@@ -8,5 +8,5 @@ import (
 
 func setAuthRoute(router *gin.Engine) {
 	authController := new(controllers.AuthController)
-	router.POST("/register", authController.Register)
+	router.POST("/talent/register", authController.TalentRegister)
 }

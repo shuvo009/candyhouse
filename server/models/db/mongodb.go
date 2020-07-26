@@ -1,7 +1,6 @@
 package db
 
 import (
-	"candyHouse/utils"
 	"log"
 
 	"github.com/goonode/mogo"
@@ -9,21 +8,15 @@ import (
 
 var mongoConnection *mogo.Connection = nil
 
-//GetConnection is for get mongo connection
-func GetConnection() *mogo.Connection {
-	if mongoConnection == nil {
-		connectionString := utils.EnvVar("DB_CONNECTION_STRING")
-		dbName := utils.EnvVar("DB_NAME")
-		config := &mogo.Config{
-			ConnectionString: connectionString,
-			Database:         dbName,
-		}
-		mongoConnection, err := mogo.Connect(config)
-		if err != nil {
-			log.Fatal(err)
-		} else {
-			return mongoConnection
-		}
+//ConnectToDatabase connection datbase when application start
+func ConnectToDatabase(connectionString string, dbName string) {
+	config := &mogo.Config{
+		ConnectionString: connectionString,
+		Database:         dbName,
 	}
-	return mongoConnection
+	mongoConnectionv, err := mogo.Connect(config)
+	if err != nil {
+		log.Fatal(err)
+	}
+	mongoConnection = mongoConnectionv
 }

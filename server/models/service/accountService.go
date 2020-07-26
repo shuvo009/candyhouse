@@ -1,33 +1,44 @@
 package service
 
 import (
-	"candyHouse/models/db"
 	"candyHouse/models/entity"
+	"candyHouse/models/viewmodels"
 	"errors"
+	"log"
+	"time"
 
 	"github.com/goonode/mogo"
+	"golang.org/x/crypto/bcrypt"
 	"labix.org/v2/mgo/bson"
 )
 
 //AccountService is to handel account reation db query
 type AccountService struct{}
 
-//Create is to register user
-func (accountService *AccountService) Create() error {
+//TalentRegister is to register user
+func (accountService *AccountService) TalentRegister(talentRegister viewmodels.TalentRegister) error {
 
-	email := "a@a.com"
-	password := "123456"
-
-	conn := db.GetConnection()
-	defer conn.Session.Close()
 	doc := mogo.NewDoc(entity.Account{}).(*(entity.Account))
-	err := doc.FindOne(bson.M{"email": "a@a.com"}, doc)
+	err := doc.FindOne(bson.M{"email": talentRegister.Email}, doc)
 	if err == nil {
 		return errors.New("Already Exist")
 	}
-	acc := new(entity.Account)
-	acc.Email = email
-	acc.Password = password
+	hashPassword, err := bcrypt.GenerateFromPassword([]byte(talentRegister.Password), bcrypt.MinCost)
+	if err != nil {
+		log.Fatal(err)
+		return errors.New("Already Exist")
+	}
+
+	acc := &entity.Account{
+		Email:                 talentRegister.Email,
+		Password:              string(hashPassword),
+		EmailVerificationCode: "",
+		IsActive:              true,
+		IsEmailVerified:       false,
+		IsPhoneVerified:       false,
+		JoinDate:              time.Now().Unix(),
+		Role:                  "talent",
+	}
 
 	account := mogo.NewDoc(acc).(*(entity.Account))
 	err = mogo.Save(account)

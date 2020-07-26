@@ -1,0 +1,8 @@
+https://app.diagrams.net/#G1uvMVEsFWgZ7-Va22HGfQIpW9kboRqSby
+
+//https://medium.com/@devcrazy/golang-gin-jwt-mogo-mongodb-orm-golang-authentication-example-52c3c1189488
+//https://github.com/devcrazygit/goseed
+//https://medium.com/@mvmaasakkers/writing-integration-tests-with-mongodb-support-231580a566cd
+
+
+//F:\inMemoryMongoDb4.2.8\bin\mongod.exe --storageEngine ephemeralForTest --dbpath F:\inMemoryMongoDb4.2.8\bin\db --port 6895
