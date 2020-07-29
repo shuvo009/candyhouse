@@ -8,6 +8,6 @@ func InitRoute() *gin.Engine {
 	router.Use(gin.Logger())
 	router.Use(gin.Recovery())
 
-	setAuthRoute(router)
+	setTalentRouters(router)
 	return router
 }

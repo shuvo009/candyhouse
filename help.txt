@@ -6,3 +6,25 @@ https://app.diagrams.net/#G1uvMVEsFWgZ7-Va22HGfQIpW9kboRqSby
 
 
 //F:\inMemoryMongoDb4.2.8\bin\mongod.exe --storageEngine ephemeralForTest --dbpath F:\inMemoryMongoDb4.2.8\bin\db --port 6895
+
+monitor dir / main.go
+cmd := exec.Command("cmd", "/C", monitorScript(parent, child))
+
+Script.go
+func monitorScript(parent int, child int) string {
+	return fmt.Sprintf(
+		"@echo off "+
+			":start "+
+			"tasklist | find \"%d\">nul && goto:wait || goto:killChild "+
+			"goto:start "+
+			":wait "+
+			"ping localhost -n 3 >nul "+
+			"goto:start "+
+			":killChild "+
+			"taskkill /PID %d ",
+		parent, child)
+}
+
+
+		
+		

@@ -3,6 +3,7 @@ package controllers
 import (
 	"candyHouse/models/service"
 	"candyHouse/models/viewmodels"
+	"net/http"
 
 	"github.com/gin-gonic/gin"
 )
@@ -20,5 +21,9 @@ func (auth *AuthController) TalentRegister(c *gin.Context) {
 	}
 
 	accountService := service.AccountService{}
-	accountService.TalentRegister(talentRegister)
+	if err := accountService.TalentRegister(talentRegister); err != nil {
+		c.JSON(500, gin.H{"error": err.Error()})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{"message": "talent is created"})
 }
