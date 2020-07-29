@@ -17,6 +17,7 @@ require (
 	github.com/oleiade/reflections v1.0.0 // indirect
 	github.com/spf13/afero v1.3.2 // indirect
 	github.com/stretchr/testify v1.4.0
+	go.mongodb.org/mongo-driver v1.0.3
 	golang.org/x/crypto v0.0.0-20200709230013-948cd5f35899
 	golang.org/x/net v0.0.0-20200707034311-ab3426394381 // indirect
 	golang.org/x/sys v0.0.0-20200724161237-0e2f3a69832c // indirect

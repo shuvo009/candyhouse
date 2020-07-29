@@ -30,6 +30,7 @@ func (accountService *AccountService) TalentRegister(talentRegister viewmodels.T
 	}
 
 	acc := &entity.Account{
+		ID:                    bson.NewObjectId(),
 		Email:                 talentRegister.Email,
 		Password:              string(hashPassword),
 		EmailVerificationCode: "",
@@ -41,6 +42,10 @@ func (accountService *AccountService) TalentRegister(talentRegister viewmodels.T
 	}
 
 	account := mogo.NewDoc(acc).(*(entity.Account))
-	err = mogo.Save(account)
+	if err = mogo.Save(account); err == nil {
+		resumeService := ResumeService{}
+		err = resumeService.CreateBasicResume(talentRegister.FirstName, talentRegister.LastName, account.ID)
+	}
+
 	return err
 }
