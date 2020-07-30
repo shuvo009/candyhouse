@@ -11,3 +11,8 @@ func EnvVar(key string) string {
 	godotenv.Load(".env")
 	return os.Getenv(key)
 }
+
+func TestEnvVar(key string) string {
+	godotenv.Load("../.env")
+	return os.Getenv(key)
+}
