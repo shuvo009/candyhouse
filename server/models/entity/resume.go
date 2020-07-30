@@ -71,7 +71,7 @@ type Resume struct {
 	Negotiable            bool          `json:"negotiable"`
 	Educations            []Education   `bson:"educations"`
 	ProfileHash           string        `json:"profileHash"`
-	LastUpdate            int           `json:"lastUpdate"`
+	LastUpdate            int64         `json:"lastUpdate"`
 	IsVisible             bool          `json:"isVisible"`
 	FirstCheckBy          bson.ObjectId `bson:"firstCheckBy"`
 	SecondCheckBy         bson.ObjectId `bson:"secondCheckBy"`

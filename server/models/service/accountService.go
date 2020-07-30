@@ -32,7 +32,6 @@ func (accountService *AccountService) TalentRegister(talentRegister viewmodels.T
 	}
 
 	acc := &entity.Account{
-		ID:                    bson.NewObjectId(),
 		Email:                 talentRegister.Email,
 		Password:              string(hashPassword),
 		EmailVerificationCode: "",
@@ -75,4 +74,14 @@ func (accountService *AccountService) TalentLogin(loginModel viewmodels.LoginMod
 	log.Println(tokenString, err)
 
 	return tokenString, err
+}
+
+//FindByEmail ...
+func (accountService *AccountService) FindByEmail(email string) (*entity.Account, error) {
+	user := mogo.NewDoc(entity.Account{}).(*(entity.Account))
+	mongoErr := user.FindOne(bson.M{"email": email}, user)
+	if mongoErr != nil {
+		return nil, errors.New("email is invalid")
+	}
+	return user, nil
 }
