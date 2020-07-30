@@ -3,10 +3,12 @@ package service
 import (
 	"candyHouse/models/entity"
 	"candyHouse/models/viewmodels"
+	"candyHouse/utils"
 	"errors"
 	"log"
 	"time"
 
+	"github.com/dgrijalva/jwt-go"
 	"github.com/goonode/mogo"
 	"golang.org/x/crypto/bcrypt"
 	"labix.org/v2/mgo/bson"
@@ -48,4 +50,29 @@ func (accountService *AccountService) TalentRegister(talentRegister viewmodels.T
 	}
 
 	return err
+}
+
+//TalentLogin ...
+func (accountService *AccountService) TalentLogin(loginModel viewmodels.LoginModel) (string, error) {
+
+	user := mogo.NewDoc(entity.Account{}).(*(entity.Account))
+	mongoErr := user.FindOne(bson.M{"email": loginModel.Username}, user)
+	if mongoErr != nil {
+		return "", errors.New("Username or password is invalid")
+	}
+
+	passwordErr := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(loginModel.Password))
+	if passwordErr != nil {
+		return "", errors.New("Username or password is invalid")
+	}
+
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
+		"email": string(user.Email),
+	})
+
+	secretKey := utils.EnvVar("TOKEN_KEY")
+	tokenString, err := token.SignedString([]byte(secretKey))
+	log.Println(tokenString, err)
+
+	return tokenString, err
 }

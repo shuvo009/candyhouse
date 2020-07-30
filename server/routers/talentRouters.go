@@ -11,6 +11,7 @@ func setTalentRouters(router *gin.Engine) {
 
 	talent := router.Group("/talent")
 	{
+		talent.POST("/login", authController.TalentLogin)
 		talent.POST("/register", authController.TalentRegister)
 	}
 
