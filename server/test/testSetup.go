@@ -35,7 +35,7 @@ func testSetup() (*memongo.Server, *gin.Engine) {
 		log.Println(err)
 	}
 
-	db.ConnectToDatabase(mongoServer.URI(), memongo.RandomDatabase())
+	db.SetConnectionInfo(mongoServer.URI(), memongo.RandomDatabase())
 	router := routers.InitRoute()
 	return mongoServer, router
 }

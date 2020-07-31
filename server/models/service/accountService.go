@@ -2,6 +2,7 @@ package service
 
 import (
 	"candyHouse/models/entity"
+	"candyHouse/models/repository"
 	"candyHouse/models/viewmodels"
 	"candyHouse/utils"
 	"errors"
@@ -9,9 +10,7 @@ import (
 	"time"
 
 	"github.com/dgrijalva/jwt-go"
-	"github.com/goonode/mogo"
 	"golang.org/x/crypto/bcrypt"
-	"labix.org/v2/mgo/bson"
 )
 
 //AccountService is to handel account reation db query
@@ -20,8 +19,10 @@ type AccountService struct{}
 //TalentRegister is to register user
 func (accountService *AccountService) TalentRegister(talentRegister viewmodels.TalentRegister) error {
 
-	doc := mogo.NewDoc(entity.Account{}).(*(entity.Account))
-	err := doc.FindOne(bson.M{"email": talentRegister.Email}, doc)
+	accountRepository := new(repository.AccountRepository)
+
+	_, err := accountRepository.FindByEmail(talentRegister.Email)
+
 	if err == nil {
 		return errors.New("Already Exist")
 	}
@@ -42,8 +43,9 @@ func (accountService *AccountService) TalentRegister(talentRegister viewmodels.T
 		Role:                  "talent",
 	}
 
-	account := mogo.NewDoc(acc).(*(entity.Account))
-	if err = mogo.Save(account); err == nil {
+	account, createError := accountRepository.Create(acc)
+
+	if createError == nil {
 		resumeService := ResumeService{}
 		err = resumeService.CreateBasicResume(talentRegister.FirstName, talentRegister.LastName, account.ID)
 	}
@@ -53,9 +55,9 @@ func (accountService *AccountService) TalentRegister(talentRegister viewmodels.T
 
 //TalentLogin ...
 func (accountService *AccountService) TalentLogin(loginModel viewmodels.LoginModel) (string, error) {
+	accountRepository := new(repository.AccountRepository)
+	user, mongoErr := accountRepository.FindByEmail(loginModel.Username)
 
-	user := mogo.NewDoc(entity.Account{}).(*(entity.Account))
-	mongoErr := user.FindOne(bson.M{"email": loginModel.Username}, user)
 	if mongoErr != nil {
 		return "", errors.New("Username or password is invalid")
 	}
@@ -78,8 +80,10 @@ func (accountService *AccountService) TalentLogin(loginModel viewmodels.LoginMod
 
 //FindByEmail ...
 func (accountService *AccountService) FindByEmail(email string) (*entity.Account, error) {
-	user := mogo.NewDoc(entity.Account{}).(*(entity.Account))
-	mongoErr := user.FindOne(bson.M{"email": email}, user)
+
+	accountRepository := new(repository.AccountRepository)
+	user, mongoErr := accountRepository.FindByEmail(email)
+
 	if mongoErr != nil {
 		return nil, errors.New("email is invalid")
 	}

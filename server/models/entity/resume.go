@@ -1,7 +1,7 @@
 package entity
 
 import (
-	"github.com/goonode/mogo"
+	"github.com/Kamva/mgm"
 	"labix.org/v2/mgo/bson"
 )
 
@@ -52,7 +52,7 @@ type Education struct {
 //Resume ...
 type Resume struct {
 	ID                    bson.ObjectId `json:"_id,omitempty"`
-	mogo.DocumentModel    `bson:",inline" coll:"resumes"`
+	mgm.DefaultModel      `bson:",inline" coll:"resumes"`
 	AccountID             bson.ObjectId `bson:"accountId"`
 	FirstName             string        `json:"firstName"`
 	LastName              string        `json:"lastName"`

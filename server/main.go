@@ -13,7 +13,7 @@ func main() {
 	connectionString := utils.EnvVar("DB_CONNECTION_STRING")
 	dbName := utils.EnvVar("DB_NAME")
 
-	db.ConnectToDatabase(connectionString, dbName)
+	db.SetConnectionInfo(connectionString, dbName)
 
 	r.Run(port) // listen and serve on 0.0.0.0:8080 (for windows "localhost:8080")
 }

@@ -20,7 +20,7 @@ func (resumeController *ResumeController) Update(c *gin.Context) {
 		return
 	}
 	resumeService := service.ResumeService{}
-	if err := resumeService.UpdateResume(account.ID, resume); err != nil {
+	if err := resumeService.UpdateResume(string(account.ID), resume); err != nil {
 		c.JSON(500, gin.H{"error": err.Error()})
 		return
 	}
@@ -31,7 +31,7 @@ func (resumeController *ResumeController) Update(c *gin.Context) {
 func (resumeController *ResumeController) GetMyResume(c *gin.Context) {
 	account := c.MustGet("account").(*(entity.Account))
 	resumeService := service.ResumeService{}
-	resume, err := resumeService.GetResume(account.ID)
+	resume, err := resumeService.GetResume(string(account.ID))
 
 	if err != nil {
 		c.JSON(500, gin.H{"error": err.Error()})
