@@ -1,7 +1,7 @@
 package main
 
 import (
-	"candyHouse/models/db"
+	"candyHouse/repository/db"
 	"candyHouse/routers"
 	"candyHouse/utils"
 )
