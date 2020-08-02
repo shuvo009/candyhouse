@@ -25,7 +25,7 @@ func (accountRepository *AccountRepository) FindByEmail(email string) (*entity.A
 	db.Connect()
 	accountModel := &entity.Account{}
 	coll := mgm.Coll(accountModel)
-	var err = coll.FindOne(mgm.Ctx(), bson.M{}).Decode(accountModel)
+	var err = coll.FindOne(mgm.Ctx(), bson.M{"email": email}).Decode(accountModel)
 	db.Disconnect()
 	return accountModel, err
 }

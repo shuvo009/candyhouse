@@ -4,14 +4,14 @@ import (
 	"candyHouse/models/entity"
 	"candyHouse/models/repository"
 
-	"labix.org/v2/mgo/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 //ResumeService ...
 type ResumeService struct{}
 
 //CreateBasicResume ...
-func (resumeService *ResumeService) CreateBasicResume(firstName string, lastName string, accountID bson.ObjectId) error {
+func (resumeService *ResumeService) CreateBasicResume(firstName string, lastName string, accountID primitive.ObjectID) error {
 
 	resume := &entity.Resume{
 		AccountID: accountID,
@@ -25,14 +25,14 @@ func (resumeService *ResumeService) CreateBasicResume(firstName string, lastName
 }
 
 //UpdateResume ...
-func (resumeService *ResumeService) UpdateResume(accountID string, resume entity.Resume) error {
+func (resumeService *ResumeService) UpdateResume(accountID primitive.ObjectID, resume entity.Resume) error {
 	resumeRepository := new(repository.ResumeRepository)
 	err := resumeRepository.UpdateResume(accountID, resume)
 	return err
 }
 
 //GetResume ...
-func (resumeService *ResumeService) GetResume(accountID string) (*entity.Resume, error) {
+func (resumeService *ResumeService) GetResume(accountID primitive.ObjectID) (*entity.Resume, error) {
 	resumeRepository := new(repository.ResumeRepository)
 	dbResume, err := resumeRepository.FindByID(accountID)
 	return dbResume, err

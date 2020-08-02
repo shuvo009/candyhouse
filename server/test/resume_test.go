@@ -1,9 +1,8 @@
 package test
 
 import (
-	"candyHouse/models/entity"
+	"bytes"
 	"encoding/json"
-	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -11,23 +10,41 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+//TestGetMyResume ...
 func TestGetMyResume(t *testing.T) {
 	mongoServer, router := testSetup()
 	setupTestAccount(router)
-	//accessToken := getTestTalentAccessToken(router)
+	accessToken := getTestTalentAccessToken(router)
+
+	resume := GetResume(accessToken, router)
+
+	assert.Equal(t, "shuvo", resume.FirstName)
+	mongoServer.Stop()
+}
+
+//TestUpdateMyResume ...
+func TestUpdateMyResume(t *testing.T) {
+	mongoServer, router := testSetup()
+	setupTestAccount(router)
+	accessToken := getTestTalentAccessToken(router)
+
+	resume := GetResume(accessToken, router)
+	resume.FirstName = "jon updated"
+	resume.Skills = []string{"C#", "JAVA"}
+
+	buf := new(bytes.Buffer)
+	json.NewEncoder(buf).Encode(resume)
 
 	w := httptest.NewRecorder()
-	req, _ := http.NewRequest("GET", "/talent/resume/my", nil)
-	//req.Header.Add("Authentication", "Bearer "+accessToken)
+	req, _ := http.NewRequest("POST", "/talent/resume/update", buf)
+	req.Header.Add("Authentication", "Bearer "+accessToken)
 	router.ServeHTTP(w, req)
 
-	resume := entity.Resume{}
-	body, _ := ioutil.ReadAll(w.Body)
-
-	json.Unmarshal([]byte(string(body)), &resume)
+	updatedResume := GetResume(accessToken, router)
 
 	assert.Equal(t, 200, w.Code)
-	assert.Equal(t, "shuvo", resume.FirstName)
+	assert.Equal(t, "jon updated", updatedResume.FirstName)
+	assert.Len(t, updatedResume.Skills, 2)
 
 	mongoServer.Stop()
 }

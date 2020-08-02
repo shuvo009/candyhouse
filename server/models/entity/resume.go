@@ -2,7 +2,7 @@ package entity
 
 import (
 	"github.com/Kamva/mgm"
-	"labix.org/v2/mgo/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 //SocialLink ...
@@ -51,28 +51,27 @@ type Education struct {
 
 //Resume ...
 type Resume struct {
-	ID                    bson.ObjectId `json:"_id,omitempty"`
 	mgm.DefaultModel      `bson:",inline" coll:"resumes"`
-	AccountID             bson.ObjectId `bson:"accountId"`
-	FirstName             string        `json:"firstName"`
-	LastName              string        `json:"lastName"`
-	Location              string        `json:"location"`
-	Phone                 string        `json:"phone"`
-	SocialLinks           []SocialLink  `bson:"socialLinks"`
-	ProfileImage          string        `json:"profileImage"`
-	SummaryList           []Summary     `bson:"summaryList"`
-	NextRoles             []NextRole    `bson:"nextRole"`
-	TotalYearOfExperience int           `json:"totalYearOfExperience"`
-	Experiences           []Experience  `bson:"experiences"`
-	Languages             []Language    `bson:"languages"`
-	Skills                []string      `json:"skills"`
-	NoticePeriod          string        `json:"noticePeriod"`
-	ExceptedSalary        string        `json:"exceptedSalary"`
-	Negotiable            bool          `json:"negotiable"`
-	Educations            []Education   `bson:"educations"`
-	ProfileHash           string        `json:"profileHash"`
-	LastUpdate            int64         `json:"lastUpdate"`
-	IsVisible             bool          `json:"isVisible"`
-	FirstCheckBy          bson.ObjectId `bson:"firstCheckBy"`
-	SecondCheckBy         bson.ObjectId `bson:"secondCheckBy"`
+	AccountID             primitive.ObjectID `bson:"accountId"`
+	FirstName             string             `json:"firstName"`
+	LastName              string             `json:"lastName"`
+	Location              string             `json:"location"`
+	Phone                 string             `json:"phone"`
+	SocialLinks           []SocialLink       `bson:"socialLinks"`
+	ProfileImage          string             `json:"profileImage"`
+	SummaryList           []Summary          `bson:"summaryList"`
+	NextRoles             []NextRole         `bson:"nextRole"`
+	TotalYearOfExperience int                `json:"totalYearOfExperience"`
+	Experiences           []Experience       `bson:"experiences"`
+	Languages             []Language         `bson:"languages"`
+	Skills                []string           `json:"skills"`
+	NoticePeriod          string             `json:"noticePeriod"`
+	ExceptedSalary        string             `json:"exceptedSalary"`
+	Negotiable            bool               `json:"negotiable"`
+	Educations            []Education        `bson:"educations"`
+	ProfileHash           string             `json:"profileHash"`
+	LastUpdate            int64              `json:"lastUpdate"`
+	IsVisible             bool               `json:"isVisible"`
+	FirstCheckBy          primitive.ObjectID `bson:"firstCheckBy"`
+	SecondCheckBy         primitive.ObjectID `bson:"secondCheckBy"`
 }

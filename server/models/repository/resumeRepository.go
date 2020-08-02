@@ -7,6 +7,8 @@ import (
 	"time"
 
 	"github.com/Kamva/mgm"
+	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 //ResumeRepository ...
@@ -21,10 +23,13 @@ func (resumeRepository *ResumeRepository) Create(resume *entity.Resume) (*entity
 }
 
 //FindByID ...
-func (resumeRepository *ResumeRepository) FindByID(accountID string) (*entity.Resume, error) {
+func (resumeRepository *ResumeRepository) FindByID(accountID primitive.ObjectID) (*entity.Resume, error) {
 	db.Connect()
 	resume := &entity.Resume{}
-	var err = mgm.Coll(resume).FindByID(accountID, resume)
+	coll := mgm.Coll(resume)
+
+	var err = coll.FindOne(mgm.Ctx(), bson.M{"accountId": accountID}).Decode(resume)
+
 	if err != nil {
 		return nil, errors.New("Resume is not found")
 	}
@@ -33,10 +38,12 @@ func (resumeRepository *ResumeRepository) FindByID(accountID string) (*entity.Re
 }
 
 //UpdateResume ...
-func (resumeRepository *ResumeRepository) UpdateResume(accountID string, resume entity.Resume) error {
+func (resumeRepository *ResumeRepository) UpdateResume(accountID primitive.ObjectID, resume entity.Resume) error {
 	db.Connect()
 	dbResume := &entity.Resume{}
-	var err = mgm.Coll(dbResume).FindByID(accountID, dbResume)
+	coll := mgm.Coll(dbResume)
+
+	var err = coll.FindOne(mgm.Ctx(), bson.M{"accountId": accountID}).Decode(dbResume)
 	if err != nil {
 		return errors.New("Resume is not found")
 	}

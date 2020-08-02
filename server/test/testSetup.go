@@ -3,6 +3,7 @@ package test
 import (
 	"bytes"
 	"candyHouse/models/db"
+	"candyHouse/models/entity"
 	"candyHouse/models/viewmodels"
 	"candyHouse/routers"
 	"candyHouse/utils"
@@ -78,4 +79,18 @@ func getTestTalentAccessToken(router *gin.Engine) string {
 	json.Unmarshal([]byte(string(body)), &loginResponse)
 
 	return loginResponse.Token
+}
+
+//GetResume ...
+func GetResume(accessToken string, router *gin.Engine) entity.Resume {
+	w := httptest.NewRecorder()
+	req, _ := http.NewRequest("GET", "/talent/resume/my", nil)
+	req.Header.Add("Authentication", "Bearer "+accessToken)
+	router.ServeHTTP(w, req)
+
+	resume := entity.Resume{}
+	body, _ := ioutil.ReadAll(w.Body)
+
+	json.Unmarshal([]byte(string(body)), &resume)
+	return resume
 }

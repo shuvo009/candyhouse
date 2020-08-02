@@ -2,13 +2,11 @@ package entity
 
 import (
 	"github.com/Kamva/mgm"
-	"labix.org/v2/mgo/bson"
 )
 
 //Account struct is to handle user data
 type Account struct {
 	mgm.DefaultModel      `bson:",inline"`
-	ID                    bson.ObjectId
 	Email                 string `json:"email"`
 	Password              string `json:"password" binding:"required"`
 	IsActive              bool   `json:"isActive"`
