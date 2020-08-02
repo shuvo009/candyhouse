@@ -1,8 +1,8 @@
 package repository
 
 import (
-	"candyHouse/models/db"
 	"candyHouse/models/entity"
+	"candyHouse/repository/db"
 
 	"github.com/Kamva/mgm"
 	"go.mongodb.org/mongo-driver/bson"

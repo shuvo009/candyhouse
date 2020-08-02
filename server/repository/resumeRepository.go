@@ -1,8 +1,8 @@
 package repository
 
 import (
-	"candyHouse/models/db"
 	"candyHouse/models/entity"
+	"candyHouse/repository/db"
 	"errors"
 	"time"
 

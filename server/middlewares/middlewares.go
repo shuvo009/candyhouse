@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"strings"
 
-	"candyHouse/models/service"
+	"candyHouse/service"
 	"candyHouse/utils"
 
 	"github.com/dgrijalva/jwt-go"

@@ -2,7 +2,7 @@ package service
 
 import (
 	"candyHouse/models/entity"
-	"candyHouse/models/repository"
+	"candyHouse/repository"
 
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )

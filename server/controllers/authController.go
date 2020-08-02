@@ -1,8 +1,8 @@
 package controllers
 
 import (
-	"candyHouse/models/service"
 	"candyHouse/models/viewmodels"
+	"candyHouse/service"
 	"net/http"
 
 	"github.com/gin-gonic/gin"

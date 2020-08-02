@@ -2,7 +2,7 @@ package controllers
 
 import (
 	"candyHouse/models/entity"
-	"candyHouse/models/service"
+	"candyHouse/service"
 	"net/http"
 
 	"github.com/gin-gonic/gin"

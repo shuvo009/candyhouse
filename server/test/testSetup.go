@@ -2,9 +2,9 @@ package test
 
 import (
 	"bytes"
-	"candyHouse/models/db"
 	"candyHouse/models/entity"
 	"candyHouse/models/viewmodels"
+	"candyHouse/repository/db"
 	"candyHouse/routers"
 	"candyHouse/utils"
 	"encoding/json"
