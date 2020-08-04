@@ -1,6 +1,6 @@
 import { AuthencationLayout } from "../layouts/authencationLayout";
 import { Login } from "../features/login/login";
-
+import { Register } from "../features/register/register";
 export class Routes {
 
     public get GetRoutes(): IRouteLayoutModel[] {
@@ -14,7 +14,8 @@ export class Routes {
         return {
             layout: AuthencationLayout,
             subRoutes: [
-                { path: '/login', component: Login }
+                { path: '/login', component: Login },
+                { path: '/register', component: Register }
             ]
         }
     }
