@@ -43,6 +43,7 @@ export const talentRegister = (talentRegisterModel: ITalentRegisterModel) => asy
     }
     try {
         dispatch(slice.actions.changeBusyState(true))
+        console.log(talentRegisterModel)
         await HttpHelpers.post<any>(ApiConstant.talentRegister, talentRegister);
         dispatch(slice.actions.registerSuccess(undefined))
     } catch (error) {
