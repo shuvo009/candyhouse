@@ -24,12 +24,12 @@ func (accountService *AccountService) TalentRegister(talentRegister viewmodels.T
 	_, err := accountRepository.FindByEmail(talentRegister.Email)
 
 	if err == nil {
-		return errors.New("Already Exist")
+		return errors.New("Email Already Exist")
 	}
 	hashPassword, err := bcrypt.GenerateFromPassword([]byte(talentRegister.Password), bcrypt.MinCost)
 	if err != nil {
 		log.Fatal(err)
-		return errors.New("Already Exist")
+		return errors.New("Internal Server Error")
 	}
 
 	acc := &entity.Account{

@@ -1,10 +1,9 @@
 import React, { Component } from "react";
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Spinner } from 'react-bootstrap';
 import { talentRegister, talentRegisterState } from "./store";
 import { IReducerState } from "../../../../helpers/store"
 import { connect } from "react-redux";
 import { ITalentRegisterProps, ITalentRegisterState } from "./models";
-import { Redirect } from "react-router-dom";
 import { ErrorMessage } from "../../../../common/errorMessage"
 
 class TalentRegisterComponent extends Component<ITalentRegisterProps, ITalentRegisterState> {
@@ -44,31 +43,32 @@ class TalentRegisterComponent extends Component<ITalentRegisterProps, ITalentReg
                 <ErrorMessage message={this.props.errorMessage}></ErrorMessage>
                 <Form>
                     <Form.Group>
-                        <Form.Label>FirstName</Form.Label>
+                        <Form.Label>FirstName*</Form.Label>
                         <Form.Control name="firstName" value={this.state.firstName}
                             onChange={this.handleInputChange} type="text" placeholder="Enter FirstName" />
                     </Form.Group>
                     <Form.Group>
-                        <Form.Label>LastName</Form.Label>
+                        <Form.Label>LastName*</Form.Label>
                         <Form.Control type="text" name="lastName" value={this.state.lastName}
                             onChange={this.handleInputChange} placeholder="Enter LastName" />
                     </Form.Group>
                     <Form.Group>
-                        <Form.Label>Email</Form.Label>
+                        <Form.Label>Email*</Form.Label>
                         <Form.Control name="email" value={this.state.email}
                             onChange={this.handleInputChange} type="email" placeholder="Enter Email" />
                     </Form.Group>
                     <Form.Group>
-                        <Form.Label>Password</Form.Label>
+                        <Form.Label>Password*</Form.Label>
                         <Form.Control type="password" name="password" value={this.state.password}
                             onChange={this.handleInputChange} placeholder="Enter password" />
                     </Form.Group>
                     <Form.Group>
-                        <Form.Label>Confirm Password</Form.Label>
+                        <Form.Label>Confirm Password*</Form.Label>
                         <Form.Control type="password" name="confirmpassword" value={this.state.confirmpassword}
                             onChange={this.handleInputChange} placeholder="Enter confirm password" />
                     </Form.Group>
-                    <Button disabled={!this.state.isFormValid} variant="primary" type="button" onClick={() => this.props.talentRegistrationRequestAction(this.state)}>
+                    <Button disabled={ this.props.isBusy || !this.state.isFormValid} variant="primary" type="button" onClick={() => this.props.talentRegistrationRequestAction(this.state)}>
+                        {this.props.isBusy ? <Spinner animation="grow" size="sm" className="mr-2"></Spinner> : null}
                         Register
                     </Button>
                 </Form>

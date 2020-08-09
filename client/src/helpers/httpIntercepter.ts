@@ -10,16 +10,10 @@ export class HttpIntercepter {
             if (accessToken) {
                 config.headers['Authorization'] = `Bearer  ${accessToken}`;
             }
+            config.headers['Content-Type'] = 'application/json'
             return config;
         }, error => {
             Promise.reject(error)
         })
-
-        axios.interceptors.response.use(response => {
-            return response;
-        }, error => {
-            Promise.reject(error)
-        })
     }
-
 }

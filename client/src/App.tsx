@@ -1,13 +1,14 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import './App.scss';
 import { Routes } from "./helpers/routs"
-
+import { ConnectedRouter } from 'connected-react-router'
+import { history } from "./helpers/store"
 
 function App() {
   return (
     <div className="App">
-      <Router>
+      <ConnectedRouter history={history} >
         <Switch>
           {new Routes().GetRoutes.map((route, i) =>
             <Route key={i} exact={route.subRoutes.some(r => r.exact)} path={route.subRoutes.map(r => r.path)}>
@@ -19,7 +20,7 @@ function App() {
             </Route>
           )}
         </Switch>
-      </Router>
+      </ConnectedRouter>
     </div>
   );
 }
