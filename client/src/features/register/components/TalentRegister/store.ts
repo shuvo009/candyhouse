@@ -12,7 +12,6 @@ export const talentRegisterState: ITalentRegisterState = {
     password: '',
     confirmpassword: '',
     isBusy: false,
-    isRegistrationSuccess: false,
     errorMessage: '',
     isFormValid: false
 }
@@ -35,15 +34,6 @@ const slice = createSlice({
                 errorMessage: '',
                 isBusy: action.payload.data
             }
-        },
-
-        registerSuccess: (state) => {
-            return {
-                ...state,
-                errorMessage: '',
-                isBusy: false,
-                isRegistrationSuccess: true
-            }
         }
     },
 });
@@ -59,14 +49,7 @@ export const talentRegister = (talentRegisterModel: ITalentRegisterModel) => asy
 
     try {
         dispatch(slice.actions.changeBusyState({ data: true }))
-        const body = {
-            firstName: talentRegisterModel.firstName,
-            lastName: talentRegisterModel.lastName,
-            email: talentRegisterModel.email,
-            password: talentRegisterModel.password,
-        }
-        await HttpHelpers.post<any>(ApiConstant.talentRegister, body);
-        dispatch(slice.actions.registerSuccess())
+        await HttpHelpers.post<any>(ApiConstant.talentRegister, talentRegisterModel);
         dispatch(push(Routes.login))
     } catch (error) {
         dispatch(slice.actions.changeBusyState({ data: false }))
