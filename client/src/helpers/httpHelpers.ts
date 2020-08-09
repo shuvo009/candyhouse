@@ -9,6 +9,6 @@ export class HttpHelpers {
 
     static async post<T>(api: string, body?: any): Promise<T> {
         const { data } = await axios.post(api, body);
-        return JSON.parse(data) as T;
+        return data;
     }
 }

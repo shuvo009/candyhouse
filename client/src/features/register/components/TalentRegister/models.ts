@@ -1,3 +1,8 @@
+interface IStateModel {
+    isBusy: boolean;
+    isRegistrationSuccess: boolean;
+    errorMessage: string;
+}
 export interface ITalentRegisterModel {
     firstName: string;
     lastName: string;
@@ -6,12 +11,10 @@ export interface ITalentRegisterModel {
     confirmpassword: string;
 }
 
-export interface ITalentRegisterState extends ITalentRegisterModel {
-    isBusy: boolean;
-    isRegistrationSuccess: boolean;
-    errorMessage: string;
+export interface ITalentRegisterState extends ITalentRegisterModel, IStateModel {
+    isFormValid: boolean;
 }
 
-export interface ITalentRegisterProps {
+export interface ITalentRegisterProps extends IStateModel {
     talentRegistrationRequestAction: (registrationModel: ITalentRegisterState) => void
 }

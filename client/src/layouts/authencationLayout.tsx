@@ -1,24 +1,22 @@
 import React, { Component } from "react";
-import { Card } from 'react-bootstrap';
+import { Container, Row, Col, Card } from 'react-bootstrap';
 import "./authencationLayout.scss"
 export class AuthencationLayout extends Component {
 
     render() {
         const { children } = this.props;
         return (
-            <div className="container">
-                <div className="row auth-card justify-content-center align-items-center">
-                    <div className="row">
-                        <div className="col-12 text-left">
-                            <Card>
-                                <Card.Body>
-                                    {children}
-                                </Card.Body>
-                            </Card>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <Container>
+                <Row className="auth-card justify-content-center align-items-center">
+                    <Col md={6} className="text-left">
+                        <Card>
+                            <Card.Body>
+                                {children}
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                </Row >
+            </Container>
         )
     }
 }

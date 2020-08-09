@@ -5,23 +5,43 @@ import { IReducerState } from "../../../../helpers/store"
 import { connect } from "react-redux";
 import { ITalentRegisterProps, ITalentRegisterState } from "./models";
 import { Redirect } from "react-router-dom";
-
+import { ErrorMessage } from "../../../../common/errorMessage"
 
 class TalentRegisterComponent extends Component<ITalentRegisterProps, ITalentRegisterState> {
+
     state = talentRegisterState
 
     handleInputChange = (event: any) => {
-        this.setState({
+        const model = {
             ...this.state,
-            [event.target.name]: event.target.value.trim()
-        });
+            [event.target.name]: event.target.value
+        };
+
+        const isValid = this.validateModel(model);
+        this.setState({
+            ...model,
+            isFormValid: isValid
+        })
     };
+
+    /* #region  Private Methods */
+
+    private validateModel(model: ITalentRegisterState): boolean {
+        const isValid = !!(model.firstName &&
+            model.lastName &&
+            model.email &&
+            model.password &&
+            model.confirmpassword);
+        return isValid;
+    }
+
+    /* #endregion */
+
     render() {
-        if (this.state.isRegistrationSuccess) {
-            <Redirect to="/login"></Redirect>
-        }
+
         return (
             <div className="p-3">
+                <ErrorMessage message={this.props.errorMessage}></ErrorMessage>
                 <Form>
                     <Form.Group>
                         <Form.Label>FirstName</Form.Label>
@@ -48,7 +68,7 @@ class TalentRegisterComponent extends Component<ITalentRegisterProps, ITalentReg
                         <Form.Control type="password" name="confirmpassword" value={this.state.confirmpassword}
                             onChange={this.handleInputChange} placeholder="Enter confirm password" />
                     </Form.Group>
-                    <Button role="alert" variant="primary" type="button" onClick={() => this.props.talentRegistrationRequestAction(this.state)}>
+                    <Button disabled={!this.state.isFormValid} variant="primary" type="button" onClick={() => this.props.talentRegistrationRequestAction(this.state)}>
                         Register
                     </Button>
                 </Form>
@@ -57,8 +77,12 @@ class TalentRegisterComponent extends Component<ITalentRegisterProps, ITalentReg
     }
 }
 
-const mapStateToProps = (state: IReducerState): ITalentRegisterState => state.talentRegisterStore
-const mapDispatchToProps = (dispatch: any): ITalentRegisterProps => {
+const mapStateToProps = (state: IReducerState) => {
+    return {
+        ...state.talentRegisterStore
+    };
+}
+const mapDispatchToProps = (dispatch: any) => {
     return {
         talentRegistrationRequestAction: (talentRegisterState: ITalentRegisterState) => {
             dispatch(talentRegister(talentRegisterState))

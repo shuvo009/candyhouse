@@ -4,9 +4,9 @@ import talentRegisterStore from "../features/register/components/TalentRegister/
 const reducer = combineReducers({
     talentRegisterStore
 })
-const store = configureStore({
-    reducer,
+
+export const store = configureStore({
+    reducer: reducer,
 })
-export default store;
 
 export type IReducerState = ReturnType<typeof store.getState>;

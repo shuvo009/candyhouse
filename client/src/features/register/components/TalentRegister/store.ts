@@ -10,7 +10,8 @@ export const talentRegisterState: ITalentRegisterState = {
     confirmpassword: '',
     isBusy: false,
     isRegistrationSuccess: false,
-    errorMessage: ''
+    errorMessage: '',
+    isFormValid : false
 }
 
 const slice = createSlice({
@@ -18,18 +19,28 @@ const slice = createSlice({
     initialState: talentRegisterState,
     reducers: {
         onError: (state, action) => {
-            state.isBusy = false;
-            state.errorMessage = action.payload
+            return {
+                ...state,
+                isBusy: false,
+                errorMessage: action.payload.data
+            }
         },
 
         changeBusyState: (state, action) => {
-            state.errorMessage = '';
-            state.isBusy = action.payload;
+            return {
+                ...state,
+                errorMessage: '',
+                isBusy: action.payload.data
+            }
         },
-        registerSuccess: (state, action) => {
-            state.errorMessage = '';
-            state.isBusy = false;
-            state.isRegistrationSuccess = true;
+
+        registerSuccess: (state) => {
+            return {
+                ...state,
+                errorMessage: '',
+                isBusy: false,
+                isRegistrationSuccess: true
+            }
         }
     },
 });
@@ -38,16 +49,15 @@ export default slice.reducer
 
 export const talentRegister = (talentRegisterModel: ITalentRegisterModel) => async (dispatch: Dispatch) => {
     if (talentRegisterModel.password !== talentRegisterModel.confirmpassword) {
-        dispatch(slice.actions.onError('Password is not match'))
+        dispatch(slice.actions.onError({ data: 'Password is not match' }))
         return;
     }
     try {
-        dispatch(slice.actions.changeBusyState(true))
-        console.log(talentRegisterModel)
+        dispatch(slice.actions.changeBusyState({ data: true }))
         await HttpHelpers.post<any>(ApiConstant.talentRegister, talentRegister);
-        dispatch(slice.actions.registerSuccess(undefined))
+        dispatch(slice.actions.registerSuccess())
     } catch (error) {
-        dispatch(slice.actions.changeBusyState(false))
+        dispatch(slice.actions.changeBusyState({ data: false }))
         dispatch(slice.actions.onError(error))
     }
 }
