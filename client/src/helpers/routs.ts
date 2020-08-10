@@ -1,5 +1,5 @@
 import { AuthencationLayout } from "../layouts/authencationLayout";
-import { PrivateLayout } from "../layouts/privateLayout";
+import { TalentLayout } from "../layouts/talentLayout";
 import { Login } from "../features/login/login";
 import { Register } from "../features/register/register";
 import { Home } from "../features/home/home";
@@ -8,7 +8,7 @@ export class Routes {
     public get GetRoutes(): IRouteLayoutModel[] {
         return [
             this.AuthRoutes(),
-            this.PrivateRoutes()
+            this.TalentRoutes()
         ]
     }
 
@@ -23,9 +23,9 @@ export class Routes {
         }
     }
 
-    private PrivateRoutes(): IRouteLayoutModel {
+    private TalentRoutes(): IRouteLayoutModel {
         return {
-            layout: PrivateLayout,
+            layout: TalentLayout,
             subRoutes: [
                 { path: '/', component: Home },
             ]

@@ -3,7 +3,7 @@ import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 export class TopNav extends Component {
     render() {
         return (
-            <Navbar>
+            <Navbar bg="white">
                 <Navbar.Brand href="#home">Navbar</Navbar.Brand>
                 <Nav className="justify-content-end ml-auto">
                     <NavDropdown title="Profile" id="basic-nav-dropdown">
