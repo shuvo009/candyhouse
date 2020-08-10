@@ -10,4 +10,8 @@ export class LocalStorageHelper {
     static clear() {
         localStorage.removeItem("access_token");
     }
+
+    static get isUserAuthorized(): boolean {
+        return !! LocalStorageHelper.AccessToken;
+      }
 }

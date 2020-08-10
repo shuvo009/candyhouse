@@ -1,13 +1,18 @@
 import React, { Component } from "react";
 import { Form, Button, Row, Col, Spinner } from 'react-bootstrap';
-import { ILoginStateModel, ILoginPorps } from "./models"
+import { ILoginStateModel, ILoginPorps, ILoginModel } from "./models"
 import { IReducerState, Routes } from "../../helpers"
-import { login, defaultLoginState } from "./store";
+import { login, defaultLoginState, reset } from "./store";
 import { connect } from "react-redux";
 import { push } from "connected-react-router";
+import { ErrorMessage } from "../../common/errorMessage"
 export class LoginComponent extends Component<ILoginPorps, ILoginStateModel> {
 
     state = defaultLoginState;
+
+    componentWillUnmount() {
+        this.props.reset();
+    }
 
     handleInputChange = (event: any) => {
         const model = {
@@ -25,8 +30,7 @@ export class LoginComponent extends Component<ILoginPorps, ILoginStateModel> {
     /* #region  Private Methods */
 
     private validateModel(model: ILoginStateModel): boolean {
-        const isValid = !!(model.username &&
-            model.password);
+        const isValid = !!(model.username && model.password);
         return isValid;
     }
 
@@ -37,6 +41,7 @@ export class LoginComponent extends Component<ILoginPorps, ILoginStateModel> {
         return (
             <div>
                 <h2>Log in</h2>
+                <ErrorMessage message={this.props.errorMessage}></ErrorMessage>
                 <Form>
                     <Form.Group>
                         <Form.Label>Email</Form.Label>
@@ -57,7 +62,7 @@ export class LoginComponent extends Component<ILoginPorps, ILoginStateModel> {
                             </Button>
                         </Col>
                         <Col md={9} className="text-right">
-                            Not a member yet? <a href="javascript:void(0)" onClick={() => { this.props.redirectToRegister() }}>Sign up</a>
+                            Not a member yet? <a href="" onClick={(e) => { e.preventDefault(); this.props.redirectToRegister() }}>Sign up</a>
                         </Col>
                     </Row>
                 </Form>
@@ -72,15 +77,12 @@ const mapStateToProps = (state: IReducerState) => {
         ...state.loginStore
     };
 }
+
 const mapDispatchToProps = (dispatch: any) => {
     return {
-        loginRequestAction: (loginStateModel: ILoginStateModel) => {
-            dispatch(login(loginStateModel))
-        },
-
-        redirectToRegister: () => {
-            dispatch(push(Routes.register))
-        }
+        loginRequestAction: (loginStateModel: ILoginModel) => dispatch(login(loginStateModel)),
+        redirectToRegister: () => dispatch(push(Routes.register)),
+        reset: () => dispatch(reset()),
     }
 }
 

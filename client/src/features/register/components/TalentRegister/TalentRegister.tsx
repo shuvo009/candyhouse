@@ -67,7 +67,7 @@ class TalentRegisterComponent extends Component<ITalentRegisterProps, ITalentReg
                         <Form.Control type="password" name="confirmpassword" value={this.state.confirmpassword}
                             onChange={this.handleInputChange} placeholder="Enter confirm password" />
                     </Form.Group>
-                    <Button disabled={ this.props.isBusy || !this.state.isFormValid} variant="primary" type="button" onClick={() => this.props.talentRegistrationRequestAction(this.state)}>
+                    <Button disabled={this.props.isBusy || !this.state.isFormValid} variant="primary" type="button" onClick={() => this.props.talentRegistrationRequestAction(this.state)}>
                         {this.props.isBusy ? <Spinner animation="grow" size="sm" className="mr-2"></Spinner> : null}
                         Register
                     </Button>
@@ -84,9 +84,7 @@ const mapStateToProps = (state: IReducerState) => {
 }
 const mapDispatchToProps = (dispatch: any) => {
     return {
-        talentRegistrationRequestAction: (talentRegisterState: ITalentRegisterState) => {
-            dispatch(talentRegister(talentRegisterState))
-        }
+        talentRegistrationRequestAction: (talentRegisterState: ITalentRegisterState) => dispatch(talentRegister(talentRegisterState))
     }
 }
 

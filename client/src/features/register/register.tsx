@@ -19,7 +19,7 @@ class RegisterComponent extends Component<any> {
                     </Tab>
                 </Tabs>
                 <div className="text-right">
-                    Already have a CandyHouse account? <a href="javascript:void(0)" onClick={() => { this.props.push(Routes.login) }}>Sign in</a>
+                    Already have a CandyHouse account? <a href="" onClick={(e) => { e.preventDefault(); this.props.push(Routes.login) }}>Sign in</a>
                 </div>
             </>
         )
