@@ -3,6 +3,7 @@ import { TalentLayout } from "../layouts/talentLayout";
 import { Login } from "../features/login/login";
 import { Register } from "../features/register/register";
 import { Home } from "../features/home/home";
+import { Profile } from "../features/profile/profile";
 export class Routes {
 
     public get GetRoutes(): IRouteLayoutModel[] {
@@ -27,7 +28,7 @@ export class Routes {
         return {
             layout: TalentLayout,
             subRoutes: [
-                { path: '/', component: Home },
+                { path: '/', component: Profile },
             ]
         }
     }
