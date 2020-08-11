@@ -32,7 +32,21 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
+  }
+}
+
+.side-menu-sub-item {
+  padding: 5px;
+
+  .item-circle {
+    border-radius: 50%;
+    background-color: #dbf0e5;
+    width: 11px;
+    height: 11px;
+    margin: 8px 20px 0px;
+    box-sizing: border-box;
   }
 }
