@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Card, Row, Col, Image } from 'react-bootstrap';
 import { ProfileHeader } from "./components/profileHeader"
 import { ProfileAbout } from "./components/profileAbout"
+import { ProfileIdeakRoles } from "./components/profileIdealRoles"
 export class Profile extends Component {
 
     render() {
@@ -13,7 +14,7 @@ export class Profile extends Component {
                         <ProfileAbout></ProfileAbout>
                     </Col>
                     <Col className="pl-0">
-                        
+                        <ProfileIdeakRoles></ProfileIdeakRoles>
                     </Col>
                 </Row>
             </>
