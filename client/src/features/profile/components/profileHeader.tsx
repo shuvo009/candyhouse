@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Card, Media, Row, Col, Image } from 'react-bootstrap';
+import { Card,  Row, Col, Image } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub, faLinkedinIn, faStackOverflow } from '@fortawesome/free-brands-svg-icons'
 import { faGlobe } from '@fortawesome/free-solid-svg-icons'
