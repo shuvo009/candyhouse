@@ -6,6 +6,7 @@ import { ProfileIdeakRoles } from "./components/profileIdealRoles"
 import { ProfileSummary } from "./components/profileSummary"
 import { ProfileSkils } from "./components/profileSkils"
 import { ProfileExperience } from "./components/profleExperience"
+import { ProfileEducation } from "./components/profileEducation"
 export class Profile extends Component {
 
     render() {
@@ -21,6 +22,7 @@ export class Profile extends Component {
                         <ProfileSummary></ProfileSummary>
                         <ProfileSkils></ProfileSkils>
                         <ProfileExperience></ProfileExperience>
+                        <ProfileEducation></ProfileEducation>
                     </Col>
                 </Row>
                 <div className="mb-5"></div>
