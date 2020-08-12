@@ -3,6 +3,7 @@ import { Card, Row, Col, Image } from 'react-bootstrap';
 import { ProfileHeader } from "./components/profileHeader"
 import { ProfileAbout } from "./components/profileAbout"
 import { ProfileIdeakRoles } from "./components/profileIdealRoles"
+import { ProfileSummary } from "./components/profileSummary"
 export class Profile extends Component {
 
     render() {
@@ -15,6 +16,7 @@ export class Profile extends Component {
                     </Col>
                     <Col className="pl-0">
                         <ProfileIdeakRoles></ProfileIdeakRoles>
+                        <ProfileSummary></ProfileSummary>
                     </Col>
                 </Row>
             </>

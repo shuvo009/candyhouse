@@ -4,7 +4,7 @@ export class Panel extends Component<IPanelProps> {
     render() {
         return (
             <>
-                <Card>
+                <Card className={this.props.className}>
                     <Card.Body>
                         <h5>{this.props.title}</h5>
                         {this.props.children}
@@ -17,4 +17,5 @@ export class Panel extends Component<IPanelProps> {
 
 interface IPanelProps {
     title: string;
+    className?: string;
 }
