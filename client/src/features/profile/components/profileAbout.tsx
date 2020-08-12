@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import { Card } from 'react-bootstrap';
-
-export class ProfileAbout extends Component<any, any> {
+import { Panel } from "../../../common/panel"
+export class ProfileAbout extends Component<any, IProfileAboutState> {
 
     status = {
         profileItems: [
@@ -16,37 +15,31 @@ export class ProfileAbout extends Component<any, any> {
     render() {
         return (
             <>
-                <Card>
-                    <Card.Body>
-                        <h5>About</h5>
-                        {this.status.profileItems.map((item, i) => {
-                            return (
-                                <ProfileAboutItem key={i} title={item.title} value={item.value}></ProfileAboutItem>
-                            )
-                        })}
-                    </Card.Body>
-                </Card>
+                <Panel title="About">
+                    {this.status.profileItems.map((item, i) => {
+                        return (
+                            <div className="mt-3" key={i}>
+                                <h3 className="text-muted m-0 profile-header-text font-weight-normal">
+                                    {item.title}
+                                </h3>
+                                <h4 className="text-dark profile-header-text">
+                                    {item.value}
+                                </h4>
+                            </div>
+                        )
+                    })}
+                </Panel>
             </>
         )
     }
 }
 
-class ProfileAboutItem extends Component<IProfileAboutItemProps> {
-    render() {
-        return (
-            <div className="mt-3">
-                <h3 className="text-muted m-0 profile-header-text font-weight-normal">
-                    {this.props.title}
-                </h3>
-                <h4 className="text-dark profile-header-text">
-                    {this.props.value}
-                </h4>
-            </div>
-        )
-    }
+
+interface IProfileAboutState {
+    profileItems: IProfileItem[]
 }
 
-interface IProfileAboutItemProps {
+interface IProfileItem {
     title: string;
     value: string;
 }
