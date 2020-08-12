@@ -6,8 +6,10 @@ export class Panel extends Component<IPanelProps> {
             <>
                 <Card className={this.props.className}>
                     <Card.Body>
-                        <h5>{this.props.title}</h5>
-                        {this.props.children}
+                        <h3>{this.props.title}</h3>
+                        <div className="mt-4">
+                            {this.props.children}
+                        </div>
                     </Card.Body>
                 </Card>
             </>
