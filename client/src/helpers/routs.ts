@@ -4,6 +4,7 @@ import { Login } from "../features/login/login";
 import { Register } from "../features/register/register";
 import { Home } from "../features/home/home";
 import { Profile } from "../features/profile/profile";
+import { ProfileBasicInfoEdit } from "../features/profileEdit/profileBasicInfoEdit";
 export class Routes {
 
     public get GetRoutes(): IRouteLayoutModel[] {
@@ -28,7 +29,8 @@ export class Routes {
         return {
             layout: TalentLayout,
             subRoutes: [
-                { path: '/', component: Profile },
+                { path: '/profile', component: Profile },
+                { path: '/profile-edit-basic-info', component: ProfileBasicInfoEdit },
             ]
         }
     }

@@ -10,7 +10,7 @@ export class TalentLayout extends Component {
             <PrivateLayout>
                 <TopNav></TopNav>
                 <Row className="mt-2">
-                    <Col> {children}</Col>
+                    <Col className="pr-0"> {children}</Col>
                     <Col md="auto" className="text-left">
                         <TalentSideNav></TalentSideNav>
                     </Col>

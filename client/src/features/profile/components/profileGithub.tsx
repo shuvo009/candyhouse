@@ -45,8 +45,8 @@ export class ProfileGithub extends Component<any, IProfileGithubState> {
                         <h5 className="mt-2">Contributions</h5>
                         {this.state.contributions.map((item, i) => {
                             return (
-                                <>
-                                    <Row key={i} className="p-0">
+                                <div key={i}>
+                                    <Row className="p-0">
                                         <Col md={9} className="text-truncate">
                                             <a href="#">{item.name}</a>
                                             <div className="text-truncate">{item.description}</div>
@@ -58,15 +58,15 @@ export class ProfileGithub extends Component<any, IProfileGithubState> {
                                         </Col>
                                     </Row>
                                     <hr className="m-0 mb-2" />
-                                </>
+                                </div>
                             )
                         })}
                         <a href="#">Show More</a>
                         <h5 className="mt-4 mb-3">Languages</h5>
                         {this.state.languages.map((item, i) => {
                             return (
-                                <>
-                                    <Row key={i} className="p-0">
+                                <div key={i}>
+                                    <Row className="p-0">
                                         <Col className="text-truncate">
                                             <a href="#">{item.language}</a>
                                         </Col>
@@ -75,7 +75,7 @@ export class ProfileGithub extends Component<any, IProfileGithubState> {
                                         </Col>
                                     </Row>
                                     {this.state.languages.length != (i + 1) ? <hr className="m-0 mb-2 mt-2" /> : null}
-                                </>
+                                </div>
                             )
                         })}
                     </Card.Body>
