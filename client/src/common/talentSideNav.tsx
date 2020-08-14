@@ -2,14 +2,15 @@ import React, { Component } from "react";
 import { Card, ListGroup, Button, Accordion } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheckCircle, faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons'
+import { Link } from "react-router-dom";
 
 export class TalentSideNav extends Component<any, any> {
     state = {
         baseInfo: [
-            { name: 'Profile picture', route: '' },
-            { name: 'Name', route: '' },
-            { name: 'Location', route: '' },
-            { name: 'Social links', route: '' }
+            { name: 'Profile picture', route: '/profile-edit-basic-info' },
+            { name: 'Name', route: '/profile-edit-basic-info' },
+            { name: 'Location', route: '/profile-edit-basic-info' },
+            { name: 'Social links', route: '/profile-edit-basic-info' }
         ],
         location: [
             { name: 'Contract type', route: '' },
@@ -33,10 +34,10 @@ export class TalentSideNav extends Component<any, any> {
                 <Card border="0">
                     <ListGroup variant="flush">
                         <ListGroup.Item>  Your Profile is Complete 100%</ListGroup.Item>
-                        <SideMenuItem name="Privacy"></SideMenuItem>
+                        <SideMenuItem name="Privacy" route="/profile-edit-privacy"></SideMenuItem>
                         <SideMenuItemList name="Basic Info" routes={this.state.baseInfo}></SideMenuItemList>
-                        <SideMenuItem name="Summary"></SideMenuItem>
-                        <SideMenuItem name="Ideal Roles"></SideMenuItem>
+                        <SideMenuItem name="Summary" route="/profile-edit-summary"></SideMenuItem>
+                        <SideMenuItem name="Ideal Roles" route="/profile-edit-ideal-roles"></SideMenuItem>
                         <SideMenuItemList name="Location" routes={this.state.location}></SideMenuItemList>
                         <SideMenuItemList name="Experience" routes={this.state.experience}></SideMenuItemList>
                         <SideMenuItemList name="Skills" routes={this.state.skills}></SideMenuItemList>
@@ -55,7 +56,12 @@ class SideMenuItem extends Component<ISideMenuItemProps> {
     render() {
         return (
             <>
-                <ListGroup.Item > <FontAwesomeIcon icon={faCheckCircle} className="text-muted"></FontAwesomeIcon>  {this.props.name}</ListGroup.Item>
+                <ListGroup.Item className="cursor-pointer">
+                    <Link  to={this.props.route}>
+                        <FontAwesomeIcon className="text-muted" icon={faCheckCircle}></FontAwesomeIcon>
+                        <span className="ml-1 text-dark">{this.props.name}</span>
+                    </Link>
+                </ListGroup.Item>
             </>
         )
     }
@@ -78,7 +84,7 @@ class SideMenuItemList extends Component<ISideMenuItemListProps, ISideMenuItemLi
     render() {
         return (
             <>
-                <Accordion className="border-bottom">
+                <Accordion className="border-bottom cursor-pointer">
                     <Accordion.Toggle as={ListGroup.Item} eventKey="0" className="border-0" onClick={this.onAccordionToggleClick}>
                         <FontAwesomeIcon icon={faCheckCircle} className="text-muted mr-1"></FontAwesomeIcon>
                         {this.props.name}
@@ -89,9 +95,9 @@ class SideMenuItemList extends Component<ISideMenuItemListProps, ISideMenuItemLi
                             {this.props.routes.map((route, i) => {
                                 return (
                                     <div key={i} className=" side-menu-sub-item">
-                                        <a className="text-dark" href="/">
+                                        <Link className="text-dark" to={route.route}>
                                             <div className="item-circle float-left"></div> {route.name}
-                                        </a>
+                                        </Link>
                                     </div>
                                 )
                             })}
@@ -105,17 +111,14 @@ class SideMenuItemList extends Component<ISideMenuItemListProps, ISideMenuItemLi
 
 interface ISideMenuItemProps {
     name: string;
+    route: string;
 }
 
-interface ISideMenuItemListProps extends ISideMenuItemProps {
-    routes: IRouteItem[];
+interface ISideMenuItemListProps {
+    name: string;
+    routes: ISideMenuItemProps[];
 }
 
 interface ISideMenuItemListState {
     collapseState: boolean;
-}
-
-interface IRouteItem {
-    name: string;
-    route: string;
 }

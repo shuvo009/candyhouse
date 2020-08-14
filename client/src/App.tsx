@@ -7,7 +7,7 @@ import { history } from "./helpers/store"
 
 function App() {
   return (
-    <div className="App">
+    <div>
       <ConnectedRouter history={history} >
         <Switch>
           {new Routes().GetRoutes.map((route, i) =>
