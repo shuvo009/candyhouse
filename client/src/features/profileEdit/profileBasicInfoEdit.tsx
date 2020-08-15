@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Form, InputGroup, FormControl, Row, Col, Button } from 'react-bootstrap';
 import { PanelEdit } from "../../common/panelEdit"
 import { SectionHeader } from "../../common/sectionHeader"
-import { ProfilePicture } from "./profilePicture"
+import { ProfilePicture } from "./components/profilePicture"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub, faLinkedinIn, faStackOverflow } from '@fortawesome/free-brands-svg-icons'
 import { faGlobe } from '@fortawesome/free-solid-svg-icons'
