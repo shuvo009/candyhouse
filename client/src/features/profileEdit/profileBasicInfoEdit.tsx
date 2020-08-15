@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Form, InputGroup, FormControl, Row, Col, Button } from 'react-bootstrap';
 import { PanelEdit } from "../../common/panelEdit"
+import { SectionHeader } from "../../common/sectionHeader"
 import { ProfilePicture } from "./profilePicture"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub, faLinkedinIn, faStackOverflow } from '@fortawesome/free-brands-svg-icons'
@@ -39,7 +40,7 @@ export class ProfileBasicInfoEdit extends Component {
                     </Col>
                 </Row>
                 <hr />
-                <h5>Your social links</h5>
+                <SectionHeader title="Your social links" />
                 <Row className="mt-4">
                     <Col>
                         <Form.Group controlId="formGroupEmail">

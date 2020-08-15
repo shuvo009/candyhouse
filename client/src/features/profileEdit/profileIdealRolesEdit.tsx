@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Image, Row, Col, Button, Form } from 'react-bootstrap';
 import { PanelEdit } from "../../common/panelEdit"
+import { SectionHeader } from "../../common/sectionHeader"
 import { SortableContainer, SortableElement, SortableHandle } from 'react-sortable-hoc';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHandRock } from '@fortawesome/free-solid-svg-icons'
@@ -62,9 +63,9 @@ export class ProfileIdealRolesEdit extends Component<any, any> {
     render() {
         return (
             <PanelEdit title="Ideal Roles">
-                <strong className="text-dark font-size-small">What would be your ideal next role? (pick up to 5) *</strong>
+                <SectionHeader title="What would be your ideal next role? (pick up to 5) *" />
                 <div className="mt-3">
-                    <strong className="text-muted font-size-small">Software Engineering</strong>
+                    <SectionHeader title="Software Engineering" />
                 </div>
                 <Row>
                     {this.state.skills.map((skill, i) => {
@@ -77,7 +78,7 @@ export class ProfileIdealRolesEdit extends Component<any, any> {
                 </Row>
 
                 <div className="mt-4">
-                    <strong className="text-dark font-size-small">Please select the years of experience per role, and rank them in order of importance to you *</strong>
+                    <SectionHeader title="Please select the years of experience per role, and rank them in order of importance to you *" />
                 </div>
                 <Row className="mt-2">
                     <Col md="9">

@@ -127,3 +127,11 @@
 .react-datepicker-wrapper {
   display: inline !important;
 }
+
+.tag-inline {
+  display: inline;
+
+  span {
+    display: inline-block;
+  }
+}
