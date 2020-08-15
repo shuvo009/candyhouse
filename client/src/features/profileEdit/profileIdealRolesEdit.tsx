@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Image, Row, Col, Button, Form } from 'react-bootstrap';
+import { Row, Col, Button, Form } from 'react-bootstrap';
 import { PanelEdit } from "../../common/panelEdit"
 import { SectionHeader } from "../../common/sectionHeader"
 import { SortableContainer, SortableElement, SortableHandle } from 'react-sortable-hoc';
