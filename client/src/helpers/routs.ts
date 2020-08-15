@@ -7,6 +7,7 @@ import { Profile } from "../features/profile/profile";
 import { ProfileBasicInfoEdit } from "../features/profileEdit/profileBasicInfoEdit";
 import { ProfileSummaryEdit } from "../features/profileEdit/profileSummaryEdit";
 import { ProfileIdealRolesEdit } from "../features/profileEdit/profileIdealRolesEdit";
+import { ProfileEditLocation } from "../features/profileEdit/profileEditLocation";
 export class Routes {
 
     public get GetRoutes(): IRouteLayoutModel[] {
@@ -35,6 +36,7 @@ export class Routes {
                 { path: '/profile-edit-basic-info', component: ProfileBasicInfoEdit },
                 { path: '/profile-edit-summary', component: ProfileSummaryEdit },
                 { path: '/profile-edit-ideal-roles', component: ProfileIdealRolesEdit },
+                { path: '/profile-edit-location', component: ProfileEditLocation },
             ]
         }
     }

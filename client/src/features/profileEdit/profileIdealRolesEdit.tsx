@@ -26,7 +26,8 @@ const SortableItem = SortableElement(({ value }: any) => {
                         <option value="4..6">4-6 years</option>
                         <option value="6..8">6-8 years</option>
                         <option value="8+">+8 years</option>
-                    </Form.Control></Col>
+                    </Form.Control>
+                </Col>
             </Row>
         </li>
     )
@@ -58,9 +59,6 @@ export class ProfileIdealRolesEdit extends Component<any, any> {
         ]
     }
 
-
-
-
     render() {
         return (
             <PanelEdit title="Ideal Roles">
@@ -72,7 +70,7 @@ export class ProfileIdealRolesEdit extends Component<any, any> {
                     {this.state.skills.map((skill, i) => {
                         return (
                             <Col md="6" className="mt-3" key={i}>
-                                <Form.Check inline label={skill} type="checkbox" />
+                                <Form.Check custom inline label={skill} type="checkbox" id={i + 'id'} />
                             </Col>
                         )
                     })}

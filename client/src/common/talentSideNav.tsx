@@ -13,17 +13,17 @@ export class TalentSideNav extends Component<any, any> {
             { name: 'Social links', route: '/profile-edit-basic-info' }
         ],
         location: [
-            { name: 'Contract type', route: '' },
-            { name: 'Start date', route: '' },
-            { name: 'Salary', route: '' }
+            { name: 'Contract type', route: '/profile-edit-location' },
+            { name: 'Start date', route: '/profile-edit-location' },
+            { name: 'Salary', route: '/profile-edit-location' }
         ],
         experience: [
-            { name: 'Total experience', route: '' },
-            { name: 'Work experience', route: '' }
+            { name: 'Total experience', route: '/profile-edit-experience' },
+            { name: 'Work experience', route: '/profile-edit-experience' }
         ],
         skills: [
-            { name: 'Languages', route: '' },
-            { name: 'Skills', route: '' }
+            { name: 'Languages', route: '/profile-edit-skills' },
+            { name: 'Skills', route: '/profile-edit-skills' }
         ]
     }
 
@@ -57,7 +57,7 @@ class SideMenuItem extends Component<ISideMenuItemProps> {
         return (
             <>
                 <ListGroup.Item className="cursor-pointer">
-                    <Link  to={this.props.route}>
+                    <Link to={this.props.route}>
                         <FontAwesomeIcon className="text-muted" icon={faCheckCircle}></FontAwesomeIcon>
                         <span className="ml-1 text-dark">{this.props.name}</span>
                     </Link>
