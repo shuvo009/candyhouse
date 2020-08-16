@@ -6,8 +6,24 @@ import { ProfilePicture } from "./components/profilePicture"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub, faLinkedinIn, faStackOverflow } from '@fortawesome/free-brands-svg-icons'
 import { faGlobe } from '@fortawesome/free-solid-svg-icons'
+import { IResumeStateModel, IResumeProps } from "./modes"
+import { defaultLoginState, getProfile } from "./store"
+import { IReducerState } from "../../helpers";
+import { connect } from "react-redux";
+export class ProfileBasicInfoEditComponent extends Component<IResumeProps, IResumeStateModel> {
+    state = defaultLoginState;
 
-export class ProfileBasicInfoEdit extends Component {
+     componentWillMount(){
+         this.props.getProfile(0)
+     }
+
+    handleInputChange = (event: any) => {
+        this.setState({
+            ...this.state,
+            [event.target.name]: event.target.value
+        })
+    };
+
     render() {
         return (
             <PanelEdit title="Basic Info" className="mt-1 pr-0">
@@ -88,3 +104,20 @@ export class ProfileBasicInfoEdit extends Component {
         )
     }
 }
+
+const mapStateToProps = (state: IReducerState) => {
+    return {
+        ...state.profileStore
+    };
+}
+
+const mapDispatchToProps = (dispatch: any) => {
+    return {
+        getProfile: (lastUpdate: number) => dispatch(getProfile(lastUpdate)),
+    }
+}
+
+export const ProfileBasicInfoEdit = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(ProfileBasicInfoEditComponent);

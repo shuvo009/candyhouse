@@ -8,9 +8,9 @@ export class HttpIntercepter {
         axios.interceptors.request.use(config => {
             const accessToken = LocalStorageHelper.AccessToken;
             if (accessToken) {
-                config.headers['Authorization'] = `Bearer  ${accessToken}`;
+                config.headers['Authorization'] = `Bearer ${accessToken}`;
             }
-            config.headers['Content-Type'] = 'application/json'
+            config.headers['Content-Type'] = 'application/json;charset=UTF-8';
             return config;
         }, error => {
             Promise.reject(error)
