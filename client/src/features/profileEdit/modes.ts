@@ -1,6 +1,5 @@
 import { IBaseState } from "../../common/models";
-import { promises } from "fs";
-
+import { IValueModel } from "./values/models"
 export interface ISocialLink {
     name: string;
     link: string;
@@ -62,10 +61,13 @@ export interface IResume {
 }
 
 export interface IResumeStateModel extends IBaseState, IResume {
-
+    lastPullTime: number;
 }
 
-export interface IResumeProps extends IResumeStateModel {
-    getProfile(lastUpdate: number): Promise<void>;
+export interface IResumeProps {
+    resumeStateModel: IResumeStateModel;
+    valuesModel: IValueModel;
+    getProfile(lastPullTime: number): Promise<void>;
+    getValues(lastPullTime: number): Promise<void>;
     updateProfile(resume: IResume): Promise<void>;
 }

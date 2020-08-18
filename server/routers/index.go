@@ -30,5 +30,6 @@ func InitRoute() *gin.Engine {
 	router.Use(gin.Recovery())
 
 	setTalentRouters(router)
+	setCommonRouters(router)
 	return router
 }

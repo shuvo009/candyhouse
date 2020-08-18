@@ -3,6 +3,7 @@ import { combineReducers } from 'redux'
 import talentRegisterStore from "../features/register/components/TalentRegister/store"
 import loginStore from "../features/login/store"
 import profileStore from "../features/profileEdit/store"
+import valuesStore from "../features/profileEdit/values/store"
 import { connectRouter } from 'connected-react-router'
 import { createBrowserHistory } from 'history'
 import { routerMiddleware } from 'connected-react-router'
@@ -12,7 +13,8 @@ const reducer = combineReducers({
     router: connectRouter(history),
     talentRegisterStore,
     loginStore,
-    profileStore
+    profileStore,
+    valuesStore
 })
 
 export const store = configureStore({

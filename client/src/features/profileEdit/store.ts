@@ -23,7 +23,8 @@ export const defaultLoginState: IResumeStateModel = {
     totalYearOfExperience: 0,
 
     errorMessage: '',
-    isBusy: false
+    isBusy: false,
+    lastPullTime: 0
 }
 
 const slice = createSlice({
@@ -50,6 +51,7 @@ const slice = createSlice({
             return {
                 ...state,
                 ...action.payload,
+                lastPullTime: new Date().getTime(),
                 errorMessage: '',
                 isBusy: false
             }
@@ -59,16 +61,16 @@ const slice = createSlice({
 
 export default slice.reducer;
 
-export const getProfile = (lastUpdate: number) => async (dispatch: Dispatch) => {
+export const getProfile = (lastPullTime: number) => async (dispatch: Dispatch) => {
     try {
-        const seconds = (new Date().getTime() - lastUpdate) / 1000;
+        const seconds = (new Date().getTime() - lastPullTime) / 1000;
         if (seconds < (5 * 60)) {
             return;
         }
 
         dispatch(slice.actions.changeBusyState({ data: true }));
         const response = await HttpHelpers.get<IResume>(ApiConstant.talentProfile);
-        dispatch(slice.actions.changeBusyState(response));
+        dispatch(slice.actions.onResumeGet(response));
     } catch (error) {
         dispatch(slice.actions.changeBusyState({ data: false }));
         dispatch(slice.actions.onError({ data: error.message }));

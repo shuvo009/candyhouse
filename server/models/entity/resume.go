@@ -55,7 +55,7 @@ type Resume struct {
 	AccountID             primitive.ObjectID `bson:"accountId"`
 	FirstName             string             `json:"firstName"`
 	LastName              string             `json:"lastName"`
-	Location              string             `json:"location"`
+	Location              string             `json:"talenLocation"`
 	Phone                 string             `json:"phone"`
 	SocialLinks           []SocialLink       `bson:"socialLinks"`
 	ProfileImage          string             `json:"profileImage"`
