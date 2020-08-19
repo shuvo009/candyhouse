@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Form, InputGroup, FormControl, Row, Col, Button } from 'react-bootstrap';
+import { Form, InputGroup, FormControl, Row, Col, Button, Spinner } from 'react-bootstrap';
 import { PanelEdit } from "../../common/panelEdit"
 import { SectionHeader } from "../../common/sectionHeader"
 import { ProfilePicture } from "./components/profilePicture"
@@ -8,7 +8,7 @@ import { faGithub, faLinkedinIn, faStackOverflow } from '@fortawesome/free-brand
 import { faGlobe } from '@fortawesome/free-solid-svg-icons'
 import { IResumeStateModel, IResumeProps } from "./modes"
 import { ISocialMedia } from "./values/models"
-import { defaultLoginState, getProfile } from "./store"
+import { defaultLoginState, getProfile, changeBusyState } from "./store"
 import { getvalues } from "./values/store"
 import { IReducerState } from "../../helpers";
 import { connect } from "react-redux";
@@ -21,11 +21,14 @@ export class ProfileBasicInfoEditComponent extends Component<IResumeProps, IResu
     }
 
     async componentWillMount() {
-        await this.props.getProfile(this.props.resumeStateModel.lastPullTime)
-        await this.props.getValues(this.props.valuesModel.lastPullTime)
-    }
-    componentDidUpdate() {
-        console.log("zzz");
+        this.props.changeBusyState(true);
+
+        await Promise.all([
+            this.props.getProfile(this.props.resumeStateModel.lastPullTime),
+            this.props.getValues(this.props.valuesModel.lastPullTime)
+        ]);
+
+        this.props.changeBusyState(false);
     }
 
     componentWillReceiveProps(nextProps: IResumeProps) {
@@ -49,6 +52,7 @@ export class ProfileBasicInfoEditComponent extends Component<IResumeProps, IResu
         if (social) {
             social.link = value;
         } else {
+          
             this.state.socialLinks.push({ link: value, name: name });
         }
     }
@@ -95,7 +99,12 @@ export class ProfileBasicInfoEditComponent extends Component<IResumeProps, IResu
                         )
                     })}
                 </Row>
-                <Button className="pl-4 pr-4 mt-4">Save</Button>
+
+                <Button className="pl-4 pr-4 mt-4" disabled={this.props.resumeStateModel.isBusy} variant="primary" type="button"
+                    onClick={() => this.props.updateProfile(this.state)}>
+                    {this.props.resumeStateModel.isBusy ? <Spinner animation="grow" size="sm" className="mr-2"></Spinner> : null}
+                    Save
+                </Button>
             </PanelEdit>
         )
     }
@@ -114,6 +123,7 @@ const mapDispatchToProps = (dispatch: any) => {
     return {
         getProfile: (lastUpdate: number) => dispatch(getProfile(lastUpdate)),
         getValues: (lastUpdate: number) => dispatch(getvalues(lastUpdate)),
+        changeBusyState: (state: boolean) => dispatch(changeBusyState(state)),
     }
 }
 
@@ -122,15 +132,19 @@ export const ProfileBasicInfoEdit = connect(
     mapDispatchToProps
 )(ProfileBasicInfoEditComponent);
 
-class SocialMediaComponent extends Component<ISocialMediaComponentProps, string> {
+class SocialMediaComponent extends Component<ISocialMediaComponentProps, ISocialMediaComponentState> {
     constructor(props: ISocialMediaComponentProps) {
         super(props);
-        this.state = props.value;
+        this.state = {
+            value: props.value
+        };
     }
 
 
     handleInputChange = (event: any) => {
-        this.setState(event.target.value);
+        this.setState({
+            value: event.target.value
+        });
         this.props.onChange(this.props.name, event.target.value);
     };
 
@@ -155,7 +169,7 @@ class SocialMediaComponent extends Component<ISocialMediaComponentProps, string>
                     <InputGroup.Prepend>
                         <InputGroup.Text><FontAwesomeIcon icon={this.getIcon(this.props.name)}></FontAwesomeIcon></InputGroup.Text>
                     </InputGroup.Prepend>
-                    <FormControl placeholder={this.props.placeholder} value={this.state} onChange={this.handleInputChange} />
+                    <FormControl placeholder={this.props.placeholder} value={this.state.value} onChange={this.handleInputChange} />
                 </InputGroup>
             </Form.Group>
         )
@@ -165,4 +179,8 @@ class SocialMediaComponent extends Component<ISocialMediaComponentProps, string>
 interface ISocialMediaComponentProps extends ISocialMedia {
     value: string;
     onChange(name: string, value: string): void;
+}
+
+interface ISocialMediaComponentState {
+    value: string;
 }

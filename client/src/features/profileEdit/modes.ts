@@ -67,6 +67,7 @@ export interface IResumeStateModel extends IBaseState, IResume {
 export interface IResumeProps {
     resumeStateModel: IResumeStateModel;
     valuesModel: IValueModel;
+    changeBusyState(state: boolean): void;
     getProfile(lastPullTime: number): Promise<void>;
     getValues(lastPullTime: number): Promise<void>;
     updateProfile(resume: IResume): Promise<void>;

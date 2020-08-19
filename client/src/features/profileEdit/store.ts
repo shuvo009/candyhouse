@@ -67,12 +67,13 @@ export const getProfile = (lastPullTime: number) => async (dispatch: Dispatch) =
         if (seconds < (5 * 60)) {
             return;
         }
-
-        dispatch(slice.actions.changeBusyState({ data: true }));
         const response = await HttpHelpers.get<IResume>(ApiConstant.talentProfile);
         dispatch(slice.actions.onResumeGet(response));
     } catch (error) {
-        dispatch(slice.actions.changeBusyState({ data: false }));
         dispatch(slice.actions.onError({ data: error.message }));
     }
+}
+
+export const changeBusyState = (state: boolean) => (dispatch: Dispatch) => {
+    dispatch(slice.actions.changeBusyState({ data: state }));
 }
