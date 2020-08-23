@@ -52,26 +52,26 @@ type Education struct {
 //Resume ...
 type Resume struct {
 	mgm.DefaultModel      `bson:",inline" coll:"resumes"`
-	AccountID             primitive.ObjectID `bson:"accountId"`
+	AccountID             primitive.ObjectID `bson:"accountId" json:"accountId"`
 	FirstName             string             `json:"firstName"`
 	LastName              string             `json:"lastName"`
-	Location              string             `json:"talenLocation"`
+	Location              string             `json:"location"`
 	Phone                 string             `json:"phone"`
-	SocialLinks           []SocialLink       `bson:"socialLinks"`
+	SocialLinks           []SocialLink       `bson:"socialLinks" json:"socialLinks"`
 	ProfileImage          string             `json:"profileImage"`
-	SummaryList           []Summary          `bson:"summaryList"`
-	NextRoles             []NextRole         `bson:"nextRole"`
+	SummaryList           []Summary          `bson:"summaryList" json:"summaryList"`
+	NextRoles             []NextRole         `bson:"nextRole" json:"nextRole"`
 	TotalYearOfExperience int                `json:"totalYearOfExperience"`
-	Experiences           []Experience       `bson:"experiences"`
-	Languages             []Language         `bson:"languages"`
+	Experiences           []Experience       `bson:"experiences" json:"experiences"`
+	Languages             []Language         `bson:"languages" json:"languages"`
 	Skills                []string           `json:"skills"`
 	NoticePeriod          string             `json:"noticePeriod"`
 	ExceptedSalary        string             `json:"exceptedSalary"`
 	Negotiable            bool               `json:"negotiable"`
-	Educations            []Education        `bson:"educations"`
+	Educations            []Education        `bson:"educations" json:"educations"`
 	ProfileHash           string             `json:"profileHash"`
 	LastUpdate            int64              `json:"lastUpdate"`
 	IsVisible             bool               `json:"isVisible"`
-	FirstCheckBy          primitive.ObjectID `bson:"firstCheckBy"`
-	SecondCheckBy         primitive.ObjectID `bson:"secondCheckBy"`
+	FirstCheckBy          primitive.ObjectID `bson:"firstCheckBy" json:"firstCheckBy"`
+	SecondCheckBy         primitive.ObjectID `bson:"secondCheckBy" json:"secondCheckBy"`
 }

@@ -6,9 +6,9 @@ import { ProfilePicture } from "./components/profilePicture"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub, faLinkedinIn, faStackOverflow } from '@fortawesome/free-brands-svg-icons'
 import { faGlobe } from '@fortawesome/free-solid-svg-icons'
-import { IResumeStateModel, IResumeProps } from "./modes"
+import { IResumeStateModel, IResumeProps, IResume } from "./modes"
 import { ISocialMedia } from "./values/models"
-import { defaultLoginState, getProfile, changeBusyState } from "./store"
+import { defaultLoginState, getProfile, changeBusyState, updateProfile } from "./store"
 import { getvalues } from "./values/store"
 import { IReducerState } from "../../helpers";
 import { connect } from "react-redux";
@@ -17,7 +17,14 @@ import _ from "lodash";
 export class ProfileBasicInfoEditComponent extends Component<IResumeProps, IResumeStateModel> {
     constructor(props: IResumeProps) {
         super(props);
-        this.state = props.resumeStateModel ? props.resumeStateModel : defaultLoginState;
+        const resume = props.resumeStateModel;
+
+        if (resume && !resume.socialLinks) {
+            resume.socialLinks = [];
+        }
+
+        this.state = resume ? resume : defaultLoginState;
+
     }
 
     async componentWillMount() {
@@ -48,13 +55,24 @@ export class ProfileBasicInfoEditComponent extends Component<IResumeProps, IResu
     };
 
     handleSocialMediaChange = (name: string, value: string) => {
-        const social = _.find(this.state.socialLinks, (sl) => { return sl.name === name });
-        if (social) {
-            social.link = value;
+        let socialLinks = this.state.socialLinks ? this.state.socialLinks : [];
+
+        const index = _.findIndex(socialLinks, (sl) => { return sl.name === name });
+        if (index > -1) {
+            socialLinks = Object.assign([...socialLinks], {
+                [index]: {
+                    ...socialLinks[index],
+                    link: value
+                }
+            });
         } else {
-          
-            this.state.socialLinks.push({ link: value, name: name });
+            socialLinks = [...socialLinks, { link: value, name: name }]
         }
+
+        this.setState({
+            ...this.state,
+            socialLinks: socialLinks
+        })
     }
 
     render() {
@@ -91,7 +109,7 @@ export class ProfileBasicInfoEditComponent extends Component<IResumeProps, IResu
                 <SectionHeader title="Your social links" />
                 <Row className="mt-4">
                     {this.props.valuesModel.socialMedia.map((media, i) => {
-                        const userValue = _.find(this.props.resumeStateModel.socialLinks, (s) => { return s.name === media.name });
+                        const userValue = _.find(this.state.socialLinks, (s) => { return s.name === media.name });
                         return (
                             <Col key={i} md="6">
                                 <SocialMediaComponent placeholder={media.placeholder} value={userValue?.link ?? ''} name={media.name} onChange={this.handleSocialMediaChange} />
@@ -111,8 +129,6 @@ export class ProfileBasicInfoEditComponent extends Component<IResumeProps, IResu
 }
 
 const mapStateToProps = (state: IReducerState) => {
-    console.log(state.profileStore);
-
     return {
         resumeStateModel: { ...state.profileStore },
         valuesModel: { ...state.valuesStore }
@@ -124,6 +140,7 @@ const mapDispatchToProps = (dispatch: any) => {
         getProfile: (lastUpdate: number) => dispatch(getProfile(lastUpdate)),
         getValues: (lastUpdate: number) => dispatch(getvalues(lastUpdate)),
         changeBusyState: (state: boolean) => dispatch(changeBusyState(state)),
+        updateProfile: (resume: IResume) => dispatch(updateProfile(resume)),
     }
 }
 
@@ -138,6 +155,15 @@ class SocialMediaComponent extends Component<ISocialMediaComponentProps, ISocial
         this.state = {
             value: props.value
         };
+    }
+
+    componentWillReceiveProps(nextProps: ISocialMediaComponentProps) {
+        const isEqual = _.isEqual(nextProps.value, this.state.value);
+        if (!isEqual) {
+            this.setState({
+                ...nextProps
+            });
+        }
     }
 
 

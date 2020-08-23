@@ -55,6 +55,16 @@ const slice = createSlice({
                 errorMessage: '',
                 isBusy: false
             }
+        },
+
+        updateResume: (state, action) => {
+            return {
+                ...state,
+                ...action.payload.resume,
+                lastPullTime: new Date().getTime(),
+                errorMessage: '',
+                isBusy: action.payload.isBusy
+            }
         }
     },
 });
@@ -73,6 +83,17 @@ export const getProfile = (lastPullTime: number) => async (dispatch: Dispatch) =
         dispatch(slice.actions.onError({ data: error.message }));
     }
 }
+
+export const updateProfile = (resume: IResume) => async (dispatch: Dispatch) => {
+    try {
+        dispatch(slice.actions.updateResume({ resume: resume, isBusy: true }));
+        await HttpHelpers.post<any>(ApiConstant.talentProfileUpdate, resume);
+        dispatch(slice.actions.changeBusyState({ data: false }));
+    } catch (error) {
+        dispatch(slice.actions.onError({ data: error.message }));
+    }
+}
+
 
 export const changeBusyState = (state: boolean) => (dispatch: Dispatch) => {
     dispatch(slice.actions.changeBusyState({ data: state }));
