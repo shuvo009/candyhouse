@@ -2,7 +2,7 @@ import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit'
 import { combineReducers } from 'redux'
 import talentRegisterStore from "../features/register/components/TalentRegister/store"
 import loginStore from "../features/login/store"
-import profileStore from "../features/profileEdit/store"
+import profileStore from "../features/profileEdit/productStore"
 import valuesStore from "../features/profileEdit/values/store"
 import { connectRouter } from 'connected-react-router'
 import { createBrowserHistory } from 'history'

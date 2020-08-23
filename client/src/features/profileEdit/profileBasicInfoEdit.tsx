@@ -4,7 +4,7 @@ import { PanelEdit } from "../../common/panelEdit"
 import { SectionHeader } from "../../common/sectionHeader"
 import { ProfilePicture } from "./components/profilePicture"
 import { IResumeStateModel, IResumeProps, IResume } from "./modes"
-import { defaultLoginState, getProfile, changeBusyState, updateProfile } from "./store"
+import { defaultLoginState, getProfile, changeBusyState, updateProfile } from "./productStore"
 import { getvalues } from "./values/store"
 import { IReducerState } from "../../helpers";
 import { connect } from "react-redux";

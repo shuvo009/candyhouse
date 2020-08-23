@@ -94,7 +94,6 @@ export const updateProfile = (resume: IResume) => async (dispatch: Dispatch) => 
     }
 }
 
-
 export const changeBusyState = (state: boolean) => (dispatch: Dispatch) => {
     dispatch(slice.actions.changeBusyState({ data: state }));
 }
