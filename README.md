@@ -1,3 +1,11 @@
-# candyhouse
-It`s a Clone of honeypot.io
-This project helps me to learn golang and gaine more knowlage about react.
+## candyhouse
+
+This Project is a clone of [https://www.honeypot.io/](Honeypot)
+
+### Project Purpose
+
+Learning Golang and React.
+
+### Project Status
+
+This project is still under development.
