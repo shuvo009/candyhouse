@@ -1,6 +1,6 @@
 ## candyhouse
 
-This Project is a clone of [https://www.honeypot.io/](Honeypot)
+This Project is a clone of [Honeypot](https://www.honeypot.io/)
 
 ### Project Purpose
 
