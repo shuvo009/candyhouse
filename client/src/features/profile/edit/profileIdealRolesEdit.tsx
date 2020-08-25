@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Row, Col, Button, Form } from 'react-bootstrap';
-import { PanelEdit } from "../../common/panelEdit"
-import { SectionHeader } from "../../common/sectionHeader"
+import { PanelEdit } from "../../../common/panelEdit"
+import { SectionHeader } from "../../../common/sectionHeader"
 import { SortableContainer, SortableElement, SortableHandle } from 'react-sortable-hoc';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHandRock } from '@fortawesome/free-solid-svg-icons'

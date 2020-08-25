@@ -3,7 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import './App.scss';
 import { Routes } from "./helpers/routs"
 import { ConnectedRouter } from 'connected-react-router'
-import { history } from "./helpers/store"
+import { history } from "./helpers/rootStore"
 
 function App() {
   return (

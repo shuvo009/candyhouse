@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { PanelEdit } from "../../common/panelEdit"
-import { SectionHeader } from "../../common/sectionHeader"
+import { PanelEdit } from "../../../common/panelEdit"
+import { SectionHeader } from "../../../common/sectionHeader"
 import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";

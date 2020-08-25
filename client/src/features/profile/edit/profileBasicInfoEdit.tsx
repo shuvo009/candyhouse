@@ -1,18 +1,23 @@
 import React, { Component } from "react";
 import { Form, Row, Col, Button, Spinner } from 'react-bootstrap';
-import { PanelEdit } from "../../common/panelEdit"
-import { SectionHeader } from "../../common/sectionHeader"
-import { ProfilePicture } from "./components/profilePicture"
-import { IResumeStateModel, IResumeProps, IResume } from "./modes"
-import { defaultLoginState, getProfile, changeBusyState, updateProfile } from "./productStore"
-import { getvalues } from "./values/store"
-import { IReducerState } from "../../helpers";
 import { connect } from "react-redux";
 import _ from "lodash";
-import { SocialMediaComponent } from "./components/socialMediaComponent"
 
-export class ProfileBasicInfoEditComponent extends Component<IResumeProps, IResumeStateModel> {
-    constructor(props: IResumeProps) {
+import { PanelEdit } from "../../../common/panelEdit";
+import { SectionHeader } from "../../../common/sectionHeader";
+
+import { ProfilePicture } from "./components/profilePicture";
+import { SocialMediaComponent } from "./components/socialMediaComponent";
+
+import { IProfileStateModel, IProfileProps, IProfile } from "../modes";
+import { defaultProfileState, getProfile, changeBusyState, updateProfile } from "../profileStore";
+
+import { getvalues } from "../defaultValues/valueStore";
+import { IReducerState } from "../../../helpers";
+
+
+export class ProfileBasicInfoEditComponent extends Component<IProfileProps, IProfileStateModel> {
+    constructor(props: IProfileProps) {
         super(props);
         const resume = props.resumeStateModel;
 
@@ -20,7 +25,7 @@ export class ProfileBasicInfoEditComponent extends Component<IResumeProps, IResu
             resume.socialLinks = [];
         }
 
-        this.state = resume ? resume : defaultLoginState;
+        this.state = resume ? resume : defaultProfileState;
 
     }
 
@@ -35,7 +40,7 @@ export class ProfileBasicInfoEditComponent extends Component<IResumeProps, IResu
         this.props.changeBusyState(false);
     }
 
-    componentWillReceiveProps(nextProps: IResumeProps) {
+    componentWillReceiveProps(nextProps: IProfileProps) {
         const isEqual = _.isEqual(nextProps.resumeStateModel, this.state);
         if (!isEqual) {
             this.setState({
@@ -127,8 +132,8 @@ export class ProfileBasicInfoEditComponent extends Component<IResumeProps, IResu
 
 const mapStateToProps = (state: IReducerState) => {
     return {
-        resumeStateModel: { ...state.profileStore },
-        valuesModel: { ...state.valuesStore }
+        resumeStateModel: { ...state.profileResucer },
+        valuesModel: { ...state.valueReducer }
     };
 }
 
@@ -137,7 +142,7 @@ const mapDispatchToProps = (dispatch: any) => {
         getProfile: (lastUpdate: number) => dispatch(getProfile(lastUpdate)),
         getValues: (lastUpdate: number) => dispatch(getvalues(lastUpdate)),
         changeBusyState: (state: boolean) => dispatch(changeBusyState(state)),
-        updateProfile: (resume: IResume) => dispatch(updateProfile(resume)),
+        updateProfile: (resume: IProfile) => dispatch(updateProfile(resume)),
     }
 }
 

@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { Form, Row, Col, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons'
-import { PanelEdit } from "../../common/panelEdit"
-import { SectionHeader } from "../../common/sectionHeader"
+import { PanelEdit } from "../../../common/panelEdit"
+import { SectionHeader } from "../../../common/sectionHeader"
 import { SkillSelector } from "./components/skillsEditor"
 import CKEditor from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
