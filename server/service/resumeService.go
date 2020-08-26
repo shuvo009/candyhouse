@@ -37,3 +37,10 @@ func (resumeService *ResumeService) GetResume(accountID primitive.ObjectID) (*en
 	dbResume, err := resumeRepository.FindByID(accountID)
 	return dbResume, err
 }
+
+//UpdateProfilePic ...
+func (resumeService *ResumeService) UpdateProfilePic(accountID primitive.ObjectID, picName string) (*entity.Resume, error) {
+	resumeRepository := new(repository.ResumeRepository)
+	resume, err := resumeRepository.UpdatePic(accountID, picName)
+	return resume, err
+}

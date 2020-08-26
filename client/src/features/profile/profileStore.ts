@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { Dispatch } from 'redux';
 import { IProfileStateModel, IProfile } from "./modes";
-import { HttpHelpers, ApiConstant, defaultReducer } from '../../helpers';
+import { HttpHelpers, ApiConstant } from '../../helpers';
 
 export const defaultProfileState: IProfileStateModel = {
     accountId: '',
@@ -31,8 +31,20 @@ const profileSlice = createSlice({
     name: 'profileStore',
     initialState: defaultProfileState,
     reducers: {
-        ...defaultReducer,
-
+        changeBusyState: (state: any, { payload }: any) => {
+            return {
+                ...state,
+                errorMessage: '',
+                isBusy: payload.data
+            }
+        },
+        onError: (state: any, { payload }: any) => {
+            return {
+                ...state,
+                isBusy: false,
+                errorMessage: payload.data
+            }
+        },
         updateProfileState: (state, { payload }) => {
             return {
                 ...state,
@@ -63,10 +75,10 @@ export const getProfile = (lastPullTime: number) => async (dispatch: Dispatch) =
     }
 }
 
-export const updateProfile = (resume: IProfile) => async (dispatch: Dispatch) => {
+export const updateProfile = (profile: IProfile) => async (dispatch: Dispatch) => {
     try {
-        dispatch(profileAction.updateProfileState({ resume: resume, isBusy: true }));
-        await HttpHelpers.post<any>(ApiConstant.talentProfileUpdate, resume);
+        dispatch(profileAction.updateProfileState({ profile: profile, isBusy: true }));
+        await HttpHelpers.post<any>(ApiConstant.talentProfileUpdate, profile);
         dispatch(profileSlice.actions.changeBusyState({ data: false }));
     } catch (error) {
         dispatch(profileSlice.actions.onError({ data: error.message }));
@@ -75,4 +87,26 @@ export const updateProfile = (resume: IProfile) => async (dispatch: Dispatch) =>
 
 export const changeBusyState = (state: boolean) => (dispatch: Dispatch) => {
     dispatch(profileSlice.actions.changeBusyState({ data: state }));
+}
+
+export const onPicRemove = (profile: IProfile) => async (dispatch: Dispatch) => {
+    try {
+        dispatch(profileSlice.actions.changeBusyState({ data: true }));
+        profile.profileImage = '';
+        await HttpHelpers.post<any>(ApiConstant.talentProfileUpdate, profile);
+        dispatch(profileAction.updateProfileState({ profile: profile, isBusy: false }));
+    } catch (error) {
+        dispatch(profileSlice.actions.onError({ data: error.message }));
+    }
+}
+
+export const onPicSet = (file: any) => async (dispatch: Dispatch) => {
+    try {
+        dispatch(profileSlice.actions.changeBusyState({ data: true }));
+        const response = await HttpHelpers.uploadImage<IProfile>(ApiConstant.talentPicUpdate, file);
+        dispatch(profileAction.updateProfileState({ profile: response, isBusy: false }));
+    } catch (error) {
+        dispatch(profileSlice.actions.onError({ data: error.message }));
+    }
+
 }

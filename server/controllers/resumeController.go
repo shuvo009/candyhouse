@@ -4,6 +4,9 @@ import (
 	"candyHouse/models/entity"
 	"candyHouse/service"
 	"net/http"
+	"path/filepath"
+	"strconv"
+	"time"
 
 	"github.com/gin-gonic/gin"
 )
@@ -35,6 +38,25 @@ func (resumeController *ResumeController) GetMyResume(c *gin.Context) {
 
 	if err != nil {
 		c.JSON(500, gin.H{"error": err.Error()})
+		return
+	}
+	c.JSON(http.StatusOK, resume)
+}
+
+//SetPic ...
+func (resumeController *ResumeController) SetPic(c *gin.Context) {
+	file, _ := c.FormFile("image")
+	dt := strconv.FormatInt(time.Now().Unix(), 10)
+	filename := dt + "_" + filepath.Base(file.Filename)
+	if err := c.SaveUploadedFile(file, "./profilepic/"+filename); err != nil {
+		c.JSON(500, gin.H{"error": err.Error()})
+		return
+	}
+	resumeService := service.ResumeService{}
+	account := c.MustGet("account").(*(entity.Account))
+	resume, updateError := resumeService.UpdateProfilePic(account.ID, filename)
+	if updateError != nil {
+		c.JSON(500, gin.H{"error": updateError.Error()})
 		return
 	}
 	c.JSON(http.StatusOK, resume)

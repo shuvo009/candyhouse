@@ -17,16 +17,10 @@ import { IReducerState } from "../../../helpers";
 
 
 export class ProfileBasicInfoEditComponent extends Component<IProfileProps, IProfileStateModel> {
+
     constructor(props: IProfileProps) {
         super(props);
-        const resume = props.resumeStateModel;
-
-        if (resume && !resume.socialLinks) {
-            resume.socialLinks = [];
-        }
-
-        this.state = resume ? resume : defaultProfileState;
-
+        this.state = props.resumeStateModel ? props.resumeStateModel : defaultProfileState;
     }
 
     async componentWillMount() {
