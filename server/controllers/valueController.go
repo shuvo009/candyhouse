@@ -15,6 +15,8 @@ func (valueController *ValueController) GetValues(c *gin.Context) {
 	var values = ValueModel{
 		SocialMedia: getSocialMediaList(),
 		SummaryList: getSumarryList(),
+		IdealRoles:  getIdealRoles(),
+		Expriences:  getExpriences(),
 	}
 
 	c.JSON(http.StatusOK, values)
@@ -73,6 +75,39 @@ func getSumarryList() []Summary {
 	}
 }
 
+func getExpriences() []Exprience {
+	return []Exprience{
+		Exprience{
+			Key:   "0..1",
+			Value: "< 1 year",
+		},
+		Exprience{
+			Key:   "1..2",
+			Value: "1-2 years",
+		}, Exprience{
+			Key:   "2..4",
+			Value: "2-4 years",
+		}, Exprience{
+			Key:   "4..6",
+			Value: "4-6 years",
+		}, Exprience{
+			Key:   "6..8",
+			Value: "6-8 years",
+		}, Exprience{
+			Key:   "8+",
+			Value: "+8 years",
+		},
+	}
+}
+
+//getIdealRoles ...
+func getIdealRoles() []string {
+	return []string{
+		"Frontend Engineer", "Fullstack Engineer", "Embedded Engineer", "Android Engineer", "Go Engineer", "Java Engineer", ".NET Engineer", "Python Engineer", "Scala Engineer",
+		"Backend Engineer", "Mobile Engineer", "Engineering Manager", "C/C++ Engineer", "iOS Engineer", "Javascript Backend Engineer", "PHP Engineer", "Ruby Engineer", "Ruby Engineer", "DevOps Engineer",
+	}
+}
+
 // #endregion
 
 // #region Models
@@ -81,6 +116,8 @@ func getSumarryList() []Summary {
 type ValueModel struct {
 	SocialMedia []SocialMedia `json:"socialMedia"`
 	SummaryList []Summary     `json:"summaryList"`
+	IdealRoles  []string      `json:"idealRoles"`
+	Expriences  []Exprience   `json:"expriences"`
 }
 
 //SocialMedia ...
@@ -94,6 +131,12 @@ type Summary struct {
 	Name        string `json:"name"`
 	Title       string `json:"title"`
 	Description string `json:"description"`
+}
+
+//Exprience ...
+type Exprience struct {
+	Key   string `json:"key"`
+	Value string `json:"value"`
 }
 
 // #endregion

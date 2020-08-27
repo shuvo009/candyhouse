@@ -6,6 +6,7 @@ import { HttpHelpers, ApiConstant } from '../../../helpers';
 export const defaultValueState: IValueModel = {
     socialMedia: [],
     summaryList: [],
+    idealRoles: [],
     lastPullTime: 0
 }
 

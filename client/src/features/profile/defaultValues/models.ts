@@ -1,6 +1,7 @@
 export interface IValueModel {
     socialMedia: ISocialMedia[];
     summaryList: ISummary[];
+    idealRoles: string[];
     lastPullTime: number;
 }
 
