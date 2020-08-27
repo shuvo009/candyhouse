@@ -11,7 +11,7 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 export class ProfileExperienceEdit extends Component {
     render() {
         return (
-            <PanelEdit title="Experience">
+            <PanelEdit title="Experience" className="mt-1 pr-0" isBusy={true} onUpdateClick={() => { }}>
                 <Row>
                     <Col md="10">
                         <ExprienceYearsCounter></ExprienceYearsCounter>

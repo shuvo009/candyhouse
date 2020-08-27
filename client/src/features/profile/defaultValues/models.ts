@@ -1,9 +1,16 @@
 export interface IValueModel {
     socialMedia: ISocialMedia[];
-    lastPullTime:number;
+    summaryList: ISummary[];
+    lastPullTime: number;
 }
 
 export interface ISocialMedia {
     name: string,
     placeholder: string,
+}
+
+export interface ISummary {
+    name: string;
+    title: string;
+    description: string;
 }

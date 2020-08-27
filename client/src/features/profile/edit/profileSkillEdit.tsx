@@ -8,7 +8,7 @@ import { SkillSelector } from "./components/skillsEditor"
 export class ProfileSkillEdit extends Component {
     render() {
         return (
-            <PanelEdit title="Skills">
+            <PanelEdit title="Skills" className="mt-1 pr-0" isBusy={true} onUpdateClick={() => { }}>
                 <Row>
                     <Col md={9}>
                         <LanguageEdit />

@@ -15,3 +15,4 @@
 # vendor/
 *.env
 server/__debug_bin
+server/profilepic/*

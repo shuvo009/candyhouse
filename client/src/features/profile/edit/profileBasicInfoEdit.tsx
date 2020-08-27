@@ -73,7 +73,7 @@ export class ProfileBasicInfoEditComponent extends Component<IProfileProps, IPro
 
     render() {
         return (
-            <PanelEdit title="Basic Info" className="mt-1 pr-0">
+            <PanelEdit title="Basic Info" className="mt-1 pr-0" isBusy={this.props.resumeStateModel.isBusy} onUpdateClick={() => { this.props.updateProfile(this.state) }}>
                 <ProfilePicture></ProfilePicture>
                 <hr />
                 <Row>
@@ -114,11 +114,7 @@ export class ProfileBasicInfoEditComponent extends Component<IProfileProps, IPro
                     })}
                 </Row>
 
-                <Button className="pl-4 pr-4 mt-4" disabled={this.props.resumeStateModel.isBusy} variant="primary" type="button"
-                    onClick={() => this.props.updateProfile(this.state)}>
-                    {this.props.resumeStateModel.isBusy ? <Spinner animation="grow" size="sm" className="mr-2"></Spinner> : null}
-                    Save
-                </Button>
+
             </PanelEdit>
         )
     }

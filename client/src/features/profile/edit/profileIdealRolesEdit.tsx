@@ -62,7 +62,7 @@ export class ProfileIdealRolesEdit extends Component<any, any> {
 
     render() {
         return (
-            <PanelEdit title="Ideal Roles">
+            <PanelEdit title="Ideal Roles" className="mt-1 pr-0" isBusy={true} onUpdateClick={() => { }}>
                 <SectionHeader title="What would be your ideal next role? (pick up to 5) *" />
                 <div className="mt-3">
                     <SectionHeader title="Software Engineering" />
