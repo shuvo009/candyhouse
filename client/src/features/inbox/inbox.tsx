@@ -1,14 +1,22 @@
 import React, { Component } from "react";
-import { Row, Col, Card, Image } from 'react-bootstrap';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCog } from "@fortawesome/free-solid-svg-icons";
+import { Row, Card } from 'react-bootstrap';
 import { InboxHeader } from "./components/inboxHeader";
+import { InboxLeftPanel } from './components/inboxLeftPanel';
+import { InboxBody } from "./components/inboxBody";
 
 export class Inbox extends Component {
     render() {
         return (
         <>
             <InboxHeader></InboxHeader>
+            <Card className="text-left small">
+                <Card.Body className="py-0">
+                    <Row>
+                        <InboxLeftPanel></InboxLeftPanel>
+                        <InboxBody></InboxBody>
+                    </Row>    
+                </Card.Body>
+            </Card>
         </>
         )
     }

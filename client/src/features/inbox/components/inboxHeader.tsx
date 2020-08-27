@@ -10,13 +10,13 @@ export class InboxHeader extends Component {
             <Card className="text-left small">
                 <Card.Body className="py-0">
                     <Row>
-                        <Col xs="12" sm="3" className="mx-auto my-0">
+                        <Col md="4" className="mx-auto my-0">
                             <div className="my-2">
                                 <strong>Inbox</strong>
                                 <FontAwesomeIcon icon={faCog} className="float-right mt-1"></FontAwesomeIcon>
                             </div>
                         </Col>
-                        <Col xs="auto" sm="9" className="border-left mx-auto my-0">
+                        <Col xs="auto" md="8" className="border-left mx-auto my-0">
                             <div className="my-2">
                                 <Image roundedCircle width={23} height={23} className="mr-3" src="https://via.placeholder.com/300/09f/fff.png" alt="name" />
                                 <strong>Tom Hardy</strong>
