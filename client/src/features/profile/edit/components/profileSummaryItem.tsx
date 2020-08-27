@@ -20,7 +20,7 @@ export class ProfileSummaryItem extends Component<IProfileSummaryItemProps> {
                     data={this.props.value}
                     onChange={(event: any, editor: any) => {
                         const data = editor.getData();
-                        this.props.onChange(data);
+                        this.props.onChange(this.props.type, data);
                     }}
                     onInit={(editor: any) => {
                         editor.editing.view.change((writer: any) => {
@@ -41,5 +41,6 @@ interface IProfileSummaryItemProps {
     title: string;
     description: string;
     value: string;
-    onChange(data: string): void;
+    type: string;
+    onChange(type: string, description: string): void;
 }
