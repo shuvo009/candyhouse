@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Form, Button, Spinner } from 'react-bootstrap';
 import { talentRegister, talentRegisterState } from "./store";
-import { IReducerState } from "../../../../helpers/store"
+import { IReducerState } from "../../../../helpers/rootStore"
 import { connect } from "react-redux";
 import { ITalentRegisterProps, ITalentRegisterState } from "./models";
 import { ErrorMessage } from "../../../../common/errorMessage"

@@ -5,14 +5,17 @@ import { HttpHelpers, ApiConstant } from '../../../helpers';
 
 export const defaultValueState: IValueModel = {
     socialMedia: [],
+    summaryList: [],
+    idealRoles: [],
+    expriences: [],
     lastPullTime: 0
 }
 
-const slice = createSlice({
-    name: 'resumeStore',
+const valueSlice = createSlice({
+    name: 'valueStore',
     initialState: defaultValueState,
     reducers: {
-        onValueGet: (state, action) => {
+        onValueStateUpdate: (state, action) => {
             return {
                 ...state,
                 ...action.payload,
@@ -22,7 +25,10 @@ const slice = createSlice({
     },
 });
 
-export default slice.reducer;
+const valueReducer = valueSlice.reducer;
+const valueActions = valueSlice.actions;
+
+export { valueReducer };
 
 
 export const getvalues = (lastPullTime: number) => async (dispatch: Dispatch) => {
@@ -32,7 +38,7 @@ export const getvalues = (lastPullTime: number) => async (dispatch: Dispatch) =>
             return;
         }
         const response = await HttpHelpers.get<IValueModel>(ApiConstant.values);
-        dispatch(slice.actions.onValueGet(response));
+        dispatch(valueActions.onValueStateUpdate(response));
     } catch (error) {
 
     }

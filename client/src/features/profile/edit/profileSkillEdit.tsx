@@ -2,13 +2,13 @@ import React, { Component } from "react";
 import { Form, Row, Col, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
-import { PanelEdit } from "../../common/panelEdit"
-import { SectionHeader } from "../../common/sectionHeader"
+import { PanelEdit } from "../../../common/panelEdit"
+import { SectionHeader } from "../../../common/sectionHeader"
 import { SkillSelector } from "./components/skillsEditor"
 export class ProfileSkillEdit extends Component {
     render() {
         return (
-            <PanelEdit title="Skills">
+            <PanelEdit title="Skills" className="mt-1 pr-0" isBusy={true} onUpdateClick={() => { }}>
                 <Row>
                     <Col md={9}>
                         <LanguageEdit />

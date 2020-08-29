@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Form, InputGroup, FormControl } from 'react-bootstrap';
-import { ISocialMedia } from "../values/models";
+import { ISocialMedia } from "../../defaultValues/models";
 import { faGithub, faLinkedinIn, faStackOverflow } from '@fortawesome/free-brands-svg-icons';
 import { faGlobe } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';

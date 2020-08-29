@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Row, Col } from 'react-bootstrap';
-import { Panel } from "../../../common/panel"
+import { Panel } from "../../../../common/panel"
 import parse from "html-react-parser"
 export class ProfileExperience extends Component<any, IProfileWorkExperienceState> {
 

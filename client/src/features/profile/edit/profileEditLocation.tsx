@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { PanelEdit } from "../../common/panelEdit"
-import { SectionHeader } from "../../common/sectionHeader"
+import { PanelEdit } from "../../../common/panelEdit"
+import { SectionHeader } from "../../../common/sectionHeader"
 import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
@@ -19,7 +19,7 @@ export class ProfileEditLocation extends Component {
 
     render() {
         return (
-            <PanelEdit title="location">
+            <PanelEdit title="location" className="mt-1 pr-0" isBusy={true} onUpdateClick={() => { }}>
                 <Row>
                     <Col md="11">
                         <SectionHeader title="What type of employment are you looking for?*" />

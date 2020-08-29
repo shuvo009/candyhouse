@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Panel } from "../../../common/panel"
+import { Panel } from "../../../../common/panel"
 export class ProfileSummary extends Component<any, IProfileSummaryState> {
 
     status = {

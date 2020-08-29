@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Rating from "react-rating"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircle } from '@fortawesome/free-solid-svg-icons'
-import { Panel } from "../../../common/panel"
+import { Panel } from "../../../../common/panel"
 export class ProfileSkils extends Component<any, IProfileSkillsState> {
 
     state = {

@@ -3,5 +3,6 @@ export class ApiConstant {
     static talentLogin = 'talent/login';
     static talentProfile = 'talent/resume/my';
     static talentProfileUpdate = 'talent/resume/update';
+    static talentPicUpdate = 'talent/resume/pic';
     static values = 'values';
 }

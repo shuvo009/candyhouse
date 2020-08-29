@@ -2,8 +2,7 @@ import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit'
 import { combineReducers } from 'redux'
 import talentRegisterStore from "../features/register/components/TalentRegister/store"
 import loginStore from "../features/login/store"
-import profileStore from "../features/profileEdit/productStore"
-import valuesStore from "../features/profileEdit/values/store"
+import { profileResucer, valueReducer } from "../features"
 import { connectRouter } from 'connected-react-router'
 import { createBrowserHistory } from 'history'
 import { routerMiddleware } from 'connected-react-router'
@@ -13,8 +12,8 @@ const reducer = combineReducers({
     router: connectRouter(history),
     talentRegisterStore,
     loginStore,
-    profileStore,
-    valuesStore
+    profileResucer,
+    valueReducer
 })
 
 export const store = configureStore({

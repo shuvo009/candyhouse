@@ -1,5 +1,6 @@
 import { IBaseState } from "../../common/models";
-import { IValueModel } from "./values/models"
+import { IValueModel } from "./defaultValues/models";
+
 export interface ISocialLink {
     name: string;
     link: string;
@@ -13,7 +14,7 @@ export interface ISummary {
 export interface INextRole {
     role: string;
     experience: string;
-    sequence: string;
+    sequence: number;
 }
 
 export interface IExperience {
@@ -27,20 +28,18 @@ export interface IExperience {
     techStack: string[];
 }
 
-
 export interface ILanguage {
     name: string;
     level: string;
 }
 
-//Education ...
 export interface IEducation {
     institute: string;
     degree: string;
     passYear: string;
 }
 
-export interface IResume {
+export interface IProfile {
     accountId: string;
     firstName: string;
     lastName: string;
@@ -60,15 +59,15 @@ export interface IResume {
     educations: IEducation[];
 }
 
-export interface IResumeStateModel extends IBaseState, IResume {
+export interface IProfileStateModel extends IBaseState, IProfile {
     lastPullTime: number;
 }
 
-export interface IResumeProps {
-    resumeStateModel: IResumeStateModel;
+export interface IProfileProps {
+    resumeStateModel: IProfileStateModel;
     valuesModel: IValueModel;
     changeBusyState(state: boolean): void;
     getProfile(lastPullTime: number): Promise<void>;
     getValues(lastPullTime: number): Promise<void>;
-    updateProfile(resume: IResume): Promise<void>;
+    updateProfile(resume: IProfile): Promise<void>;
 }

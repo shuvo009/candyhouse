@@ -51,6 +51,7 @@ func (resumeRepository *ResumeRepository) UpdateResume(accountID primitive.Objec
 	dbResume.FirstName = resume.FirstName
 	dbResume.LastName = resume.LastName
 	dbResume.Location = resume.Location
+	dbResume.ProfileImage = resume.ProfileImage
 	dbResume.Phone = resume.Phone
 	dbResume.SocialLinks = resume.SocialLinks
 	dbResume.SummaryList = resume.SummaryList
@@ -67,4 +68,22 @@ func (resumeRepository *ResumeRepository) UpdateResume(accountID primitive.Objec
 	var mongoError = mgm.Coll(dbResume).Update(dbResume)
 	db.Disconnect()
 	return mongoError
+}
+
+//UpdatePic ...
+func (resumeRepository *ResumeRepository) UpdatePic(accountID primitive.ObjectID, fileName string) (*entity.Resume, error) {
+	db.Connect()
+	dbResume := &entity.Resume{}
+	coll := mgm.Coll(dbResume)
+
+	var err = coll.FindOne(mgm.Ctx(), bson.M{"accountId": accountID}).Decode(dbResume)
+	if err != nil {
+		return nil, errors.New("Resume is not found")
+	}
+
+	dbResume.ProfileImage = fileName
+	dbResume.LastUpdate = time.Now().Unix()
+	var _ = mgm.Coll(dbResume).Update(dbResume)
+	db.Disconnect()
+	return dbResume, err
 }

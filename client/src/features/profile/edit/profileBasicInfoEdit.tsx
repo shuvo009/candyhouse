@@ -1,27 +1,26 @@
 import React, { Component } from "react";
-import { Form, Row, Col, Button, Spinner } from 'react-bootstrap';
-import { PanelEdit } from "../../common/panelEdit"
-import { SectionHeader } from "../../common/sectionHeader"
-import { ProfilePicture } from "./components/profilePicture"
-import { IResumeStateModel, IResumeProps, IResume } from "./modes"
-import { defaultLoginState, getProfile, changeBusyState, updateProfile } from "./productStore"
-import { getvalues } from "./values/store"
-import { IReducerState } from "../../helpers";
+import { Form, Row, Col } from 'react-bootstrap';
 import { connect } from "react-redux";
 import _ from "lodash";
-import { SocialMediaComponent } from "./components/socialMediaComponent"
 
-export class ProfileBasicInfoEditComponent extends Component<IResumeProps, IResumeStateModel> {
-    constructor(props: IResumeProps) {
+import { PanelEdit } from "../../../common/panelEdit";
+import { SectionHeader } from "../../../common/sectionHeader";
+
+import { ProfilePicture } from "./components/profilePicture";
+import { SocialMediaComponent } from "./components/socialMediaComponent";
+
+import { IProfileStateModel, IProfileProps, IProfile } from "../modes";
+import { defaultProfileState, getProfile, changeBusyState, updateProfile } from "../profileStore";
+
+import { getvalues } from "../defaultValues/valueStore";
+import { IReducerState } from "../../../helpers";
+
+
+export class ProfileBasicInfoEditComponent extends Component<IProfileProps, IProfileStateModel> {
+
+    constructor(props: IProfileProps) {
         super(props);
-        const resume = props.resumeStateModel;
-
-        if (resume && !resume.socialLinks) {
-            resume.socialLinks = [];
-        }
-
-        this.state = resume ? resume : defaultLoginState;
-
+        this.state = props.resumeStateModel ? props.resumeStateModel : defaultProfileState;
     }
 
     async componentWillMount() {
@@ -35,7 +34,7 @@ export class ProfileBasicInfoEditComponent extends Component<IResumeProps, IResu
         this.props.changeBusyState(false);
     }
 
-    componentWillReceiveProps(nextProps: IResumeProps) {
+    componentWillReceiveProps(nextProps: IProfileProps) {
         const isEqual = _.isEqual(nextProps.resumeStateModel, this.state);
         if (!isEqual) {
             this.setState({
@@ -74,7 +73,7 @@ export class ProfileBasicInfoEditComponent extends Component<IResumeProps, IResu
 
     render() {
         return (
-            <PanelEdit title="Basic Info" className="mt-1 pr-0">
+            <PanelEdit title="Basic Info" className="mt-1 pr-0" isBusy={this.props.resumeStateModel.isBusy} onUpdateClick={() => { this.props.updateProfile(this.state) }}>
                 <ProfilePicture></ProfilePicture>
                 <hr />
                 <Row>
@@ -115,11 +114,7 @@ export class ProfileBasicInfoEditComponent extends Component<IResumeProps, IResu
                     })}
                 </Row>
 
-                <Button className="pl-4 pr-4 mt-4" disabled={this.props.resumeStateModel.isBusy} variant="primary" type="button"
-                    onClick={() => this.props.updateProfile(this.state)}>
-                    {this.props.resumeStateModel.isBusy ? <Spinner animation="grow" size="sm" className="mr-2"></Spinner> : null}
-                    Save
-                </Button>
+
             </PanelEdit>
         )
     }
@@ -127,8 +122,8 @@ export class ProfileBasicInfoEditComponent extends Component<IResumeProps, IResu
 
 const mapStateToProps = (state: IReducerState) => {
     return {
-        resumeStateModel: { ...state.profileStore },
-        valuesModel: { ...state.valuesStore }
+        resumeStateModel: { ...state.profileResucer },
+        valuesModel: { ...state.valueReducer }
     };
 }
 
@@ -137,7 +132,7 @@ const mapDispatchToProps = (dispatch: any) => {
         getProfile: (lastUpdate: number) => dispatch(getProfile(lastUpdate)),
         getValues: (lastUpdate: number) => dispatch(getvalues(lastUpdate)),
         changeBusyState: (state: boolean) => dispatch(changeBusyState(state)),
-        updateProfile: (resume: IResume) => dispatch(updateProfile(resume)),
+        updateProfile: (resume: IProfile) => dispatch(updateProfile(resume)),
     }
 }
 

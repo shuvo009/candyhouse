@@ -9,6 +9,7 @@ import (
 
 func setTalentRouters(router *gin.Engine) {
 	authController := new(controllers.AuthController)
+	router.Static("/image", "./profilepic")
 
 	talent := router.Group("/talent")
 	{
@@ -19,6 +20,7 @@ func setTalentRouters(router *gin.Engine) {
 			resumeController := new(controllers.ResumeController)
 			private.Use(middlewares.Authentication())
 			private.POST("/resume/update", resumeController.Update)
+			private.POST("/resume/pic", resumeController.SetPic)
 			private.GET("/resume/my", resumeController.GetMyResume)
 		}
 
