@@ -7,6 +7,7 @@ export const defaultValueState: IValueModel = {
     socialMedia: [],
     summaryList: [],
     idealRoles: [],
+    expriences: [],
     lastPullTime: 0
 }
 

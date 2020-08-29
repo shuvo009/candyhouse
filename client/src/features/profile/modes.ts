@@ -14,7 +14,7 @@ export interface ISummary {
 export interface INextRole {
     role: string;
     experience: string;
-    sequence: string;
+    sequence: number;
 }
 
 export interface IExperience {
