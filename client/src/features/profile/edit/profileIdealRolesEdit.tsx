@@ -21,7 +21,7 @@ import { IExprience } from "../defaultValues/models";
 
 const DragHandle = SortableHandle(() => <FontAwesomeIcon className="mr-3 text-muted" icon={faHandRock} />);
 
-const SortableItem = SortableElement(({ value, expriences }: { value: any, expriences: any[] }) => {
+const SortableItem = SortableElement(({ value, expriences, onExprienceSelect }: { value: any, expriences: any[], onExprienceSelect: (index: number, nextRole: INextRole) => void }) => {
     return (
         <li className="list-style-none">
             <Row>
@@ -31,7 +31,10 @@ const SortableItem = SortableElement(({ value, expriences }: { value: any, expri
                     <span className="text-muted ml-3">{value.value.role}</span>
                 </Col>
                 <Col>
-                    <Form.Control as="select">
+                    <Form.Control as="select" onChange={(event) => {
+                        const nextRole = { ...value.value, experience: event.target.value };
+                        onExprienceSelect(value.index, nextRole);
+                    }} value={value.value.experience}>
                         {expriences.map((exp, i) => {
                             return (
                                 <option key={i} value={exp.key}>{exp.value}</option>
@@ -44,11 +47,11 @@ const SortableItem = SortableElement(({ value, expriences }: { value: any, expri
     )
 });
 
-const SortableList = SortableContainer(({ items, expriences }: { items: INextRole[], expriences: IExprience[] }) => {
+const SortableList = SortableContainer(({ items, expriences, onExprienceSelect }: { items: INextRole[], expriences: IExprience[], onExprienceSelect: (index: number, nextRole: INextRole) => void }) => {
     return (
         <ul className="list-unstyled">
             {items.map((value: INextRole, index: any) => (
-                <SortableItem key={`item-${index}`} index={index} value={{ value, index }} expriences={expriences} />
+                <SortableItem key={`item-${index}`} index={index} value={{ value, index }} expriences={expriences} onExprienceSelect={onExprienceSelect} />
             ))}
         </ul>
     );
@@ -117,9 +120,20 @@ export class ProfileIdealRolesEditComponent extends Component<IProfileProps, IPr
         })
     };
 
+    onExprienceSelected = (index: number, nextRole: INextRole) => {
+        const nextRoles = Object.assign([...this.state.nextRoles], {
+            [index]: nextRole
+        });
+
+        this.setState({
+            ...this.state,
+            nextRoles: nextRoles
+        })
+    }
+
     render() {
         return (
-            <PanelEdit title="Ideal Roles" className="mt-1 pr-0" isBusy={this.props.resumeStateModel.isBusy} onUpdateClick={() => { }}>
+            <PanelEdit title="Ideal Roles" className="mt-1 pr-0" isBusy={this.props.resumeStateModel.isBusy} onUpdateClick={() => { this.props.updateProfile(this.state) }}>
                 <SectionHeader title="What would be your ideal next role? (pick up to 5) *" />
                 <div className="mt-3">
                     <SectionHeader title="Software Engineering" />
@@ -127,9 +141,10 @@ export class ProfileIdealRolesEditComponent extends Component<IProfileProps, IPr
                 <ErrorMessage message={this.state.errorMessage} />
                 <Row>
                     {this.props.valuesModel.idealRoles.map((role, i) => {
+                        const isChecked = !!_.find(this.state.nextRoles, (r) => { return r.role === role });
                         return (
                             <Col md="6" className="mt-3" key={i}>
-                                <Form.Check custom inline label={role} type="checkbox" id={i + 'id'} onChange={(event: any) => { this.handleInputChange(event, role) }} />
+                                <Form.Check custom checked={isChecked} inline label={role} type="checkbox" id={i + 'id'} onChange={(event: any) => { this.handleInputChange(event, role) }} />
                             </Col>
                         )
                     })}
@@ -144,7 +159,7 @@ export class ProfileIdealRolesEditComponent extends Component<IProfileProps, IPr
                             <Row className="mt-2">
                                 <Col md="10">
                                     <div className="top-skill">
-                                        <SortableList onSortEnd={this.onSortEnd} items={this.state.nextRoles} expriences={this.props.valuesModel.expriences} />
+                                        <SortableList onSortEnd={this.onSortEnd} items={this.state.nextRoles} expriences={this.props.valuesModel.expriences} onExprienceSelect={this.onExprienceSelected} />
                                     </div>
                                 </Col>
                             </Row>
