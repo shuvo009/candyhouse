@@ -14,6 +14,7 @@ export const defaultProfileState: IProfileStateModel = {
     location: '',
     negotiable: true,
     nextRoles: [],
+    employmentType: [],
     noticePeriod: '',
     phone: '',
     profileImage: '',

@@ -21,7 +21,7 @@ type Summary struct {
 type NextRole struct {
 	Role       string `json:"role"`
 	Experience string `json:"experience"`
-	Sequence   string `json:"sequence"`
+	Sequence   int    `json:"sequence"`
 }
 
 //Experience ...
@@ -60,7 +60,8 @@ type Resume struct {
 	SocialLinks           []SocialLink       `bson:"socialLinks" json:"socialLinks"`
 	ProfileImage          string             `json:"profileImage"`
 	SummaryList           []Summary          `bson:"summaryList" json:"summaryList"`
-	NextRoles             []NextRole         `bson:"nextRole" json:"nextRole"`
+	NextRoles             []NextRole         `bson:"nextRoles" json:"nextRoles"`
+	EmploymentType        []string           `bson:"employmentType" json:"employmentType"`
 	TotalYearOfExperience int                `json:"totalYearOfExperience"`
 	Experiences           []Experience       `bson:"experiences" json:"experiences"`
 	Languages             []Language         `bson:"languages" json:"languages"`

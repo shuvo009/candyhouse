@@ -59,6 +59,7 @@ func (resumeRepository *ResumeRepository) UpdateResume(accountID primitive.Objec
 	dbResume.TotalYearOfExperience = resume.TotalYearOfExperience
 	dbResume.Experiences = resume.Experiences
 	dbResume.Languages = resume.Languages
+	dbResume.EmploymentType = resume.EmploymentType
 	dbResume.Skills = resume.Skills
 	dbResume.NoticePeriod = resume.NoticePeriod
 	dbResume.ExceptedSalary = resume.ExceptedSalary

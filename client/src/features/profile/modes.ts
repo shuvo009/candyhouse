@@ -48,6 +48,7 @@ export interface IProfile {
     socialLinks: ISocialLink[];
     profileImage: string;
     summaryList: ISummary[];
+    employmentType: string[]
     nextRoles: INextRole[];
     totalYearOfExperience: number;
     experiences: IExperience[];

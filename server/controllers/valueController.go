@@ -17,6 +17,7 @@ func (valueController *ValueController) GetValues(c *gin.Context) {
 		SummaryList: getSumarryList(),
 		IdealRoles:  getIdealRoles(),
 		Expriences:  getExpriences(),
+		Positions:   getPositions(),
 	}
 
 	c.JSON(http.StatusOK, values)
@@ -108,6 +109,13 @@ func getIdealRoles() []string {
 	}
 }
 
+//getPositions ...
+func getPositions() []string {
+	return []string{
+		"Permanent (full-time)", "Part-time", "Contract / Freelance", "Intern",
+	}
+}
+
 // #endregion
 
 // #region Models
@@ -118,6 +126,7 @@ type ValueModel struct {
 	SummaryList []Summary     `json:"summaryList"`
 	IdealRoles  []string      `json:"idealRoles"`
 	Expriences  []Exprience   `json:"expriences"`
+	Positions   []string      `json:"positions"`
 }
 
 //SocialMedia ...
