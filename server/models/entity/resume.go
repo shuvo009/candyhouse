@@ -61,6 +61,7 @@ type Resume struct {
 	ProfileImage          string             `json:"profileImage"`
 	SummaryList           []Summary          `bson:"summaryList" json:"summaryList"`
 	NextRoles             []NextRole         `bson:"nextRoles" json:"nextRoles"`
+	EmploymentType        []string           `bson:"employmentType" json:"employmentType"`
 	TotalYearOfExperience int                `json:"totalYearOfExperience"`
 	Experiences           []Experience       `bson:"experiences" json:"experiences"`
 	Languages             []Language         `bson:"languages" json:"languages"`

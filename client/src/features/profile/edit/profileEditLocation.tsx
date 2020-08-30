@@ -1,33 +1,83 @@
-import React, { Component } from "react";
-import { PanelEdit } from "../../../common/panelEdit"
-import { SectionHeader } from "../../../common/sectionHeader"
-import DatePicker from "react-datepicker";
-
 import "react-datepicker/dist/react-datepicker.css";
+import React, { Component } from "react";
+import DatePicker from "react-datepicker";
+import _ from "lodash";
+import { connect } from "react-redux";
+
 import { InputGroup, Row, Col, Form, FormControl } from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMoneyBill } from '@fortawesome/free-solid-svg-icons'
-export class ProfileEditLocation extends Component {
-    state = {
-        positions: [
-            { title: "Permanent (full-time)", value: "" },
-            { title: "Part-time", value: "" },
-            { title: "Contract / Freelance", value: "" },
-            { title: "Intern", value: "" }
-        ]
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMoneyBill } from '@fortawesome/free-solid-svg-icons';
+
+import { PanelEdit } from "../../../common/panelEdit";
+import { SectionHeader } from "../../../common/sectionHeader";
+import { IReducerState } from "../../../helpers";
+
+import { IProfileStateModel, IProfileProps, IProfile, INextRole } from "../modes";
+import { defaultProfileState, getProfile, changeBusyState, updateProfile } from "../profileStore";
+
+import { getvalues } from "../defaultValues/valueStore";
+import { IExprience } from "../defaultValues/models";
+
+export class ProfileEditLocationComponent extends Component<IProfileProps, IProfileStateModel>  {
+
+    constructor(props: IProfileProps) {
+        super(props);
+        this.state = props.resumeStateModel ? props.resumeStateModel : defaultProfileState;
+    }
+
+    async componentWillMount() {
+        this.props.changeBusyState(true);
+
+        await Promise.all([
+            this.props.getProfile(this.props.resumeStateModel.lastPullTime),
+            this.props.getValues(this.props.valuesModel.lastPullTime)
+        ]);
+
+        this.props.changeBusyState(false);
+    }
+
+    componentWillReceiveProps(nextProps: IProfileProps) {
+        const isEqual = _.isEqual(nextProps.resumeStateModel, this.state);
+        if (!isEqual) {
+            this.setState({
+                ...nextProps.resumeStateModel
+            });
+        }
+    }
+
+    handleInputChange = (event: any) => {
+        this.setState({
+            ...this.state,
+            [event.target.name]: event.target.value
+        })
+    };
+
+    onEmploymentTypeSelect = (event: any) => {
+        let employmentType = this.state.employmentType || [];
+
+        if (event.target.checked) {
+            employmentType = [...employmentType, event.target.value];
+        } else {
+            employmentType = _.filter(employmentType, (s) => { return s != event.target.value })
+        }
+        this.setState({
+            ...this.state,
+            employmentType: employmentType
+        })
     }
 
     render() {
         return (
-            <PanelEdit title="location" className="mt-1 pr-0" isBusy={true} onUpdateClick={() => { }}>
+            <PanelEdit title="location" className="mt-1 pr-0" isBusy={this.props.resumeStateModel.isBusy} onUpdateClick={() => { this.props.updateProfile(this.state) }}>
                 <Row>
                     <Col md="11">
                         <SectionHeader title="What type of employment are you looking for?*" />
                         <Row className="mt-3 mb-3">
-                            {this.state.positions.map((position, i) => {
+                            {this.props.valuesModel.positions.map((position, i) => {
+                                const isSelected = !!_.find(this.state.employmentType, (s) => { return s == position })
                                 return (
                                     <Col key={i} md="4" className="mt-3">
-                                        <Form.Check inline custom label={position.title} type="checkbox" id={i + 'id'} />
+                                        <Form.Check inline custom checked={isSelected} label={position} value={position} type="checkbox" id={i + 'id'} onChange={this.onEmploymentTypeSelect} />
                                     </Col>
                                 )
                             })}
@@ -79,3 +129,24 @@ export class ProfileEditLocation extends Component {
         )
     }
 }
+
+const mapStateToProps = (state: IReducerState) => {
+    return {
+        resumeStateModel: { ...state.profileResucer },
+        valuesModel: { ...state.valueReducer }
+    };
+}
+
+const mapDispatchToProps = (dispatch: any) => {
+    return {
+        getProfile: (lastUpdate: number) => dispatch(getProfile(lastUpdate)),
+        getValues: (lastUpdate: number) => dispatch(getvalues(lastUpdate)),
+        changeBusyState: (state: boolean) => dispatch(changeBusyState(state)),
+        updateProfile: (resume: IProfile) => dispatch(updateProfile(resume)),
+    }
+}
+
+export const ProfileEditLocation = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(ProfileEditLocationComponent);

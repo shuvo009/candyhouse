@@ -1,21 +1,21 @@
+import 'draft-js/dist/Draft.css';
 import React, { Component } from "react";
 import { Row, Col, Form } from 'react-bootstrap';
 import { connect } from "react-redux";
 import _ from "lodash";
-
-import { PanelEdit } from "../../../common/panelEdit"
-import { ErrorMessage } from "../../../common/errorMessage"
-import { SectionHeader } from "../../../common/sectionHeader"
 import { SortableContainer, SortableElement, SortableHandle } from 'react-sortable-hoc';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHandRock } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHandRock } from '@fortawesome/free-solid-svg-icons';
+
+import { PanelEdit } from "../../../common/panelEdit";
+import { ErrorMessage } from "../../../common/errorMessage";
+import { SectionHeader } from "../../../common/sectionHeader";
+import { IReducerState } from "../../../helpers";
 
 import { IProfileStateModel, IProfileProps, IProfile, INextRole } from "../modes";
 import { defaultProfileState, getProfile, changeBusyState, updateProfile } from "../profileStore";
 
-import 'draft-js/dist/Draft.css';
 import { getvalues } from "../defaultValues/valueStore";
-import { IReducerState } from "../../../helpers";
 import { IExprience } from "../defaultValues/models";
 
 

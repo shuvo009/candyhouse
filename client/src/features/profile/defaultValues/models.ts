@@ -4,6 +4,7 @@ export interface IValueModel {
     idealRoles: string[];
     expriences: IExprience[];
     lastPullTime: number;
+    positions: string[];
 }
 
 export interface ISocialMedia {
