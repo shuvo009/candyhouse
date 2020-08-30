@@ -3,13 +3,13 @@ import { TalentLayout } from "../layouts/talentLayout";
 import { Login } from "../features/login/login";
 import { Register } from "../features/register/register";
 import { Home } from "../features/home/home";
-import { Profile } from "../features/profile/profile";
-import { ProfileBasicInfoEdit } from "../features/profileEdit/profileBasicInfoEdit";
-import { ProfileSummaryEdit } from "../features/profileEdit/profileSummaryEdit";
-import { ProfileIdealRolesEdit } from "../features/profileEdit/profileIdealRolesEdit";
-import { ProfileEditLocation } from "../features/profileEdit/profileEditLocation";
-import { ProfileExperienceEdit } from "../features/profileEdit/profileExperienceEdit";
-import { ProfileSkillEdit } from "../features/profileEdit/profileSkillEdit";
+import { Profile } from "../features/profile/view/profile";
+import { ProfileBasicInfoEdit } from "../features/profile/edit/profileBasicInfoEdit";
+import { ProfileSummaryEdit } from "../features/profile/edit/profileSummaryEdit";
+import { ProfileIdealRolesEdit } from "../features/profile/edit/profileIdealRolesEdit";
+import { ProfileEditLocation } from "../features/profile/edit/profileEditLocation";
+import { ProfileExperienceEdit } from "../features/profile/edit/profileExperienceEdit";
+import { ProfileSkillEdit } from "../features/profile/edit/profileSkillEdit";
 import { Inbox } from '../features/inbox/inbox';
 export class Routes {
 
