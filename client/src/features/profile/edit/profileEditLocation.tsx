@@ -11,6 +11,7 @@ import { faMoneyBill } from '@fortawesome/free-solid-svg-icons';
 import { PanelEdit } from "../../../common/panelEdit";
 import { SectionHeader } from "../../../common/sectionHeader";
 import { IReducerState } from "../../../helpers";
+import { JobLocation } from "./components/jobLocation"
 
 import { IProfileStateModel, IProfileProps, IProfile, INextRole } from "../modes";
 import { defaultProfileState, getProfile, changeBusyState, updateProfile } from "../profileStore";
@@ -117,23 +118,7 @@ export class ProfileEditLocationComponent extends Component<IProfileProps, IProf
                                 }
                             </Col>
                         </Row>
-                        <Row>
-                            <Col>
-                                <SectionHeader title="Where would you like to work?*" />
-                                <div className="mt-2">
-                                    <Form.Check inline custom label="Dhaka" type="checkbox" id={"Dhaka" + 'id'} />
-                                </div>
-                            </Col>
-                            <Col>
-                                <SectionHeader title="What are your minimum salary expectations?*" />
-                                <InputGroup className="mt-2">
-                                    <InputGroup.Prepend>
-                                        <InputGroup.Text><FontAwesomeIcon icon={faMoneyBill}></FontAwesomeIcon></InputGroup.Text>
-                                    </InputGroup.Prepend>
-                                    <FormControl placeholder="min. salary for Dhaka" />
-                                </InputGroup>
-                            </Col>
-                        </Row>
+                        <JobLocation />
                     </Col>
                 </Row>
             </PanelEdit>

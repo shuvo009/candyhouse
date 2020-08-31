@@ -5,6 +5,7 @@ export interface IValueModel {
     expriences: IExprience[];
     lastPullTime: number;
     positions: string[];
+    jobLocations: string[];
 }
 
 export interface ISocialMedia {

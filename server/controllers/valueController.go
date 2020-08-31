@@ -13,11 +13,12 @@ type ValueController struct{}
 func (valueController *ValueController) GetValues(c *gin.Context) {
 
 	var values = ValueModel{
-		SocialMedia: getSocialMediaList(),
-		SummaryList: getSumarryList(),
-		IdealRoles:  getIdealRoles(),
-		Expriences:  getExpriences(),
-		Positions:   getPositions(),
+		SocialMedia:  getSocialMediaList(),
+		SummaryList:  getSumarryList(),
+		IdealRoles:   getIdealRoles(),
+		Expriences:   getExpriences(),
+		Positions:    getPositions(),
+		JobLocations: getJobLocations(),
 	}
 
 	c.JSON(http.StatusOK, values)
@@ -116,17 +117,25 @@ func getPositions() []string {
 	}
 }
 
+//getJobLocations ...
+func getJobLocations() []string {
+	return []string{
+		"Dhaka", "Chittagong",
+	}
+}
+
 // #endregion
 
 // #region Models
 
 //ValueModel ...
 type ValueModel struct {
-	SocialMedia []SocialMedia `json:"socialMedia"`
-	SummaryList []Summary     `json:"summaryList"`
-	IdealRoles  []string      `json:"idealRoles"`
-	Expriences  []Exprience   `json:"expriences"`
-	Positions   []string      `json:"positions"`
+	SocialMedia  []SocialMedia `json:"socialMedia"`
+	SummaryList  []Summary     `json:"summaryList"`
+	IdealRoles   []string      `json:"idealRoles"`
+	Expriences   []Exprience   `json:"expriences"`
+	Positions    []string      `json:"positions"`
+	JobLocations []string      `json:"jobLocations"`
 }
 
 //SocialMedia ...
