@@ -6,7 +6,6 @@ import { faCog } from "@fortawesome/free-solid-svg-icons";
 export class InboxHeader extends Component {
     render() {
         return (
-        <>
             <Card className="text-left small">
                 <Card.Body className="py-0">
                     <Row>
@@ -26,7 +25,6 @@ export class InboxHeader extends Component {
                     </Row>    
                 </Card.Body>
             </Card>
-        </>
         )
     }
 }
