@@ -45,10 +45,18 @@ export class ProfileEditLocationComponent extends Component<IProfileProps, IProf
         }
     }
 
-    handleInputChange = (event: any) => {
+    onNoticePeriodTypeChange = (event: any) => {
         this.setState({
             ...this.state,
-            [event.target.name]: event.target.value
+            noticePeriodType: event.target.value,
+            noticePeriod: ''
+        })
+    };
+
+    onNoticePeriodChange = (value: any) => {
+        this.setState({
+            ...this.state,
+            noticePeriod: value
         })
     };
 
@@ -85,25 +93,28 @@ export class ProfileEditLocationComponent extends Component<IProfileProps, IProf
                         <SectionHeader title="When could you start a new opportunity? *" />
                         <Row className="mt-3 mb-3">
                             <Col md="6">
-                                <Form.Check custom id="now" type="radio" label="Now" />
-                                <Form.Check className="mt-2" custom id="noticeMon" type="radio" label="Upon completing my notice period" />
-                                <Form.Control as="select" value="" className="mt-2 ml-3">
-                                    <option value="" disabled={true}>Select notice period</option>
-                                    <option value="1">1 month</option>
-                                    <option value="2">2 months</option>
-                                    <option value="3">3 months</option>
-                                    <option value="4">4 months</option>
-                                    <option value="5">5 months</option>
-                                    <option value="6">6 months</option>
-                                    <option value="7">7 months</option>
-                                    <option value="8">8 months</option>
-                                    <option value="9">9 months</option>
-                                    <option value="10">10 months</option>
-                                    <option value="11">11 months</option>
-                                    <option value="12">12 months</option>
-                                </Form.Control>
-                                <Form.Check className="mt-2" custom id="specificDate" type="radio" label="After a specific date" />
-                                <DatePicker className="mt-2 ml-3 form form-control"></DatePicker>
+                                <Form.Check custom id="now" type="radio" label="Now" value="now" checked={this.state.noticePeriodType === 'now'} onChange={this.onNoticePeriodTypeChange} />
+                                <Form.Check className="mt-2" custom id="noticeMon" type="radio" label="Upon completing my notice period" value="days" checked={this.state.noticePeriodType === 'days'} onChange={this.onNoticePeriodTypeChange} />
+                                {this.state.noticePeriodType === 'days' ?
+                                    <Form.Control as="select" className="mt-2 ml-3" value={this.state.noticePeriod} onChange={(event) => { this.onNoticePeriodChange(event.target.value) }}>
+                                        <option value="" disabled={true}>Select notice period</option>
+                                        <option value="1">1 month</option>
+                                        <option value="2">2 months</option>
+                                        <option value="3">3 months</option>
+                                        <option value="4">4 months</option>
+                                        <option value="5">5 months</option>
+                                        <option value="6">6 months</option>
+                                        <option value="7">7 months</option>
+                                        <option value="8">8 months</option>
+                                        <option value="9">9 months</option>
+                                        <option value="10">10 months</option>
+                                        <option value="11">11 months</option>
+                                        <option value="12">12 months</option>
+                                    </Form.Control> : null}
+                                <Form.Check className="mt-2" custom id="specificDate" type="radio" label="After a specific date" value="specificDate" checked={this.state.noticePeriodType === 'specificDate'} onChange={this.onNoticePeriodTypeChange} />
+                                {
+                                    this.state.noticePeriodType === 'specificDate' ? <DatePicker className="mt-2 ml-3 form form-control" selected={this.state.noticePeriod} onChange={this.onNoticePeriodChange}></DatePicker> : null
+                                }
                             </Col>
                         </Row>
                         <Row>

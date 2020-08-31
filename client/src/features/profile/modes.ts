@@ -54,6 +54,7 @@ export interface IProfile {
     experiences: IExperience[];
     languages: ILanguage[];
     skills: string[];
+    noticePeriodType: string;
     noticePeriod: string;
     exceptedSalary: string;
     negotiable: boolean;
