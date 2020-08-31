@@ -4,8 +4,8 @@ import { Row, Col, Image } from 'react-bootstrap';
 export class ChatMine extends Component {
     render() {
         var color = {
-            backgroundColor: "#e2e3e5",
-          }
+            backgroundColor: "#e2e3e5"
+        }
         return (
             <Row>
                 <Col md={{ span: 8, offset: 2 }} className="p-3 my-2" style={color}>
