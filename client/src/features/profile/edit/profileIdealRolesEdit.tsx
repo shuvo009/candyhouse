@@ -106,14 +106,12 @@ export class ProfileIdealRolesEditComponent extends Component<IProfileProps, IPr
     };
 
     onSortEnd = ({ oldIndex, newIndex }: any) => {
-        const nextRoles = [...this.state.nextRoles];
+        let nextRoles = [...this.state.nextRoles];
         const item = nextRoles[newIndex];
         nextRoles[newIndex] = nextRoles[oldIndex];
         nextRoles[oldIndex] = item;
-        _.each(nextRoles, (role, index) => {
-            role.sequence = index;
+        nextRoles = _.map(nextRoles, (r, index) => { return { ...r, sequence: index } })
 
-        })
         this.setState({
             ...this.state,
             nextRoles: nextRoles
