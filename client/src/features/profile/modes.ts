@@ -39,11 +39,17 @@ export interface IEducation {
     passYear: string;
 }
 
+export interface IJobLocation {
+    name: string;
+    exceptedSalary: number;
+}
+
 export interface IProfile {
     accountId: string;
     firstName: string;
     lastName: string;
-    location: string;
+    address: string;
+    jobLocation: IJobLocation[];
     phone: string;
     socialLinks: ISocialLink[];
     profileImage: string;
@@ -56,7 +62,6 @@ export interface IProfile {
     skills: string[];
     noticePeriodType: string;
     noticePeriod: string;
-    exceptedSalary: string;
     negotiable: boolean;
     educations: IEducation[];
 }

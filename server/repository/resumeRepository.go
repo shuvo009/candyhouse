@@ -50,9 +50,10 @@ func (resumeRepository *ResumeRepository) UpdateResume(accountID primitive.Objec
 
 	dbResume.FirstName = resume.FirstName
 	dbResume.LastName = resume.LastName
-	dbResume.Location = resume.Location
+	dbResume.JobLocation = resume.JobLocation
 	dbResume.ProfileImage = resume.ProfileImage
 	dbResume.Phone = resume.Phone
+	dbResume.Address = resume.Address
 	dbResume.SocialLinks = resume.SocialLinks
 	dbResume.SummaryList = resume.SummaryList
 	dbResume.NextRoles = resume.NextRoles
@@ -62,7 +63,6 @@ func (resumeRepository *ResumeRepository) UpdateResume(accountID primitive.Objec
 	dbResume.EmploymentType = resume.EmploymentType
 	dbResume.Skills = resume.Skills
 	dbResume.NoticePeriod = resume.NoticePeriod
-	dbResume.ExceptedSalary = resume.ExceptedSalary
 	dbResume.Negotiable = resume.Negotiable
 	dbResume.Educations = resume.Educations
 	dbResume.LastUpdate = time.Now().Unix()

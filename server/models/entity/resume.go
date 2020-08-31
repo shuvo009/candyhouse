@@ -49,13 +49,20 @@ type Education struct {
 	PassYear  string `json:"passYear"`
 }
 
+//JobLocation ...
+type JobLocation struct {
+	Name           string  `json:"name"`
+	ExceptedSalary float64 `json:"exceptedSalary"`
+}
+
 //Resume ...
 type Resume struct {
 	mgm.DefaultModel      `bson:",inline" coll:"resumes"`
 	AccountID             primitive.ObjectID `bson:"accountId" json:"accountId"`
 	FirstName             string             `json:"firstName"`
 	LastName              string             `json:"lastName"`
-	Location              string             `json:"location"`
+	Address               string             `json:"address"`
+	JobLocation           JobLocation        `json:"jobLocation"`
 	Phone                 string             `json:"phone"`
 	SocialLinks           []SocialLink       `bson:"socialLinks" json:"socialLinks"`
 	ProfileImage          string             `json:"profileImage"`
@@ -67,7 +74,6 @@ type Resume struct {
 	Languages             []Language         `bson:"languages" json:"languages"`
 	Skills                []string           `json:"skills"`
 	NoticePeriod          string             `json:"noticePeriod"`
-	ExceptedSalary        string             `json:"exceptedSalary"`
 	Negotiable            bool               `json:"negotiable"`
 	Educations            []Education        `bson:"educations" json:"educations"`
 	ProfileHash           string             `json:"profileHash"`
