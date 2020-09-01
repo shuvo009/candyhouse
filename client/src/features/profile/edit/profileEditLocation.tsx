@@ -13,7 +13,7 @@ import { SectionHeader } from "../../../common/sectionHeader";
 import { IReducerState } from "../../../helpers";
 import { JobLocation } from "./components/jobLocation"
 
-import { IProfileStateModel, IProfileProps, IProfile, INextRole } from "../modes";
+import { IProfileStateModel, IProfileProps, IProfile, INextRole, IJobLocation } from "../modes";
 import { defaultProfileState, getProfile, changeBusyState, updateProfile } from "../profileStore";
 
 import { getvalues } from "../defaultValues/valueStore";
@@ -75,6 +75,13 @@ export class ProfileEditLocationComponent extends Component<IProfileProps, IProf
         })
     }
 
+    onJobLocationChange = (jobLocations: IJobLocation[]) => {
+        this.setState({
+            ...this.state,
+            jobLocation: jobLocations
+        })
+    }
+
     render() {
         return (
             <PanelEdit title="location" className="mt-1 pr-0" isBusy={this.props.resumeStateModel.isBusy} onUpdateClick={() => { this.props.updateProfile(this.state) }}>
@@ -118,7 +125,7 @@ export class ProfileEditLocationComponent extends Component<IProfileProps, IProf
                                 }
                             </Col>
                         </Row>
-                        <JobLocation />
+                        <JobLocation jobLocations={this.props.valuesModel.jobLocations} selectedLocations={this.state.jobLocation} onLocationChange={this.onJobLocationChange} />
                     </Col>
                 </Row>
             </PanelEdit>

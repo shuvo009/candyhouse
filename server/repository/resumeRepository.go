@@ -63,6 +63,7 @@ func (resumeRepository *ResumeRepository) UpdateResume(accountID primitive.Objec
 	dbResume.EmploymentType = resume.EmploymentType
 	dbResume.Skills = resume.Skills
 	dbResume.NoticePeriod = resume.NoticePeriod
+	dbResume.NoticePeriodType = resume.NoticePeriodType
 	dbResume.Negotiable = resume.Negotiable
 	dbResume.Educations = resume.Educations
 	dbResume.LastUpdate = time.Now().Unix()

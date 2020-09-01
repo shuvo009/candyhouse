@@ -62,7 +62,7 @@ type Resume struct {
 	FirstName             string             `json:"firstName"`
 	LastName              string             `json:"lastName"`
 	Address               string             `json:"address"`
-	JobLocation           JobLocation        `json:"jobLocation"`
+	JobLocation           []JobLocation      `json:"jobLocation"`
 	Phone                 string             `json:"phone"`
 	SocialLinks           []SocialLink       `bson:"socialLinks" json:"socialLinks"`
 	ProfileImage          string             `json:"profileImage"`
@@ -73,6 +73,7 @@ type Resume struct {
 	Experiences           []Experience       `bson:"experiences" json:"experiences"`
 	Languages             []Language         `bson:"languages" json:"languages"`
 	Skills                []string           `json:"skills"`
+	NoticePeriodType      string             `json:"noticePeriodType"`
 	NoticePeriod          string             `json:"noticePeriod"`
 	Negotiable            bool               `json:"negotiable"`
 	Educations            []Education        `bson:"educations" json:"educations"`
