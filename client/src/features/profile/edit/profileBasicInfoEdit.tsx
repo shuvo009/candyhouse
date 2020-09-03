@@ -85,7 +85,7 @@ export class ProfileBasicInfoEditComponent extends Component<IProfileProps, IPro
 
                         <Form.Group controlId="location">
                             <Form.Label className="font-weight-semi-bold">Location *</Form.Label>
-                            <Form.Control name="location" type="text" placeholder="Jafrabad, Shonkor" value={this.state.location} onChange={this.handleInputChange} />
+                            <Form.Control name="location" type="text" placeholder="Jafrabad, Shonkor" value={this.state.address} onChange={this.handleInputChange} />
                         </Form.Group>
                     </Col>
                     <Col>

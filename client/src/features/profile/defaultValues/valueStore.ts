@@ -9,7 +9,8 @@ export const defaultValueState: IValueModel = {
     idealRoles: [],
     expriences: [],
     lastPullTime: 0,
-    positions: []
+    positions: [],
+    jobLocations: []
 }
 
 const valueSlice = createSlice({
