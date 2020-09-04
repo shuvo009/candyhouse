@@ -1,17 +1,29 @@
 import React, { Component } from "react";
 import { Form, Row, Col, Button } from 'react-bootstrap';
 import { CompanyExprienceEdit } from "./companyExprienceEdit";
+import { IExperience } from "../../modes";
 
-export class CompanyExprienceSummary extends Component {
+export class CompanyExprienceSummary extends Component<IProps, IState> {
+
+    constructor(props: IProps) {
+        super(props);
+        this.state = {
+            isEditModel: false,
+            experience: this.props.experience
+        }
+    }
+
     render() {
         return (
             <>
                 <div>
                     <Row className="border rounded m-0 p-2">
                         <Col>
-                            <p className="font-weight-semi-bold m-0">Kaz Software</p>
-                            <p className="text-dark m-0 font-size-small">Senior Software Engineer</p>
-                            <p className="text-muted m-0 font-size-small">February 2014 - ongoing</p>
+                            <p className="font-weight-semi-bold m-0">{this.state.experience.company}</p>
+                            <p className="text-dark m-0 font-size-small">{this.state.experience.title}</p>
+                            <p className="text-muted m-0 font-size-small">{this.state.experience.startDate} - {
+                                this.state.experience.isCurrentlyWorking ? 'OnGoing' : this.state.experience.endDate
+                            }</p>
                         </Col>
                         <Col>
                             <Button className="float-right p-0 text-dark" variant="link">Remove</Button>
@@ -26,4 +38,14 @@ export class CompanyExprienceSummary extends Component {
             </>
         )
     }
+}
+
+interface IProps {
+    mode: "work" | "education";
+    experience: IExperience;
+}
+
+interface IState {
+    isEditModel: boolean;
+    experience: IExperience;
 }

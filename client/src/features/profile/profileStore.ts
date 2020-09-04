@@ -71,6 +71,9 @@ export const getProfile = (lastPullTime: number) => async (dispatch: Dispatch) =
             return;
         }
         const profile = await HttpHelpers.get<IProfile>(ApiConstant.talentProfile);
+        if (!profile.experiences) {
+            profile.experiences = [];
+        }
         dispatch(profileAction.updateProfileState({ profile: profile, isBusy: true }));
     } catch (error) {
         dispatch(profileSlice.actions.onError({ data: error.message }));

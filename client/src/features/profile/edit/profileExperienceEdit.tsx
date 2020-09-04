@@ -17,7 +17,7 @@ import _ from "lodash";
 import { ProfilePicture } from "./components/profilePicture";
 import { SocialMediaComponent } from "./components/socialMediaComponent";
 
-import { IProfileStateModel, IProfileProps, IProfile } from "../modes";
+import { IProfileStateModel, IProfileProps, IProfile, IExperience } from "../modes";
 import { defaultProfileState, getProfile, changeBusyState, updateProfile } from "../profileStore";
 
 import { getvalues } from "../defaultValues/valueStore";
@@ -51,6 +51,25 @@ class ProfileExperienceEditComponent extends Component<IProfileProps, IProfileSt
         }
     }
 
+    onAddNewExperience = (event: any) => {
+        event.preventDefault();
+        const newExperience: IExperience = {
+            title: '',
+            company: '',
+            description: '',
+            endDate: 0,
+            startDate: 0,
+            hideFromThisCompany: false,
+            isCurrentlyWorking: false,
+            techStack: [],
+        };
+
+        this.setState({
+            ...this.state,
+            experiences: [...this.state.experiences, newExperience]
+        })
+    }
+
 
     render() {
         return (
@@ -62,18 +81,21 @@ class ProfileExperienceEditComponent extends Component<IProfileProps, IProfileSt
                             <SectionHeader title="Professional experience"></SectionHeader>
                         </div>
                         {
-                            this.props.resumeStateModel.experiences.map((experience, i) => {
-                                return <CompanyExprienceSummary></CompanyExprienceSummary>
+                            this.state.experiences.map((experience, i) => {
+                                return <div key={i}>
+                                    <CompanyExprienceSummary experience={experience} mode={"education"}></CompanyExprienceSummary>
+                                </div>
+
                             })
                         }
 
                         <div className="mt-1">
-                            <a href="#" className="font-size-small mt-2"><FontAwesomeIcon icon={faPlusCircle} /> Add Experience </a>
+                            <a href="#" onClick={this.onAddNewExperience} className="font-size-small mt-2"><FontAwesomeIcon icon={faPlusCircle} /> Add Experience </a>
                         </div>
                         <div className="mt-2 mb-3">
                             <SectionHeader title="Education"></SectionHeader>
                         </div>
-                        <CompanyExprienceSummary></CompanyExprienceSummary>
+                        {/* <CompanyExprienceSummary></CompanyExprienceSummary> */}
                         <EducationEdit></EducationEdit>
                         <div className="mt-1">
                             <a href="#" className="font-size-small"><FontAwesomeIcon icon={faPlusCircle} /> Add Education </a>
