@@ -18,7 +18,7 @@ export class CompanyExprienceSummary extends Component<IProps, IState> {
             <>
                 {
                     this.state.isEditModel ?
-                        <CompanyExprienceEdit></CompanyExprienceEdit>
+                        <CompanyExprienceEdit experience={this.state.experience}></CompanyExprienceEdit>
                         :
                         <>
                             <div>
