@@ -20,6 +20,7 @@ export class CompanyExprienceSummary extends BaseComponent<IProps, IState> {
             ...experience,
             isEditModel: false
         });
+        this.props.onExperienceUpdated(this.props.index, this.state);
     }
 
     onCancelClick = () => {
@@ -69,6 +70,7 @@ interface IProps {
     mode: "work" | "education";
     experience: IExperience;
     onExperienceRemove(index: number): void;
+    onExperienceUpdated(index: number, experience: IExperience): void;
     index: number;
 }
 
