@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Form, Row, Col, Button } from 'react-bootstrap';
 import { SkillSelector } from "./skillsEditor"
 import CKEditor from '@ckeditor/ckeditor5-react';
+import { RichTextEditor } from "../../../../common/richTextEditor"
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 export class CompanyExprienceEdit extends Component {
@@ -37,27 +38,8 @@ export class CompanyExprienceEdit extends Component {
                 </Row>
                 <Row className="mt-2">
                     <Col>
-                        <CKEditor
-                            editor={ClassicEditor}
-                            config={{
-                                toolbar: ['bold', 'italic', 'bulletedList', 'numberedList'],
-                                height: 500,
-                            }}
-
-                            onChange={(event: any, editor: any) => {
-                                const data = editor.getData();
-
-                            }}
-                            onInit={(editor: any) => {
-                                editor.editing.view.change((writer: any) => {
-                                    writer.setStyle(
-                                        "height",
-                                        "140px",
-                                        editor.editing.view.document.getRoot()
-                                    );
-                                });
-                            }}
-                        />
+                        <RichTextEditor text={"aaa"} onChange={(a) => { }} />
+                        
                     </Col>
                 </Row>
                 <div className="mt-2">
