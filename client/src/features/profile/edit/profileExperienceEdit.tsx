@@ -70,6 +70,15 @@ class ProfileExperienceEditComponent extends Component<IProfileProps, IProfileSt
         })
     }
 
+    onExperienceRemove = (index: number) => {
+        const experiences = [...this.state.experiences];
+        experiences.splice(index, 1);
+        this.setState({
+            ...this.state,
+            experiences: experiences
+        });
+    }
+
 
     render() {
         return (
@@ -83,7 +92,7 @@ class ProfileExperienceEditComponent extends Component<IProfileProps, IProfileSt
                         {
                             this.state.experiences.map((experience, i) => {
                                 return <div key={i}>
-                                    <CompanyExprienceSummary experience={experience} mode={"education"}></CompanyExprienceSummary>
+                                    <CompanyExprienceSummary index={i} experience={experience} mode={"education"} onExperienceRemove={this.onExperienceRemove}></CompanyExprienceSummary>
                                 </div>
 
                             })
