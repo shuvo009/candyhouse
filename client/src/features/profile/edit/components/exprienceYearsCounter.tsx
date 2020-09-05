@@ -25,7 +25,7 @@ export class ExprienceYearsCounter extends Component<IProps, IState> {
                 <SectionHeader title="Years of professional experience *" />
                 <Row>
                     <Col md={6}>
-                        <Form.Control type="range" onChange={this.handleInputChange} max={this.props.max || 10} min={this.props.min || 0} step={this.props.step || 1} />
+                        <Form.Control type="range" value={this.state.experience} onChange={this.handleInputChange} max={this.props.max || 10} min={this.props.min || 0} step={this.props.step || 1} />
                         <Row>
                             <Col>
                                 <p className="text-muted text-left font-size-small">{this.props.max || 0}</p>

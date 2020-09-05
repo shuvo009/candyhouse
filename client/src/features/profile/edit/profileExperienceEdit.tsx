@@ -14,17 +14,13 @@ import { SectionHeader } from "../../../common/sectionHeader"
 
 import _ from "lodash";
 
-import { ProfilePicture } from "./components/profilePicture";
-import { SocialMediaComponent } from "./components/socialMediaComponent";
-
 import { IProfileStateModel, IProfileProps, IProfile, IExperience } from "../modes";
 import { defaultProfileState, getProfile, changeBusyState, updateProfile } from "../profileStore";
 
 import { getvalues } from "../defaultValues/valueStore";
-import { IReducerState } from "../../../helpers";
+import { IReducerState, BaseComponent } from "../../../helpers";
 
-
-class ProfileExperienceEditComponent extends Component<IProfileProps, IProfileStateModel> {
+class ProfileExperienceEditComponent extends BaseComponent<IProfileProps, IProfileStateModel> {
 
     constructor(props: IProfileProps) {
         super(props);
@@ -57,26 +53,19 @@ class ProfileExperienceEditComponent extends Component<IProfileProps, IProfileSt
             title: '',
             company: '',
             description: '',
-            endDate: 0,
-            startDate: 0,
+            endDate: '',
+            startDate: '',
             hideFromThisCompany: false,
             isCurrentlyWorking: false,
             techStack: [],
         };
-
-        this.setState({
-            ...this.state,
-            experiences: [...this.state.experiences, newExperience]
-        })
+        this.changeState({ experiences: [...this.state.experiences, newExperience] });
     }
 
     onExperienceRemove = (index: number) => {
         const experiences = [...this.state.experiences];
         experiences.splice(index, 1);
-        this.setState({
-            ...this.state,
-            experiences: experiences
-        });
+        this.changeState({ experiences: experiences });
     }
 
 
@@ -85,7 +74,7 @@ class ProfileExperienceEditComponent extends Component<IProfileProps, IProfileSt
             <PanelEdit title="Experience" className="mt-1 pr-0" isBusy={this.props.resumeStateModel.isBusy} onUpdateClick={() => { this.props.updateProfile(this.state) }}>
                 <Row>
                     <Col md="10">
-                        <ExprienceYearsCounter experience={3} onExperienceChange={() => { }} />
+                        <ExprienceYearsCounter experience={3} onExperienceChange={(experience) => { this.changeState({ totalYearOfExperience: experience }) }} />
                         <div className="mt-2 mb-3">
                             <SectionHeader title="Professional experience"></SectionHeader>
                         </div>

@@ -5,8 +5,8 @@ export abstract class BaseComponent<P, S> extends Component<P, S>{
         this.onChangeState({ [event.target.name]: event.target.value });
     };
 
-    handleCheckedChange = (event: any) => {
-        this.onChangeState({ [event.target.name]: event.target.checked });
+    handleInputCheckedChanged = (event: any) => {
+        this.onChangeState({ [event.target.name]: !!event.target.checked });
     };
 
     changeState = (state: Partial<Readonly<S>>) => {

@@ -20,8 +20,8 @@ export interface INextRole {
 export interface IExperience {
     company: string;
     title: string;
-    startDate: number;
-    endDate: number;
+    startDate: string;
+    endDate: string;
     isCurrentlyWorking: boolean;
     hideFromThisCompany: boolean;
     description: string;
