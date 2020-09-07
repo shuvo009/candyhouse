@@ -84,7 +84,7 @@ class SkillEdit extends Component {
                 <SectionHeader title="Skills *" />
                 <p className="font-size-small mt-2 mb-0">Which languages can you use to communicate with machines?</p>
                 <p className="font-size-small">Feel free to also add skills like: Angular, Scrum Master, Photoshop ...</p>
-                <SkillSelector></SkillSelector>
+                <SkillSelector skills={[]} onChangeSkills={() => { }}></SkillSelector>
             </div>
         )
     }

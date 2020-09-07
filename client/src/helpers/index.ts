@@ -4,4 +4,5 @@ export * from "./routes";
 export * from "./rootStore";
 export * from "./localStorageHelper";
 export * from "./defaultReducers";
+export * from "./baseComponent";
 
