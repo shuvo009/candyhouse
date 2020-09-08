@@ -74,6 +74,9 @@ export const getProfile = (lastPullTime: number) => async (dispatch: Dispatch) =
         if (!profile.experiences) {
             profile.experiences = [];
         }
+        if (!profile.educations) {
+            profile.educations = [];
+        }
         dispatch(profileAction.updateProfileState({ profile: profile, isBusy: true }));
     } catch (error) {
         dispatch(profileSlice.actions.onError({ data: error.message }));

@@ -67,7 +67,6 @@ export class CompanyExprienceSummary extends BaseComponent<IProps, IState> {
 }
 
 interface IProps {
-    mode: "work" | "education";
     experience: IExperience;
     onExperienceRemove(index: number): void;
     onExperienceUpdated(index: number, experience: IExperience): void;

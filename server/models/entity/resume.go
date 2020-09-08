@@ -44,9 +44,12 @@ type Language struct {
 
 //Education ...
 type Education struct {
-	Institute string `json:"institute"`
-	Degree    string `json:"degree"`
-	PassYear  string `json:"passYear"`
+	Institute        string `json:"institute"`
+	Degree           string `json:"degree"`
+	StartYear        string `json:"startYear"`
+	EndYear          string `json:"endYear"`
+	IsCurrentlyStudy bool   `json:"isCurrentlyStudy"`
+	PassYear         string `json:"passYear"`
 }
 
 //JobLocation ...

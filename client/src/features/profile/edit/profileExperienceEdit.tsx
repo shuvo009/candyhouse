@@ -7,6 +7,7 @@ import { faPlusCircle } from '@fortawesome/free-solid-svg-icons'
 import { PanelEdit } from "../../../common/panelEdit";
 import { ExprienceYearsCounter } from "./components/exprienceYearsCounter";
 import { CompanyExprienceSummary } from "./components/companyExprienceSummary";
+import { EducationSummary } from "./components/educationSummary";
 
 import { EducationEdit } from "./components/educationEdit";
 
@@ -14,7 +15,7 @@ import { SectionHeader } from "../../../common/sectionHeader"
 
 import _ from "lodash";
 
-import { IProfileStateModel, IProfileProps, IProfile, IExperience } from "../modes";
+import { IProfileStateModel, IProfileProps, IProfile, IExperience, IEducation } from "../modes";
 import { defaultProfileState, getProfile, changeBusyState, updateProfile } from "../profileStore";
 
 import { getvalues } from "../defaultValues/valueStore";
@@ -74,6 +75,31 @@ class ProfileExperienceEditComponent extends BaseComponent<IProfileProps, IProfi
         this.changeState({ experiences: experiences });
     }
 
+    onAddNewEducation = (event: any) => {
+        event.preventDefault();
+        const newEducation: IEducation = {
+            degree: '',
+            endYear: '',
+            institute: '',
+            isCurrentlyStudy: false,
+            startYear: '',
+        };
+        this.changeState({ educations: [...this.state.educations, newEducation] });
+    }
+
+
+    onEducationRemove = (index: number) => {
+        const educations = [...this.state.educations];
+        educations.splice(index, 1);
+        this.changeState({ educations: educations });
+    }
+
+    onEducationUpdate = (index: number, education: IEducation) => {
+        const educations = [...this.state.educations];
+        educations[index] = education;
+        this.changeState({ educations: educations });
+    }
+
 
     render() {
         return (
@@ -88,7 +114,7 @@ class ProfileExperienceEditComponent extends BaseComponent<IProfileProps, IProfi
                             this.state.experiences.map((experience, i) => {
                                 return <div key={i}>
                                     <CompanyExprienceSummary index={i} experience={experience}
-                                        mode={"education"} onExperienceRemove={this.onExperienceRemove}
+                                        onExperienceRemove={this.onExperienceRemove}
                                         onExperienceUpdated={this.onExperienceUpdate} />
                                 </div>
 
@@ -101,10 +127,18 @@ class ProfileExperienceEditComponent extends BaseComponent<IProfileProps, IProfi
                         <div className="mt-2 mb-3">
                             <SectionHeader title="Education"></SectionHeader>
                         </div>
-                        {/* <CompanyExprienceSummary></CompanyExprienceSummary> */}
-                        <EducationEdit></EducationEdit>
+                        {
+                            this.state.educations.map((education, i) => {
+                                return <div key={i}>
+                                    <EducationSummary index={i} education={education}
+                                        onEducationRemove={this.onEducationRemove}
+                                        onEducationUpdated={this.onEducationUpdate} />
+                                </div>
+
+                            })
+                        }
                         <div className="mt-1">
-                            <a href="#" className="font-size-small"><FontAwesomeIcon icon={faPlusCircle} /> Add Education </a>
+                            <a href="#" onClick={this.onAddNewEducation} className="font-size-small"><FontAwesomeIcon icon={faPlusCircle} /> Add Education </a>
                         </div>
                     </Col>
                 </Row>

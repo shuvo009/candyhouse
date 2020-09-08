@@ -36,7 +36,9 @@ export interface ILanguage {
 export interface IEducation {
     institute: string;
     degree: string;
-    passYear: string;
+    startYear: string;
+    endYear: string;
+    isCurrentlyStudy: boolean;
 }
 
 export interface IJobLocation {
