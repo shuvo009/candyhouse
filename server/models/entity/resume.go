@@ -28,8 +28,8 @@ type NextRole struct {
 type Experience struct {
 	Company             string   `json:"company"`
 	Title               string   `json:"title"`
-	StartDate           int      `json:"startDate"`
-	EndDate             int      `json:"endDate"`
+	StartDate           string   `json:"startDate"`
+	EndDate             string   `json:"endDate"`
 	IsCurrentlyWorking  bool     `json:"isCurrentlyWorking"`
 	HideFromThisCompany bool     `json:"hideFromThisCompany"`
 	Description         string   `json:"description"`

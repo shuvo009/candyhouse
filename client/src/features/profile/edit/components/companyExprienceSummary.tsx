@@ -20,7 +20,7 @@ export class CompanyExprienceSummary extends BaseComponent<IProps, IState> {
             ...experience,
             isEditModel: false
         });
-        this.props.onExperienceUpdated(this.props.index, this.state);
+        this.props.onExperienceUpdated(this.props.index, experience);
     }
 
     onCancelClick = () => {
