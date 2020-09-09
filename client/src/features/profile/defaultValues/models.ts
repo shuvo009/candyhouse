@@ -6,6 +6,8 @@ export interface IValueModel {
     lastPullTime: number;
     positions: string[];
     jobLocations: string[];
+    languages: string[];
+    languageFluency: string[];
 }
 
 export interface ISocialMedia {

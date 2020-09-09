@@ -1,25 +1,21 @@
-import React, { Component } from "react";
-import { Form, Row, Col, Button } from 'react-bootstrap';
+import React from "react";
+import { Row, Col } from 'react-bootstrap';
 import { connect } from "react-redux";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlusCircle } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
+import _ from "lodash";
 
 import { PanelEdit } from "../../../common/panelEdit";
+import { SectionHeader } from "../../../common/sectionHeader";
+import { IReducerState, BaseComponent } from "../../../helpers";
+
 import { ExprienceYearsCounter } from "./components/exprienceYearsCounter";
 import { CompanyExprienceSummary } from "./components/companyExprienceSummary";
 import { EducationSummary } from "./components/educationSummary";
 
-import { EducationEdit } from "./components/educationEdit";
-
-import { SectionHeader } from "../../../common/sectionHeader"
-
-import _ from "lodash";
-
 import { IProfileStateModel, IProfileProps, IProfile, IExperience, IEducation } from "../modes";
 import { defaultProfileState, getProfile, changeBusyState, updateProfile } from "../profileStore";
-
 import { getvalues } from "../defaultValues/valueStore";
-import { IReducerState, BaseComponent } from "../../../helpers";
 
 class ProfileExperienceEditComponent extends BaseComponent<IProfileProps, IProfileStateModel> {
 
