@@ -106,7 +106,7 @@ class ProfileExperienceEditComponent extends BaseComponent<IProfileProps, IProfi
             <PanelEdit title="Experience" className="mt-1 pr-0" isBusy={this.props.resumeStateModel.isBusy} onUpdateClick={() => { this.props.updateProfile(this.state) }}>
                 <Row>
                     <Col md="10">
-                        <ExprienceYearsCounter experience={3} onExperienceChange={(experience) => { this.changeState({ totalYearOfExperience: +experience }) }} />
+                        <ExprienceYearsCounter experience={this.state.totalYearOfExperience} onExperienceChange={(experience) => { this.changeState({ totalYearOfExperience: +experience }) }} />
                         <div className="mt-2 mb-3">
                             <SectionHeader title="Professional experience"></SectionHeader>
                         </div>

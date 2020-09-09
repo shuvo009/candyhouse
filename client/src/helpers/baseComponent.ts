@@ -18,9 +18,9 @@ export abstract class BaseComponent<P, S> extends Component<P, S>{
             ...this.state,
             ...state
         })
-        this.onHandleInputChanged();
+        this.onHandleInputChanged(state);
     }
 
 
-    onHandleInputChanged() { };
+    onHandleInputChanged<T>(state: T) { };
 }

@@ -34,6 +34,10 @@ export class CompanyExprienceSummary extends BaseComponent<IProps, IState> {
         }
     }
 
+    onHandleInputChanged = (state: any) => {
+        this.props.onExperienceUpdated(this.props.index, { ...this.state, ...state });
+    }
+
     render() {
         return (
             <>
@@ -58,7 +62,8 @@ export class CompanyExprienceSummary extends BaseComponent<IProps, IState> {
                                     </Col>
                                 </Row>
                             </div>
-                            <Form.Check className="ml-4 mt-1" id="hideFromThisCompany" name="hideFromThisCompany" custom inline label="I do not want to be visible to this company" type="checkbox" onChange={this.handleInputCheckedChanged} />
+                            <Form.Check className="ml-4 mt-1" id="hideFromThisCompany" name="hideFromThisCompany" checked={this.state.hideFromThisCompany}
+                                custom inline label="I do not want to be visible to this company" type="checkbox" onChange={this.handleInputCheckedChanged} />
                         </>
                 }
             </>

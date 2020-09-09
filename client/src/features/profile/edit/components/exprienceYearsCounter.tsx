@@ -26,7 +26,7 @@ export class ExprienceYearsCounter extends Component<IProps, IState> {
             ...this.state,
             experience: +event.target.value
         });
-        this.props.onExperienceChange(this.state.experience);
+        this.props.onExperienceChange(+event.target.value);
     };
 
     render() {
