@@ -4,19 +4,38 @@ import { connect } from "react-redux";
 import { PanelEdit } from "../../../common/panelEdit"
 import { IReducerState, BaseComponent } from "../../../helpers";
 
-import { IProfileStateModel, IProfileProps, IProfile, IExperience, IEducation } from "../modes";
+import { IProfileStateModel, IProfileProps, IProfile, IExperience, IEducation, ILanguage } from "../modes";
 import { defaultProfileState, getProfile, changeBusyState, updateProfile } from "../profileStore";
 import { getvalues } from "../defaultValues/valueStore";
 import { LanguageEdit } from "./components/languageEdit";
 import { SkillEdit } from "./components/skillEdit";
 
 export class ProfileSkillEditComponent extends BaseComponent<IProfileProps, IProfileStateModel> {
+
+    async componentWillMount() {
+        this.props.changeBusyState(true);
+
+        await Promise.all([
+            this.props.getProfile(this.props.resumeStateModel.lastPullTime),
+            this.props.getValues(this.props.valuesModel.lastPullTime)
+        ]);
+
+        this.props.changeBusyState(false);
+    }
+
+    onLanguageChange = (languages: ILanguage[]) => {
+        this.setState({
+            languages: languages
+        })
+    }
+
+
     render() {
         return (
             <PanelEdit title="Skills" className="mt-1 pr-0" isBusy={this.props.resumeStateModel.isBusy} onUpdateClick={() => { this.props.updateProfile(this.state) }}>
                 <Row>
                     <Col md={9}>
-                        <LanguageEdit languages={this.props.valuesModel.languages} languageFluency={this.props.valuesModel.languageFluency} userLanguage={this.props.resumeStateModel.languages} />
+                        <LanguageEdit languages={this.props.valuesModel.languages} languageFluency={this.props.valuesModel.languageFluency} userLanguage={this.props.resumeStateModel.languages} onLanguageChanged={this.onLanguageChange} />
                         <SkillEdit />
                     </Col>
                 </Row>

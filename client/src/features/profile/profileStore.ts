@@ -71,12 +71,10 @@ export const getProfile = (lastPullTime: number) => async (dispatch: Dispatch) =
             return;
         }
         const profile = await HttpHelpers.get<IProfile>(ApiConstant.talentProfile);
-        if (!profile.experiences) {
-            profile.experiences = [];
-        }
-        if (!profile.educations) {
-            profile.educations = [];
-        }
+        profile.experiences = !profile.experiences ? profile.experiences : [];
+        profile.educations = !profile.educations ? profile.educations : [];
+        profile.languages = !profile.languages ? profile.languages : [];
+
         dispatch(profileAction.updateProfileState({ profile: profile, isBusy: true }));
     } catch (error) {
         dispatch(profileSlice.actions.onError({ data: error.message }));
