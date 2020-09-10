@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Form, Row, Col } from 'react-bootstrap';
 import { SectionHeader } from "../../../../common/sectionHeader"
+import _ from "lodash";
 
 export class ExprienceYearsCounter extends Component<IProps, IState> {
 
@@ -11,12 +12,21 @@ export class ExprienceYearsCounter extends Component<IProps, IState> {
         }
     }
 
+    componentWillReceiveProps(nextProps: IProps) {
+        const isEqual = _.isEqual(nextProps.experience, this.state.experience);
+        if (!isEqual) {
+            this.setState({
+                experience: this.props.experience
+            });
+        }
+    }
+
     handleInputChange = (event: any) => {
         this.setState({
             ...this.state,
             experience: +event.target.value
         });
-        this.props.onExperienceChange(this.state.experience);
+        this.props.onExperienceChange(+event.target.value);
     };
 
     render() {

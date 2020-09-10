@@ -28,8 +28,8 @@ type NextRole struct {
 type Experience struct {
 	Company             string   `json:"company"`
 	Title               string   `json:"title"`
-	StartDate           int      `json:"startDate"`
-	EndDate             int      `json:"endDate"`
+	StartDate           string   `json:"startDate"`
+	EndDate             string   `json:"endDate"`
 	IsCurrentlyWorking  bool     `json:"isCurrentlyWorking"`
 	HideFromThisCompany bool     `json:"hideFromThisCompany"`
 	Description         string   `json:"description"`
@@ -44,9 +44,12 @@ type Language struct {
 
 //Education ...
 type Education struct {
-	Institute string `json:"institute"`
-	Degree    string `json:"degree"`
-	PassYear  string `json:"passYear"`
+	Institute        string `json:"institute"`
+	Degree           string `json:"degree"`
+	StartYear        string `json:"startYear"`
+	EndYear          string `json:"endYear"`
+	IsCurrentlyStudy bool   `json:"isCurrentlyStudy"`
+	PassYear         string `json:"passYear"`
 }
 
 //JobLocation ...

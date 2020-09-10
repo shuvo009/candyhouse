@@ -1,24 +1,21 @@
-import React, { Component } from "react";
-import { Form, Row, Col, Button } from 'react-bootstrap';
+import React from "react";
+import { Row, Col } from 'react-bootstrap';
 import { connect } from "react-redux";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlusCircle } from '@fortawesome/free-solid-svg-icons'
-
-import { PanelEdit } from "../../../common/panelEdit";
-import { ExprienceYearsCounter } from "./components/exprienceYearsCounter";
-import { CompanyExprienceSummary } from "./components/companyExprienceSummary";
-
-import { EducationEdit } from "./components/educationEdit";
-
-import { SectionHeader } from "../../../common/sectionHeader"
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import _ from "lodash";
 
-import { IProfileStateModel, IProfileProps, IProfile, IExperience } from "../modes";
-import { defaultProfileState, getProfile, changeBusyState, updateProfile } from "../profileStore";
-
-import { getvalues } from "../defaultValues/valueStore";
+import { PanelEdit } from "../../../common/panelEdit";
+import { SectionHeader } from "../../../common/sectionHeader";
 import { IReducerState, BaseComponent } from "../../../helpers";
+
+import { ExprienceYearsCounter } from "./components/exprienceYearsCounter";
+import { CompanyExprienceSummary } from "./components/companyExprienceSummary";
+import { EducationSummary } from "./components/educationSummary";
+
+import { IProfileStateModel, IProfileProps, IProfile, IExperience, IEducation } from "../modes";
+import { defaultProfileState, getProfile, changeBusyState, updateProfile } from "../profileStore";
+import { getvalues } from "../defaultValues/valueStore";
 
 class ProfileExperienceEditComponent extends BaseComponent<IProfileProps, IProfileStateModel> {
 
@@ -74,13 +71,38 @@ class ProfileExperienceEditComponent extends BaseComponent<IProfileProps, IProfi
         this.changeState({ experiences: experiences });
     }
 
+    onAddNewEducation = (event: any) => {
+        event.preventDefault();
+        const newEducation: IEducation = {
+            degree: '',
+            endYear: '',
+            institute: '',
+            isCurrentlyStudy: false,
+            startYear: '',
+        };
+        this.changeState({ educations: [...this.state.educations, newEducation] });
+    }
+
+
+    onEducationRemove = (index: number) => {
+        const educations = [...this.state.educations];
+        educations.splice(index, 1);
+        this.changeState({ educations: educations });
+    }
+
+    onEducationUpdate = (index: number, education: IEducation) => {
+        const educations = [...this.state.educations];
+        educations[index] = education;
+        this.changeState({ educations: educations });
+    }
+
 
     render() {
         return (
             <PanelEdit title="Experience" className="mt-1 pr-0" isBusy={this.props.resumeStateModel.isBusy} onUpdateClick={() => { this.props.updateProfile(this.state) }}>
                 <Row>
                     <Col md="10">
-                        <ExprienceYearsCounter experience={3} onExperienceChange={(experience) => { this.changeState({ totalYearOfExperience: experience }) }} />
+                        <ExprienceYearsCounter experience={this.state.totalYearOfExperience} onExperienceChange={(experience) => { this.changeState({ totalYearOfExperience: +experience }) }} />
                         <div className="mt-2 mb-3">
                             <SectionHeader title="Professional experience"></SectionHeader>
                         </div>
@@ -88,7 +110,7 @@ class ProfileExperienceEditComponent extends BaseComponent<IProfileProps, IProfi
                             this.state.experiences.map((experience, i) => {
                                 return <div key={i}>
                                     <CompanyExprienceSummary index={i} experience={experience}
-                                        mode={"education"} onExperienceRemove={this.onExperienceRemove}
+                                        onExperienceRemove={this.onExperienceRemove}
                                         onExperienceUpdated={this.onExperienceUpdate} />
                                 </div>
 
@@ -101,10 +123,18 @@ class ProfileExperienceEditComponent extends BaseComponent<IProfileProps, IProfi
                         <div className="mt-2 mb-3">
                             <SectionHeader title="Education"></SectionHeader>
                         </div>
-                        {/* <CompanyExprienceSummary></CompanyExprienceSummary> */}
-                        <EducationEdit></EducationEdit>
+                        {
+                            this.state.educations.map((education, i) => {
+                                return <div key={i}>
+                                    <EducationSummary index={i} education={education}
+                                        onEducationRemove={this.onEducationRemove}
+                                        onEducationUpdated={this.onEducationUpdate} />
+                                </div>
+
+                            })
+                        }
                         <div className="mt-1">
-                            <a href="#" className="font-size-small"><FontAwesomeIcon icon={faPlusCircle} /> Add Education </a>
+                            <a href="#" onClick={this.onAddNewEducation} className="font-size-small"><FontAwesomeIcon icon={faPlusCircle} /> Add Education </a>
                         </div>
                     </Col>
                 </Row>

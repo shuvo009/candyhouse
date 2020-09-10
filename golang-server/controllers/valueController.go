@@ -13,12 +13,14 @@ type ValueController struct{}
 func (valueController *ValueController) GetValues(c *gin.Context) {
 
 	var values = ValueModel{
-		SocialMedia:  getSocialMediaList(),
-		SummaryList:  getSumarryList(),
-		IdealRoles:   getIdealRoles(),
-		Expriences:   getExpriences(),
-		Positions:    getPositions(),
-		JobLocations: getJobLocations(),
+		SocialMedia:     getSocialMediaList(),
+		SummaryList:     getSumarryList(),
+		IdealRoles:      getIdealRoles(),
+		Expriences:      getExpriences(),
+		Positions:       getPositions(),
+		JobLocations:    getJobLocations(),
+		Languages:       getLanguages(),
+		LanguageFluency: getLanguagesFluency(),
 	}
 
 	c.JSON(http.StatusOK, values)
@@ -124,18 +126,34 @@ func getJobLocations() []string {
 	}
 }
 
+//getLanguages ...
+func getLanguages() []string {
+	return []string{
+		"English", "Bangla",
+	}
+}
+
+//getLanguagesFluency ...
+func getLanguagesFluency() []string {
+	return []string{
+		"Basic", "Conversational", "Working proficiency", "Fluent", "Native",
+	}
+}
+
 // #endregion
 
 // #region Models
 
 //ValueModel ...
 type ValueModel struct {
-	SocialMedia  []SocialMedia `json:"socialMedia"`
-	SummaryList  []Summary     `json:"summaryList"`
-	IdealRoles   []string      `json:"idealRoles"`
-	Expriences   []Exprience   `json:"expriences"`
-	Positions    []string      `json:"positions"`
-	JobLocations []string      `json:"jobLocations"`
+	SocialMedia     []SocialMedia `json:"socialMedia"`
+	SummaryList     []Summary     `json:"summaryList"`
+	IdealRoles      []string      `json:"idealRoles"`
+	Expriences      []Exprience   `json:"expriences"`
+	Positions       []string      `json:"positions"`
+	JobLocations    []string      `json:"jobLocations"`
+	Languages       []string      `json:"languages"`
+	LanguageFluency []string      `json:"languageFluency"`
 }
 
 //SocialMedia ...

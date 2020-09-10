@@ -20,7 +20,7 @@ export class CompanyExprienceSummary extends BaseComponent<IProps, IState> {
             ...experience,
             isEditModel: false
         });
-        this.props.onExperienceUpdated(this.props.index, this.state);
+        this.props.onExperienceUpdated(this.props.index, experience);
     }
 
     onCancelClick = () => {
@@ -32,6 +32,10 @@ export class CompanyExprienceSummary extends BaseComponent<IProps, IState> {
         } else {
             this.props.onExperienceRemove(this.props.index);
         }
+    }
+
+    onHandleInputChanged = (state: any) => {
+        this.props.onExperienceUpdated(this.props.index, { ...this.state, ...state });
     }
 
     render() {
@@ -58,7 +62,8 @@ export class CompanyExprienceSummary extends BaseComponent<IProps, IState> {
                                     </Col>
                                 </Row>
                             </div>
-                            <Form.Check className="ml-4 mt-1" id="hideFromThisCompany" name="hideFromThisCompany" custom inline label="I do not want to be visible to this company" type="checkbox" onChange={this.handleInputCheckedChanged} />
+                            <Form.Check className="ml-4 mt-1" id="hideFromThisCompany" name="hideFromThisCompany" checked={this.state.hideFromThisCompany}
+                                custom inline label="I do not want to be visible to this company" type="checkbox" onChange={this.handleInputCheckedChanged} />
                         </>
                 }
             </>
@@ -67,7 +72,6 @@ export class CompanyExprienceSummary extends BaseComponent<IProps, IState> {
 }
 
 interface IProps {
-    mode: "work" | "education";
     experience: IExperience;
     onExperienceRemove(index: number): void;
     onExperienceUpdated(index: number, experience: IExperience): void;

@@ -1,6 +1,6 @@
 import React from "react";
 import { Button, InputGroup, FormControl } from 'react-bootstrap';
-
+import _ from "lodash";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 
@@ -16,27 +16,34 @@ export class SkillSelector extends BaseComponent<IProps, IState> {
         }
     }
 
-    onHandleInputChanged() {
-        this.props.onChangeSkills(this.state.skills);
+    componentWillReceiveProps(nextProps: IProps) {
+        const isEqual = _.isEqual(nextProps.skills, this.state.skills);
+        if (!isEqual) {
+            this.setState({
+                ...this.state,
+                skills: nextProps.skills
+            });
+        }
     }
 
     onAddSkill = () => {
         if (!this.state.skillText) {
             return;
         }
-
+        const skills = [...this.state.skills, this.state.skillText];
         this.setState({
             ...this.state,
             skillText: '',
-            skills: [...this.state.skills, this.state.skillText]
+            skills: skills
         });
-        this.props.onChangeSkills(this.state.skills);
+        this.props.onChangeSkills(skills);
     };
 
     onRemoveSkill = (index: number) => {
         const skills = [...this.state.skills]
         skills.splice(index, 1);
         this.changeState({ skills: skills })
+        this.props.onChangeSkills(this.state.skills);
     };
 
     render() {
