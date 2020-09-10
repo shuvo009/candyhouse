@@ -2,6 +2,7 @@ import React from "react";
 import { Form, Row, Col, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import _ from "lodash";
 
 import { BaseComponent } from "../../../../helpers";
 import { SectionHeader } from "../../../../common/sectionHeader"
@@ -44,6 +45,16 @@ export class LanguageEdit extends BaseComponent<IProps, IState> {
             userLanguage: userLanguage,
         });
         this.props.onLanguageChanged(userLanguage);
+    }
+
+    componentWillReceiveProps(nextProps: IProps) {
+        const isEqual = _.isEqual(nextProps.userLanguage, this.state.userLanguage);
+        if (!isEqual) {
+            this.setState({
+                ...this.state,
+                userLanguage: nextProps.userLanguage
+            });
+        }
     }
 
     render() {

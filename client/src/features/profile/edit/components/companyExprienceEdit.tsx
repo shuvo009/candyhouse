@@ -2,7 +2,7 @@ import React from "react";
 import { Form, Row, Col, Button } from 'react-bootstrap';
 
 import { RichTextEditor } from "../../../../common/richTextEditor";
-import { SkillSelector } from "./skillsEditor";
+import { SkillSelector } from "./skillSelector";
 
 import { IExperience } from "../../modes";
 import { BaseComponent } from "../../../../helpers";
