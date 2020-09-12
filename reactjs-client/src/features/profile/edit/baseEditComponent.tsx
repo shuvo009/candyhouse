@@ -1,17 +1,16 @@
-import { Component } from "react";
 import _ from "lodash";
 
 import { IProfileStateModel, IProfileProps, IProfile } from "../modes";
 import { defaultProfileState, getProfile, changeBusyState, updateProfile } from "../profileStore";
 import { IReducerState } from "../../../helpers";
 import { getvalues } from "../defaultValues/valueStore";
+import { BaseComponent } from "../../../helpers"
 
-export class BaseEditComponent extends Component<IProfileProps, IProfileStateModel> {
+export class BaseEditComponent extends BaseComponent<IProfileProps, IProfileStateModel> {
     constructor(props: IProfileProps) {
         super(props);
         this.state = props.resumeStateModel ? props.resumeStateModel : defaultProfileState;
     }
-
 
     async componentWillMount() {
         this.props.changeBusyState(true);
