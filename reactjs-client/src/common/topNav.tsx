@@ -1,22 +1,42 @@
 import React, { Component } from "react";
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
-export class TopNav extends Component {
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { push } from "connected-react-router";
+import { Routes, LocalStorageHelper } from "../helpers";
+
+export class TopNavComponent extends Component<any> {
+
+    onLogout = (event: any) => {
+        event.preventDefault()
+        LocalStorageHelper.clear();
+        this.props.goToLogin();
+    }
+
     render() {
         return (
             <Navbar bg="white">
-                <Navbar.Brand href="#home">Navbar</Navbar.Brand>
+                <Navbar.Brand href="#home">CandyHouse</Navbar.Brand>
                 <Nav className="justify-content-end ml-auto">
                     <NavDropdown title="Profile" id="basic-nav-dropdown">
-                        <NavDropdown.Item href="#action/3.1">My Profile</NavDropdown.Item>
-                        <NavDropdown.Item href="#action/3.2">Edit Profile</NavDropdown.Item>
-                        <NavDropdown.Divider />
-                        <NavDropdown.Item href="#action/3.4">Settings</NavDropdown.Item>
+                        <Link to={"/profile"} className="dropdown-item">My Profile</Link>
+                        <Link to={"/profile-edit-basic-info"} className="dropdown-item">Edit Profile</Link>
                     </NavDropdown>
-                    <Nav.Link href="#home">Inverview Invites</Nav.Link>
-                    <Nav.Link href="#features">Inbox</Nav.Link>
-                    <Nav.Link href="#pricing">Sign Out</Nav.Link>
+                    <Nav.Link href="javascript:void(0)" onClick={this.onLogout}>Sign Out</Nav.Link>
                 </Nav>
             </Navbar>
         )
     }
 }
+
+
+const mapDispatchToProps = (dispatch: any) => {
+    return {
+        goToLogin: () => dispatch(push(Routes.login)),
+    }
+}
+
+export const TopNav = connect(
+    null,
+    mapDispatchToProps
+)(TopNavComponent);
