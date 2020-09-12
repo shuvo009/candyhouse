@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import { Card, ListGroup, Button, Accordion } from 'react-bootstrap';
+import { Card, ListGroup, Accordion } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheckCircle, faAngleDown, faAngleUp } from '@fortawesome/free-solid-svg-icons'
 import { Link } from "react-router-dom";
-
+import { Routes } from "../helpers/routes";
 export class TalentSideNav extends Component<any, any> {
+
     state = {
         baseInfo: [
             { name: 'Profile picture', route: '/profile-edit-basic-info' },
@@ -28,13 +29,11 @@ export class TalentSideNav extends Component<any, any> {
     }
 
     render() {
-
         return (
             <>
                 <Card border="0">
                     <ListGroup variant="flush">
                         <ListGroup.Item>  Your Profile is Complete 100%</ListGroup.Item>
-                        <SideMenuItem name="Privacy" route="/profile-edit-privacy"></SideMenuItem>
                         <SideMenuItemList name="Basic Info" routes={this.state.baseInfo}></SideMenuItemList>
                         <SideMenuItem name="Summary" route="/profile-edit-summary"></SideMenuItem>
                         <SideMenuItem name="Ideal Roles" route="/profile-edit-ideal-roles"></SideMenuItem>
@@ -43,9 +42,9 @@ export class TalentSideNav extends Component<any, any> {
                         <SideMenuItemList name="Skills" routes={this.state.skills}></SideMenuItemList>
                     </ListGroup>
                 </Card>
-                <Button className="w-100 mt-2" variant="outline-primary">
+                <Link className="w-100 mt-2 btn btn-outline-primary " to={Routes.profile}>
                     View Profile
-                </Button>
+                </Link>
             </>
         )
     }
