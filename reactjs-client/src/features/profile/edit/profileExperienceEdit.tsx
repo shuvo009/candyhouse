@@ -7,7 +7,6 @@ import _ from "lodash";
 
 import { PanelEdit } from "../../../common/panelEdit";
 import { SectionHeader } from "../../../common/sectionHeader";
-
 import { ExprienceYearsCounter } from "./components/exprienceYearsCounter";
 import { CompanyExprienceSummary } from "./components/companyExprienceSummary";
 import { EducationSummary } from "./components/educationSummary";

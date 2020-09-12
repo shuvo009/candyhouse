@@ -3,7 +3,6 @@ import React from "react";
 import { Row, Col, Form } from 'react-bootstrap';
 import { connect } from "react-redux";
 import _ from "lodash";
-
 import { SortableContainer, SortableElement, SortableHandle } from 'react-sortable-hoc';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHandRock } from '@fortawesome/free-solid-svg-icons';

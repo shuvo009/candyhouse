@@ -6,7 +6,6 @@ import { PanelEdit } from "../../../common/panelEdit"
 import { LanguageEdit } from "./components/languageEdit";
 import { SkillSelector } from "./components/skillSelector";
 import { SectionHeader } from "../../../common/sectionHeader";
-
 import { BaseEditComponent, mapDispatchToProps, mapStateToProps } from "./baseEditComponent";
 
 export class ProfileSkillEditComponent extends BaseEditComponent {

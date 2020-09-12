@@ -1,12 +1,14 @@
-import React, { Component } from "react";
+import React from "react";
 import { Form, InputGroup, FormControl } from 'react-bootstrap';
-import { ISocialMedia } from "../../defaultValues/models";
-import { faGithub, faLinkedinIn, faStackOverflow } from '@fortawesome/free-brands-svg-icons';
 import { faGlobe } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGithub, faLinkedinIn, faStackOverflow } from '@fortawesome/free-brands-svg-icons';
 import _ from "lodash";
 
-export class SocialMediaComponent extends Component<ISocialMediaComponentProps, ISocialMediaComponentState> {
+import { ISocialMedia } from "../../defaultValues/models";
+import { BaseComponent } from "../../../../helpers";
+
+export class SocialMediaComponent extends BaseComponent<ISocialMediaComponentProps, ISocialMediaComponentState> {
 
     state = {
         value: ''
@@ -20,13 +22,6 @@ export class SocialMediaComponent extends Component<ISocialMediaComponentProps, 
             });
         }
     }
-
-    handleInputChange = (event: any) => {
-        this.setState({
-            value: event.target.value
-        });
-        this.props.onChange(this.props.name, event.target.value);
-    };
 
     getIcon = (name: string) => {
         switch (name) {
