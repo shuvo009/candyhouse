@@ -1,54 +1,15 @@
-import React, { Component } from "react";
+import React from "react";
 import { Form, Row, Col } from 'react-bootstrap';
 import { connect } from "react-redux";
 import _ from "lodash";
 
 import { PanelEdit } from "../../../common/panelEdit";
 import { SectionHeader } from "../../../common/sectionHeader";
-
 import { ProfilePicture } from "./components/profilePicture";
 import { SocialMediaComponent } from "./components/socialMediaComponent";
+import { BaseEditComponent, mapDispatchToProps, mapStateToProps } from "./baseEditComponent";
 
-import { IProfileStateModel, IProfileProps, IProfile } from "../modes";
-import { defaultProfileState, getProfile, changeBusyState, updateProfile } from "../profileStore";
-
-import { getvalues } from "../defaultValues/valueStore";
-import { IReducerState } from "../../../helpers";
-
-
-export class ProfileBasicInfoEditComponent extends Component<IProfileProps, IProfileStateModel> {
-
-    constructor(props: IProfileProps) {
-        super(props);
-        this.state = props.resumeStateModel ? props.resumeStateModel : defaultProfileState;
-    }
-
-    async componentWillMount() {
-        this.props.changeBusyState(true);
-
-        await Promise.all([
-            this.props.getProfile(this.props.resumeStateModel.lastPullTime),
-            this.props.getValues(this.props.valuesModel.lastPullTime)
-        ]);
-
-        this.props.changeBusyState(false);
-    }
-
-    componentWillReceiveProps(nextProps: IProfileProps) {
-        const isEqual = _.isEqual(nextProps.resumeStateModel, this.state);
-        if (!isEqual) {
-            this.setState({
-                ...nextProps.resumeStateModel
-            });
-        }
-    }
-
-    handleInputChange = (event: any) => {
-        this.setState({
-            ...this.state,
-            [event.target.name]: event.target.value
-        })
-    };
+export class ProfileBasicInfoEditComponent extends BaseEditComponent {
 
     handleSocialMediaChange = (name: string, value: string) => {
         let socialLinks = this.state.socialLinks ? this.state.socialLinks : [];
@@ -117,22 +78,6 @@ export class ProfileBasicInfoEditComponent extends Component<IProfileProps, IPro
 
             </PanelEdit>
         )
-    }
-}
-
-const mapStateToProps = (state: IReducerState) => {
-    return {
-        resumeStateModel: { ...state.profileResucer },
-        valuesModel: { ...state.valueReducer }
-    };
-}
-
-const mapDispatchToProps = (dispatch: any) => {
-    return {
-        getProfile: (lastUpdate: number) => dispatch(getProfile(lastUpdate)),
-        getValues: (lastUpdate: number) => dispatch(getvalues(lastUpdate)),
-        changeBusyState: (state: boolean) => dispatch(changeBusyState(state)),
-        updateProfile: (resume: IProfile) => dispatch(updateProfile(resume)),
     }
 }
 

@@ -11,7 +11,6 @@ import { JobLocation } from "./components/jobLocation"
 import {IJobLocation } from "../modes";
 import { BaseEditComponent, mapDispatchToProps, mapStateToProps } from "./baseEditComponent";
 
-
 export class ProfileEditLocationComponent extends BaseEditComponent  {
 
     onNoticePeriodTypeChange = (event: any) => {
