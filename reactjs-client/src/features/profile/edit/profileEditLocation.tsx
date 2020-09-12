@@ -1,50 +1,18 @@
 import "react-datepicker/dist/react-datepicker.css";
-import React, { Component } from "react";
+import React from "react";
 import DatePicker from "react-datepicker";
 import _ from "lodash";
 import { connect } from "react-redux";
-
-import { InputGroup, Row, Col, Form, FormControl } from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMoneyBill } from '@fortawesome/free-solid-svg-icons';
+import { Row, Col, Form } from 'react-bootstrap';
 
 import { PanelEdit } from "../../../common/panelEdit";
 import { SectionHeader } from "../../../common/sectionHeader";
-import { IReducerState } from "../../../helpers";
 import { JobLocation } from "./components/jobLocation"
+import {IJobLocation } from "../modes";
+import { BaseEditComponent, mapDispatchToProps, mapStateToProps } from "./baseEditComponent";
 
-import { IProfileStateModel, IProfileProps, IProfile, INextRole, IJobLocation } from "../modes";
-import { defaultProfileState, getProfile, changeBusyState, updateProfile } from "../profileStore";
 
-import { getvalues } from "../defaultValues/valueStore";
-import { IExprience } from "../defaultValues/models";
-
-export class ProfileEditLocationComponent extends Component<IProfileProps, IProfileStateModel>  {
-
-    constructor(props: IProfileProps) {
-        super(props);
-        this.state = props.resumeStateModel ? props.resumeStateModel : defaultProfileState;
-    }
-
-    async componentWillMount() {
-        this.props.changeBusyState(true);
-
-        await Promise.all([
-            this.props.getProfile(this.props.resumeStateModel.lastPullTime),
-            this.props.getValues(this.props.valuesModel.lastPullTime)
-        ]);
-
-        this.props.changeBusyState(false);
-    }
-
-    componentWillReceiveProps(nextProps: IProfileProps) {
-        const isEqual = _.isEqual(nextProps.resumeStateModel, this.state);
-        if (!isEqual) {
-            this.setState({
-                ...nextProps.resumeStateModel
-            });
-        }
-    }
+export class ProfileEditLocationComponent extends BaseEditComponent  {
 
     onNoticePeriodTypeChange = (event: any) => {
         this.setState({
@@ -130,22 +98,6 @@ export class ProfileEditLocationComponent extends Component<IProfileProps, IProf
                 </Row>
             </PanelEdit>
         )
-    }
-}
-
-const mapStateToProps = (state: IReducerState) => {
-    return {
-        resumeStateModel: { ...state.profileResucer },
-        valuesModel: { ...state.valueReducer }
-    };
-}
-
-const mapDispatchToProps = (dispatch: any) => {
-    return {
-        getProfile: (lastUpdate: number) => dispatch(getProfile(lastUpdate)),
-        getValues: (lastUpdate: number) => dispatch(getvalues(lastUpdate)),
-        changeBusyState: (state: boolean) => dispatch(changeBusyState(state)),
-        updateProfile: (resume: IProfile) => dispatch(updateProfile(resume)),
     }
 }
 
