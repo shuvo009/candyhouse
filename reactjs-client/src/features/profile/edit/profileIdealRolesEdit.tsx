@@ -1,8 +1,9 @@
 import 'draft-js/dist/Draft.css';
-import React, { Component } from "react";
+import React from "react";
 import { Row, Col, Form } from 'react-bootstrap';
 import { connect } from "react-redux";
 import _ from "lodash";
+
 import { SortableContainer, SortableElement, SortableHandle } from 'react-sortable-hoc';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHandRock } from '@fortawesome/free-solid-svg-icons';
@@ -10,14 +11,9 @@ import { faHandRock } from '@fortawesome/free-solid-svg-icons';
 import { PanelEdit } from "../../../common/panelEdit";
 import { ErrorMessage } from "../../../common/errorMessage";
 import { SectionHeader } from "../../../common/sectionHeader";
-import { IReducerState } from "../../../helpers";
-
-import { IProfileStateModel, IProfileProps, IProfile, INextRole } from "../modes";
-import { defaultProfileState, getProfile, changeBusyState, updateProfile } from "../profileStore";
-
-import { getvalues } from "../defaultValues/valueStore";
+import { INextRole } from "../modes";
 import { IExprience } from "../defaultValues/models";
-
+import { BaseEditComponent, mapDispatchToProps, mapStateToProps } from "./baseEditComponent";
 
 const DragHandle = SortableHandle(() => <FontAwesomeIcon className="mr-3 text-muted" icon={faHandRock} />);
 
@@ -57,33 +53,9 @@ const SortableList = SortableContainer(({ items, expriences, onExprienceSelect }
     );
 });
 
-export class ProfileIdealRolesEditComponent extends Component<IProfileProps, IProfileStateModel> {
-    constructor(props: IProfileProps) {
-        super(props);
-        this.state = props.resumeStateModel ? props.resumeStateModel : defaultProfileState;
-    }
+export class ProfileIdealRolesEditComponent extends BaseEditComponent {
 
-    async componentWillMount() {
-        this.props.changeBusyState(true);
-
-        await Promise.all([
-            this.props.getProfile(this.props.resumeStateModel.lastPullTime),
-            this.props.getValues(this.props.valuesModel.lastPullTime)
-        ]);
-
-        this.props.changeBusyState(false);
-    }
-
-    componentWillReceiveProps(nextProps: IProfileProps) {
-        const isEqual = _.isEqual(nextProps.resumeStateModel, this.state);
-        if (!isEqual) {
-            this.setState({
-                ...nextProps.resumeStateModel
-            });
-        }
-    }
-
-    handleInputChange = (event: any, role: any) => {
+    onRoleChanged = (event: any, role: any) => {
         let nextRoles = this.state.nextRoles || [];
         if (nextRoles.length >= 5) {
             this.setState({
@@ -142,7 +114,7 @@ export class ProfileIdealRolesEditComponent extends Component<IProfileProps, IPr
                         const isChecked = !!_.find(this.state.nextRoles, (r) => { return r.role === role });
                         return (
                             <Col md="6" className="mt-3" key={i}>
-                                <Form.Check custom checked={isChecked} inline label={role} type="checkbox" id={i + 'id'} onChange={(event: any) => { this.handleInputChange(event, role) }} />
+                                <Form.Check custom checked={isChecked} inline label={role} type="checkbox" id={i + 'id'} onChange={(event: any) => { this.onRoleChanged(event, role) }} />
                             </Col>
                         )
                     })}
@@ -165,23 +137,6 @@ export class ProfileIdealRolesEditComponent extends Component<IProfileProps, IPr
                 }
             </PanelEdit>
         )
-    }
-}
-
-
-const mapStateToProps = (state: IReducerState) => {
-    return {
-        resumeStateModel: { ...state.profileResucer },
-        valuesModel: { ...state.valueReducer }
-    };
-}
-
-const mapDispatchToProps = (dispatch: any) => {
-    return {
-        getProfile: (lastUpdate: number) => dispatch(getProfile(lastUpdate)),
-        getValues: (lastUpdate: number) => dispatch(getvalues(lastUpdate)),
-        changeBusyState: (state: boolean) => dispatch(changeBusyState(state)),
-        updateProfile: (resume: IProfile) => dispatch(updateProfile(resume)),
     }
 }
 

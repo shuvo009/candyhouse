@@ -1,7 +1,6 @@
 import React from "react";
 import { Row, Col } from 'react-bootstrap';
 import { connect } from "react-redux";
-import _ from "lodash";
 
 import { PanelEdit } from "../../../common/panelEdit"
 import { LanguageEdit } from "./components/languageEdit";
