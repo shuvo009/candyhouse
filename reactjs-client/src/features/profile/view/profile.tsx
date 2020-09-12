@@ -1,14 +1,38 @@
 import React, { Component } from "react";
-import { Card, Row, Col, Image } from 'react-bootstrap';
-import { ProfileHeader } from "./components/profileHeader"
-import { ProfileAbout } from "./components/profileAbout"
-import { ProfileIdeakRoles } from "./components/profileIdealRoles"
-import { ProfileSummary } from "./components/profileSummary"
-import { ProfileSkils } from "./components/profileSkils"
-import { ProfileExperience } from "./components/profleExperience"
-import { ProfileEducation } from "./components/profileEducation"
-import { ProfileGithub } from "./components/profileGithub"
-export class Profile extends Component {
+import _ from "lodash";
+import { Row, Col } from 'react-bootstrap';
+import { ProfileHeader } from "./components/profileHeader";
+import { ProfileAbout } from "./components/profileAbout";
+import { ProfileIdeakRoles } from "./components/profileIdealRoles";
+import { ProfileSummary } from "./components/profileSummary";
+import { ProfileSkils } from "./components/profileSkils";
+import { ProfileExperience } from "./components/profleExperience";
+import { ProfileEducation } from "./components/profileEducation";
+import { ProfileGithub } from "./components/profileGithub";
+import { IProfileStateModel } from "../modes";
+import { defaultProfileState, getProfile, changeBusyState } from "../profileStore";
+import { IReducerState } from "../../../helpers";
+import { connect } from "react-redux";
+class ProfileComponent extends Component<IProps, IProfileStateModel> {
+    constructor(props: IProps) {
+        super(props);
+        this.state = props.profile ? props.profile : defaultProfileState;
+    }
+
+    async componentWillMount() {
+        this.props.changeBusyState(true);
+        await this.props.getProfile(this.props.profile.lastPullTime);
+        this.props.changeBusyState(false);
+    }
+
+    componentWillReceiveProps(nextProps: IProps) {
+        const isEqual = _.isEqual(nextProps.profile, this.state);
+        if (!isEqual) {
+            this.setState({
+                ...nextProps.profile
+            });
+        }
+    }
 
     render() {
         return (
@@ -32,3 +56,27 @@ export class Profile extends Component {
         )
     }
 }
+
+interface IProps {
+    profile: IProfileStateModel;
+    changeBusyState(state: boolean): void;
+    getProfile(lastPullTime: number): Promise<void>;
+}
+
+export const mapStateToProps = (state: IReducerState) => {
+    return {
+        profile: { ...state.profileResucer },
+    };
+}
+
+export const mapDispatchToProps = (dispatch: any) => {
+    return {
+        getProfile: (lastUpdate: number) => dispatch(getProfile(lastUpdate)),
+        changeBusyState: (state: boolean) => dispatch(changeBusyState(state))
+    }
+}
+
+export const Profile = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(ProfileComponent);
