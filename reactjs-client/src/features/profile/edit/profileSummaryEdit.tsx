@@ -4,39 +4,9 @@ import _ from "lodash";
 
 import { PanelEdit } from "../../../common/panelEdit"
 import { ProfileSummaryItem } from "./components/profileSummaryItem";
-import { IProfileStateModel, IProfileProps, IProfile } from "../modes";
-import { defaultProfileState, getProfile, changeBusyState, updateProfile } from "../profileStore";
+import { BaseEditComponent, mapDispatchToProps, mapStateToProps } from "./baseEditComponent";
 
-import { getvalues } from "../defaultValues/valueStore";
-import { IReducerState } from "../../../helpers";
-
-export class ProfileSummaryEditComponent extends Component<IProfileProps, IProfileStateModel> {
-
-    constructor(props: IProfileProps) {
-        super(props);
-        this.state = props.resumeStateModel ? props.resumeStateModel : defaultProfileState;
-    }
-
-
-    async componentWillMount() {
-        this.props.changeBusyState(true);
-
-        await Promise.all([
-            this.props.getProfile(this.props.resumeStateModel.lastPullTime),
-            this.props.getValues(this.props.valuesModel.lastPullTime)
-        ]);
-
-        this.props.changeBusyState(false);
-    }
-
-    componentWillReceiveProps(nextProps: IProfileProps) {
-        const isEqual = _.isEqual(nextProps.resumeStateModel, this.state);
-        if (!isEqual) {
-            this.setState({
-                ...nextProps.resumeStateModel
-            });
-        }
-    }
+export class ProfileSummaryEditComponent extends BaseEditComponent {
 
     handleSummaryChange = (type: string, value: string) => {
         let summaryList = this.state.summaryList ? this.state.summaryList : [];
@@ -72,23 +42,6 @@ export class ProfileSummaryEditComponent extends Component<IProfileProps, IProfi
                 })}
             </PanelEdit>
         )
-    }
-}
-
-
-const mapStateToProps = (state: IReducerState) => {
-    return {
-        resumeStateModel: { ...state.profileResucer },
-        valuesModel: { ...state.valueReducer }
-    };
-}
-
-const mapDispatchToProps = (dispatch: any) => {
-    return {
-        getProfile: (lastUpdate: number) => dispatch(getProfile(lastUpdate)),
-        getValues: (lastUpdate: number) => dispatch(getvalues(lastUpdate)),
-        changeBusyState: (state: boolean) => dispatch(changeBusyState(state)),
-        updateProfile: (resume: IProfile) => dispatch(updateProfile(resume)),
     }
 }
 
