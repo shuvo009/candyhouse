@@ -7,42 +7,14 @@ import _ from "lodash";
 
 import { PanelEdit } from "../../../common/panelEdit";
 import { SectionHeader } from "../../../common/sectionHeader";
-import { IReducerState, BaseComponent } from "../../../helpers";
 
 import { ExprienceYearsCounter } from "./components/exprienceYearsCounter";
 import { CompanyExprienceSummary } from "./components/companyExprienceSummary";
 import { EducationSummary } from "./components/educationSummary";
+import { IExperience, IEducation } from "../modes";
+import { BaseEditComponent, mapDispatchToProps, mapStateToProps } from "./baseEditComponent";
 
-import { IProfileStateModel, IProfileProps, IProfile, IExperience, IEducation } from "../modes";
-import { defaultProfileState, getProfile, changeBusyState, updateProfile } from "../profileStore";
-import { getvalues } from "../defaultValues/valueStore";
-
-class ProfileExperienceEditComponent extends BaseComponent<IProfileProps, IProfileStateModel> {
-
-    constructor(props: IProfileProps) {
-        super(props);
-        this.state = props.resumeStateModel ? props.resumeStateModel : defaultProfileState;
-    }
-
-    async componentWillMount() {
-        this.props.changeBusyState(true);
-
-        await Promise.all([
-            this.props.getProfile(this.props.resumeStateModel.lastPullTime),
-            this.props.getValues(this.props.valuesModel.lastPullTime)
-        ]);
-
-        this.props.changeBusyState(false);
-    }
-
-    componentWillReceiveProps(nextProps: IProfileProps) {
-        const isEqual = _.isEqual(nextProps.resumeStateModel, this.state);
-        if (!isEqual) {
-            this.setState({
-                ...nextProps.resumeStateModel
-            });
-        }
-    }
+class ProfileExperienceEditComponent extends BaseEditComponent {
 
     onAddNewExperience = (event: any) => {
         event.preventDefault();
@@ -83,7 +55,6 @@ class ProfileExperienceEditComponent extends BaseComponent<IProfileProps, IProfi
         this.changeState({ educations: [...this.state.educations, newEducation] });
     }
 
-
     onEducationRemove = (index: number) => {
         const educations = [...this.state.educations];
         educations.splice(index, 1);
@@ -95,7 +66,6 @@ class ProfileExperienceEditComponent extends BaseComponent<IProfileProps, IProfi
         educations[index] = education;
         this.changeState({ educations: educations });
     }
-
 
     render() {
         return (
@@ -141,23 +111,6 @@ class ProfileExperienceEditComponent extends BaseComponent<IProfileProps, IProfi
             </PanelEdit>
 
         )
-    }
-}
-
-
-const mapStateToProps = (state: IReducerState) => {
-    return {
-        resumeStateModel: { ...state.profileResucer },
-        valuesModel: { ...state.valueReducer }
-    };
-}
-
-const mapDispatchToProps = (dispatch: any) => {
-    return {
-        getProfile: (lastUpdate: number) => dispatch(getProfile(lastUpdate)),
-        getValues: (lastUpdate: number) => dispatch(getvalues(lastUpdate)),
-        changeBusyState: (state: boolean) => dispatch(changeBusyState(state)),
-        updateProfile: (resume: IProfile) => dispatch(updateProfile(resume)),
     }
 }
 
