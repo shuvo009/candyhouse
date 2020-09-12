@@ -104,7 +104,6 @@ export class LanguageEdit extends BaseComponent<IProps, IState> {
                 </Row>
             </>
         )
-
     }
 }
 
@@ -118,5 +117,4 @@ interface IState {
     userLanguage: ILanguage[];
     selectedLanguage: string;
     selectedFluency: string;
-
 }

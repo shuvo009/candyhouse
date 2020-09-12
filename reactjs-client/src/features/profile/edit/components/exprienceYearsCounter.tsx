@@ -1,9 +1,11 @@
-import React, { Component } from "react";
+import React from "react";
 import { Form, Row, Col } from 'react-bootstrap';
-import { SectionHeader } from "../../../../common/sectionHeader"
 import _ from "lodash";
 
-export class ExprienceYearsCounter extends Component<IProps, IState> {
+import { SectionHeader } from "../../../../common/sectionHeader";
+import { BaseComponent } from "../../../../helpers";
+
+export class ExprienceYearsCounter extends BaseComponent<IProps, IState> {
 
     constructor(props: IProps) {
         super(props);
@@ -21,13 +23,9 @@ export class ExprienceYearsCounter extends Component<IProps, IState> {
         }
     }
 
-    handleInputChange = (event: any) => {
-        this.setState({
-            ...this.state,
-            experience: +event.target.value
-        });
-        this.props.onExperienceChange(+event.target.value);
-    };
+    onHandleInputChanged(data: any) {
+        this.props.onExperienceChange(+data.experience);
+    }
 
     render() {
         return (
