@@ -40,7 +40,7 @@ class ProfileComponent extends Component<IProps, IProfileStateModel> {
                 <ProfileHeader profile={this.props.profile}></ProfileHeader>
                 <Row className="text-left mt-2">
                     <Col md="4">
-                        <ProfileAbout></ProfileAbout>
+                        <ProfileAbout profile={this.props.profile}></ProfileAbout>
                         <ProfileGithub></ProfileGithub>
                     </Col>
                     <Col className="pl-0">
