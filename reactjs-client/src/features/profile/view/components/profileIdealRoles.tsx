@@ -24,6 +24,23 @@ export class ProfileIdeakRoles extends Component<IProps> {
         }
     }
 
+    getLabel = (experience: string) => {
+        switch (experience) {
+            case '0..1':
+                return "< 1 year";
+            case '1..2':
+                return "1-2 years";
+            case '2..4':
+                return "2-4 years";
+            case '4..6':
+                return "4-6 years";
+            case '6..8':
+                return "6-8 years";
+            default:
+                return "+8 years";
+        }
+    }
+
     render() {
         return (
             <>
@@ -33,7 +50,7 @@ export class ProfileIdeakRoles extends Component<IProps> {
                             <div className="clearfix" key={i}>
                                 <p className="float-left">{item.role}</p>
                                 <div className="float-right">
-                                    <span className="text-muted mr-2">{item.experience}</span>
+                                    <span className="text-muted mr-2">{this.getLabel(item.experience)}</span>
                                     <Rating initialRating={this.getRating(item.experience)} stop={6} readonly className="rating-bar"
                                         fullSymbol={<FontAwesomeIcon icon={faCircle} className="text-primary"></FontAwesomeIcon>}
                                         emptySymbol={<FontAwesomeIcon icon={faCircle} className="text-muted"></FontAwesomeIcon>}
