@@ -1,30 +1,40 @@
 import React, { Component } from "react";
-import Rating from "react-rating"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCircle } from '@fortawesome/free-solid-svg-icons'
-import { Panel } from "../../../../common/panel"
-export class ProfileIdeakRoles extends Component<any, IProfileIdealRoleState> {
+import Rating from "react-rating";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircle } from '@fortawesome/free-solid-svg-icons';
+import _ from "lodash";
+import { Panel } from "../../../../common/panel";
+import { IProfileStateModel } from "../../modes";
+export class ProfileIdeakRoles extends Component<IProps> {
 
-    state = {
-        items: [
-            { title: "Fullstack Engineer", rating: 5, experience: "6-8 years" },
-            { title: ".NET Engineer", rating: 5, experience: "6-8 years" },
-            { title: "Backend Engineer", rating: 5, experience: "6-8 years" },
-            { title: "Javascript Backend Engineer", rating: 3, experience: "2-4 years" },
-        ]
+    getRating = (experience: string) => {
+        switch (experience) {
+            case '0..1':
+                return 1;
+            case '1..2':
+                return 2;
+            case '2..4':
+                return 3;
+            case '4..6':
+                return 4;
+            case '6..8':
+                return 5;
+            default:
+                return 6;
+        }
     }
 
     render() {
         return (
             <>
                 <Panel title="Ideal roles">
-                    {this.state.items.map((item, i) => {
+                    {this.props.profile.nextRoles.map((item, i) => {
                         return (
                             <div className="clearfix" key={i}>
-                                <p className="float-left">{item.title}</p>
+                                <p className="float-left">{item.role}</p>
                                 <div className="float-right">
                                     <span className="text-muted mr-2">{item.experience}</span>
-                                    <Rating initialRating={item.rating} stop={6} readonly className="rating-bar"
+                                    <Rating initialRating={this.getRating(item.experience)} stop={6} readonly className="rating-bar"
                                         fullSymbol={<FontAwesomeIcon icon={faCircle} className="text-primary"></FontAwesomeIcon>}
                                         emptySymbol={<FontAwesomeIcon icon={faCircle} className="text-muted"></FontAwesomeIcon>}
                                         fractions={2}
@@ -40,12 +50,6 @@ export class ProfileIdeakRoles extends Component<any, IProfileIdealRoleState> {
     }
 }
 
-interface IProfileIdealRoleState {
-    items: IProfileIdealRoleItem[];
-}
-
-interface IProfileIdealRoleItem {
-    title: string;
-    experience: string;
-    rating: number;
+interface IProps {
+    profile: IProfileStateModel;
 }
