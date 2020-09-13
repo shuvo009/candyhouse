@@ -65,6 +65,7 @@ type Resume struct {
 	FirstName             string             `json:"firstName"`
 	LastName              string             `json:"lastName"`
 	Address               string             `json:"address"`
+	Pitch                 string             `json:"pitch"`
 	JobLocation           []JobLocation      `json:"jobLocation"`
 	Phone                 string             `json:"phone"`
 	SocialLinks           []SocialLink       `bson:"socialLinks" json:"socialLinks"`

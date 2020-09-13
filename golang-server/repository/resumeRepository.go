@@ -53,6 +53,7 @@ func (resumeRepository *ResumeRepository) UpdateResume(accountID primitive.Objec
 	dbResume.JobLocation = resume.JobLocation
 	dbResume.ProfileImage = resume.ProfileImage
 	dbResume.Phone = resume.Phone
+	dbResume.Pitch = resume.Pitch
 	dbResume.Address = resume.Address
 	dbResume.SocialLinks = resume.SocialLinks
 	dbResume.SummaryList = resume.SummaryList

@@ -22,6 +22,9 @@ export class SocialMediaComponent extends BaseComponent<ISocialMediaComponentPro
             });
         }
     }
+    onHandleInputChanged(data: any) {
+        this.props.onChange(this.props.name, data.value);
+    }
 
     getIcon = (name: string) => {
         switch (name) {
@@ -44,7 +47,7 @@ export class SocialMediaComponent extends BaseComponent<ISocialMediaComponentPro
                     <InputGroup.Prepend>
                         <InputGroup.Text><FontAwesomeIcon icon={this.getIcon(this.props.name)}></FontAwesomeIcon></InputGroup.Text>
                     </InputGroup.Prepend>
-                    <FormControl placeholder={this.props.placeholder} value={this.state.value} onChange={this.handleInputChange} />
+                    <FormControl name="value" placeholder={this.props.placeholder} value={this.state.value} onChange={this.handleInputChange} />
                 </InputGroup>
             </Form.Group>
         )

@@ -46,7 +46,7 @@ export class ProfileBasicInfoEditComponent extends BaseEditComponent {
 
                         <Form.Group controlId="location">
                             <Form.Label className="font-weight-semi-bold">Location *</Form.Label>
-                            <Form.Control name="location" type="text" placeholder="Jafrabad, Shonkor" value={this.state.address} onChange={this.handleInputChange} />
+                            <Form.Control name="address" type="text" placeholder="Jafrabad, Shonkor" value={this.state.address} onChange={this.handleInputChange} />
                         </Form.Group>
                     </Col>
                     <Col>
@@ -59,6 +59,14 @@ export class ProfileBasicInfoEditComponent extends BaseEditComponent {
                         <Form.Group controlId="phone">
                             <Form.Label className="font-weight-semi-bold">Phone *</Form.Label>
                             <Form.Control type="phone" name="phone" placeholder="+8801xxx-xxxxxx" value={this.state.phone} onChange={this.handleInputChange} />
+                        </Form.Group>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        <Form.Group controlId="phone">
+                            <Form.Label className="font-weight-semi-bold">Pitch</Form.Label>
+                            <textarea className="form-control" name="pitch" value={this.state.pitch} onChange={this.handleInputChange}></textarea>
                         </Form.Group>
                     </Col>
                 </Row>

@@ -46,7 +46,7 @@ export class ProfileHeader extends Component<IProps> {
 
                                     {this.props.profile.socialLinks.map((media, i) => {
                                         return (
-                                            <a key={i} href={media.link}>
+                                            <a key={i} href={media.link} target="_blank">
                                                 <FontAwesomeIcon icon={this.getIcon(media.name)} className="float-left mr-3"></FontAwesomeIcon>
                                             </a>
                                         )
