@@ -50,6 +50,7 @@ export interface IProfile {
     accountId: string;
     firstName: string;
     lastName: string;
+    pitch: string;
     address: string;
     jobLocation: IJobLocation[];
     phone: string;

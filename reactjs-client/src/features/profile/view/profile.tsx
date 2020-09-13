@@ -37,7 +37,7 @@ class ProfileComponent extends Component<IProps, IProfileStateModel> {
     render() {
         return (
             <>
-                <ProfileHeader></ProfileHeader>
+                <ProfileHeader profile={this.props.profile}></ProfileHeader>
                 <Row className="text-left mt-2">
                     <Col md="4">
                         <ProfileAbout></ProfileAbout>

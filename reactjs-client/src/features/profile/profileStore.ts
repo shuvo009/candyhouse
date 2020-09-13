@@ -7,6 +7,7 @@ export const defaultProfileState: IProfileStateModel = {
     accountId: '',
     educations: [],
     experiences: [],
+    pitch:'',
     firstName: '',
     languages: [],
     lastName: '',
@@ -71,6 +72,7 @@ export const getProfile = (lastPullTime: number) => async (dispatch: Dispatch) =
             return;
         }
         const profile = await HttpHelpers.get<IProfile>(ApiConstant.talentProfile);
+        profile.socialLinks = profile.socialLinks ? profile.socialLinks : [];
         profile.experiences = profile.experiences ? profile.experiences : [];
         profile.educations = profile.educations ? profile.educations : [];
         profile.languages = profile.languages ? profile.languages : [];
