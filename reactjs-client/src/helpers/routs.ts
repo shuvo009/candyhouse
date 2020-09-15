@@ -15,10 +15,19 @@ export class Routes {
     public get GetRoutes(): IRouteLayoutModel[] {
         return [
             this.AuthRoutes(),
-            this.TalentRoutes()
+            this.TalentRoutes(),
+            this.HomeRoutes()
         ]
     }
 
+    private HomeRoutes(): IRouteLayoutModel {
+        return {
+            layout: AuthencationLayout,
+            subRoutes: [
+                { path: '/', component: Home }
+            ]
+        }
+    }
 
     private AuthRoutes(): IRouteLayoutModel {
         return {
