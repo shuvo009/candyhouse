@@ -45,7 +45,7 @@ class ProfileComponent extends Component<IProps, IProfileStateModel> {
                     </Col>
                     <Col className="pl-0">
                         <ProfileIdeakRoles profile={this.props.profile}></ProfileIdeakRoles>
-                        <ProfileSummary></ProfileSummary>
+                        <ProfileSummary profile={this.props.profile}></ProfileSummary>
                         <ProfileSkils></ProfileSkils>
                         <ProfileExperience></ProfileExperience>
                         <ProfileEducation></ProfileEducation>
