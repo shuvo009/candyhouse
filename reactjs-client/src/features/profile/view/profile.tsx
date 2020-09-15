@@ -5,7 +5,7 @@ import { ProfileHeader } from "./components/profileHeader";
 import { ProfileAbout } from "./components/profileAbout";
 import { ProfileIdeakRoles } from "./components/profileIdealRoles";
 import { ProfileSummary } from "./components/profileSummary";
-import { ProfileSkils } from "./components/profileSkils";
+import { ProfileSkills } from "./components/profileSkills";
 import { ProfileExperience } from "./components/profleExperience";
 import { ProfileEducation } from "./components/profileEducation";
 import { ProfileGithub } from "./components/profileGithub";
@@ -46,7 +46,7 @@ class ProfileComponent extends Component<IProps, IProfileStateModel> {
                     <Col className="pl-0">
                         <ProfileIdeakRoles profile={this.props.profile}></ProfileIdeakRoles>
                         <ProfileSummary profile={this.props.profile}></ProfileSummary>
-                        <ProfileSkils></ProfileSkils>
+                        <ProfileSkills profile={this.props.profile}></ProfileSkills>
                         <ProfileExperience></ProfileExperience>
                         <ProfileEducation></ProfileEducation>
                     </Col>
