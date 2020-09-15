@@ -4,8 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircle } from '@fortawesome/free-solid-svg-icons';
 import _ from "lodash";
 import { Panel } from "../../../../common/panel";
-import { IProfileStateModel } from "../../modes";
-export class ProfileIdeakRoles extends Component<IProps> {
+import { IProfileViewProps } from "../../modes";
+export class ProfileIdeakRoles extends Component<IProfileViewProps> {
 
     getRating = (experience: string) => {
         switch (experience) {
@@ -65,8 +65,4 @@ export class ProfileIdeakRoles extends Component<IProps> {
             </>
         )
     }
-}
-
-interface IProps {
-    profile: IProfileStateModel;
 }

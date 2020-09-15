@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import { Row, Col } from 'react-bootstrap';
 import { Panel } from "../../../../common/panel"
 import parse from "html-react-parser"
-import { IProfileStateModel } from "../../modes";
-export class ProfileExperience extends Component<IProps> {
+import { IProfileViewProps } from "../../modes";
+export class ProfileExperience extends Component<IProfileViewProps> {
+    
     render() {
         return (
             <>
@@ -42,8 +43,4 @@ export class ProfileExperience extends Component<IProps> {
             </>
         )
     }
-}
-
-interface IProps {
-    profile: IProfileStateModel;
 }

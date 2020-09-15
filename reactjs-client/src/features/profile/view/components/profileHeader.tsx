@@ -3,9 +3,9 @@ import { Card, Row, Col, Image } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGithub, faLinkedinIn, faStackOverflow } from '@fortawesome/free-brands-svg-icons'
 import { faGlobe } from '@fortawesome/free-solid-svg-icons'
-import { IProfileStateModel } from "../../modes";
+import { IProfileViewProps } from "../../modes";
 
-export class ProfileHeader extends Component<IProps> {
+export class ProfileHeader extends Component<IProfileViewProps> {
 
     getIcon = (name: string) => {
         switch (name) {
@@ -59,8 +59,4 @@ export class ProfileHeader extends Component<IProps> {
             </>
         )
     }
-}
-
-interface IProps {
-    profile: IProfileStateModel;
 }

@@ -1,25 +1,20 @@
 import React, { Component } from "react";
 import { Row, Col } from 'react-bootstrap';
 import { Panel } from "../../../../common/panel"
-export class ProfileEducation extends Component<any, IProfileEducationState> {
-
-    status = {
-        items: [
-            { university: "State University of Bangladesh", subject: "Computer Science and Engineering", startYear: "2009", endYear: "2012" },
-        ]
-    }
+import { IProfileViewProps } from "../../modes";
+export class ProfileEducation extends Component<IProfileViewProps> {
 
     render() {
         return (
             <>
                 <Panel title="Education" className="mt-2">
-                    {this.status.items.map((item, i) => {
+                    {this.props.profile.educations.map((item, i) => {
                         return (
                             <div key={i} className="experence">
                                 <Row>
                                     <Col className="text-left">
-                                        <h4 className="title">{item.university}</h4>
-                                        <span className="text-muted company">at {item.subject}</span>
+                                        <h4 className="title">{item.degree}</h4>
+                                        <span className="text-muted company">at {item.institute}</span>
                                     </Col>
                                     <Col className="text-right">
                                         <span className="working-dates text-muted">{item.startYear} - {item.endYear}</span>
@@ -32,16 +27,4 @@ export class ProfileEducation extends Component<any, IProfileEducationState> {
             </>
         )
     }
-}
-
-
-interface IProfileEducationState {
-    items: IProfileEducationItem[]
-}
-
-interface IProfileEducationItem {
-    university: string;
-    subject: string;
-    startYear: string;
-    endYear: string;
 }

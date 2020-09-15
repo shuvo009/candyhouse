@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import _ from "lodash";
 import parse from "html-react-parser";
 import { Panel } from "../../../../common/panel"
-import { IProfileStateModel } from "../../modes";
-export class ProfileSummary extends Component<IProps> {
+import { IProfileViewProps } from "../../modes";
+export class ProfileSummary extends Component<IProfileViewProps> {
 
     getTitle = (type: string) => {
         switch (type) {
@@ -41,8 +41,4 @@ export class ProfileSummary extends Component<IProps> {
             </>
         )
     }
-}
-
-interface IProps {
-    profile: IProfileStateModel;
 }

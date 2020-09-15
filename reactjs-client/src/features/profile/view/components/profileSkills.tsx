@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Panel } from "../../../../common/panel"
-import { IProfileStateModel } from "../../modes";
-export class ProfileSkills extends Component<IProps> {
+import { IProfileViewProps } from "../../modes";
+export class ProfileSkills extends Component<IProfileViewProps> {
 
     render() {
         return (
@@ -18,8 +18,4 @@ export class ProfileSkills extends Component<IProps> {
             </>
         )
     }
-}
-
-interface IProps {
-    profile: IProfileStateModel;
 }

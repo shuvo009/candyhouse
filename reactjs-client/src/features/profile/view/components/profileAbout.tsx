@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import _ from "lodash";
 
 import { Panel } from "../../../../common/panel";
-import { IProfileStateModel } from "../../modes";
+import { IProfileViewProps } from "../../modes";
 
-export class ProfileAbout extends Component<IProps> {
+export class ProfileAbout extends Component<IProfileViewProps> {
 
     render() {
 
@@ -37,8 +37,4 @@ export class ProfileAbout extends Component<IProps> {
             </>
         )
     }
-}
-
-interface IProps {
-    profile: IProfileStateModel;
 }

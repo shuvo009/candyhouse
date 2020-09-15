@@ -81,3 +81,7 @@ export interface IProfileProps {
     getValues(lastPullTime: number): Promise<void>;
     updateProfile(resume: IProfile): Promise<void>;
 }
+
+export interface IProfileViewProps {
+    profile: IProfileStateModel;
+}

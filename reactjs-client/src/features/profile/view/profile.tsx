@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import _ from "lodash";
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, Spinner } from 'react-bootstrap';
 import { ProfileHeader } from "./components/profileHeader";
 import { ProfileAbout } from "./components/profileAbout";
 import { ProfileIdeakRoles } from "./components/profileIdealRoles";
@@ -8,7 +8,6 @@ import { ProfileSummary } from "./components/profileSummary";
 import { ProfileSkills } from "./components/profileSkills";
 import { ProfileExperience } from "./components/profleExperience";
 import { ProfileEducation } from "./components/profileEducation";
-import { ProfileGithub } from "./components/profileGithub";
 import { IProfileStateModel } from "../modes";
 import { defaultProfileState, getProfile, changeBusyState } from "../profileStore";
 import { IReducerState } from "../../../helpers";
@@ -37,18 +36,22 @@ class ProfileComponent extends Component<IProps, IProfileStateModel> {
     render() {
         return (
             <>
+                <Row className="justify-content-md-center">
+                    <Col md="auto">
+                        {this.state.isBusy ? <Spinner animation="grow" size="sm" className="mr-2"></Spinner> : null}
+                    </Col>
+                </Row>
                 <ProfileHeader profile={this.props.profile}></ProfileHeader>
                 <Row className="text-left mt-2">
                     <Col md="4">
                         <ProfileAbout profile={this.props.profile}></ProfileAbout>
-                        <ProfileGithub></ProfileGithub>
                     </Col>
                     <Col className="pl-0">
                         <ProfileIdeakRoles profile={this.props.profile}></ProfileIdeakRoles>
                         <ProfileSummary profile={this.props.profile}></ProfileSummary>
                         <ProfileSkills profile={this.props.profile}></ProfileSkills>
                         <ProfileExperience profile={this.props.profile}></ProfileExperience>
-                        <ProfileEducation></ProfileEducation>
+                        <ProfileEducation profile={this.props.profile}></ProfileEducation>
                     </Col>
                 </Row>
                 <div className="mb-5"></div>
