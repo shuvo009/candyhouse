@@ -47,3 +47,23 @@ REACT_APP_API_BASE=http://127.0.0.1:3200
 ```
 - Step 2: npm install
 - Step 3: npm start
+
+## Golang Server Directory Structure
+```
+.
+|-- controllers
+|-- middlewares
+|-- models
+|   |-- entity
+|   `-- viewmodels
+|-- profilepic
+|-- repository
+|   `-- db
+|-- routers
+|-- service
+|-- test
+`-- utils
+```
+
+
+Enjoy!! :blush:
