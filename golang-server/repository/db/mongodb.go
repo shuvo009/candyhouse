@@ -1,5 +1,6 @@
 package db
 
+//https://stackoverflow.com/questions/56970867/how-to-use-mongo-driver-connection-into-other-packages
 import (
 	"github.com/Kamva/mgm"
 	"go.mongodb.org/mongo-driver/mongo/options"
