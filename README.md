@@ -1,4 +1,4 @@
-## candyhouse
+## CandyHouse (Reactjs, Typescript, Golang, MongoDb)
 
 This Project is a clone of [Honeypot](https://www.honeypot.io/)
 
