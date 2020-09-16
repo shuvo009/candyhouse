@@ -64,6 +64,26 @@ REACT_APP_API_BASE=http://127.0.0.1:3200
 |-- test
 `-- utils
 ```
-
-
+## Reactjs Client Directory Structure
+```
+.
+|-- public
+`-- src
+    |-- common
+    |-- features
+    |   |-- home
+    |   |   `-- components
+    |   |-- login
+    |   |-- profile
+    |   |   |-- defaultValues
+    |   |   |-- edit
+    |   |   |   `-- components
+    |   |   `-- view
+    |   |       `-- components
+    |   `-- register
+    |       `-- components
+    |           `-- TalentRegister
+    |-- helpers
+    `-- layouts
+```
 Enjoy!! :blush:
