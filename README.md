@@ -28,3 +28,15 @@ This project is developed using Reactjs, Typescript, Golang and MongoDb for lear
 * [API Server Integration Test](https://github.com/shuvo009/candyhouse/tree/master/golang-server/test/)
   * [memongo](https://github.com/benweissmann/memongo) *Does not support windows :worried:
   
+## Run Golang Server
+- Step 1: Create a free MongoDb database at https://www.mongodb.com/cloud/atlas
+- Step 2: create a **.env** file at root directory of server (**golang-server**) with below variables. (Please change database configurations)
+```
+SERVER_PORT=':3200'
+DB_CONNECTION_STRING='mongodb+srv://xxxxxxxx.mongodb.net/candyHouse?retryWrites=true&w=majority'
+DB_NAME='candyHouse'
+IN_MEMORY_MONGO_DB_PATH='F:\inMemoryMongoDb4.2.8\bin\mongod.exe'
+TOKEN_KEY='Your_Auth_Token_Encryption_KEY'
+```
+- Step 3: go get
+- Step 6: go get main.go
