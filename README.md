@@ -40,3 +40,10 @@ TOKEN_KEY='Your_Auth_Token_Encryption_KEY'
 ```
 - Step 3: go get
 - Step 6: go get main.go
+## Run Reactjs Client
+- Step 1: create a **.env** file at root directory of client (**reactjs-client**) with below variables.
+```
+REACT_APP_API_BASE=http://127.0.0.1:3200
+```
+- Step 2: npm install
+- Step 3: npm start
