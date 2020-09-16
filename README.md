@@ -4,13 +4,16 @@ This Project is a clone of [Honeypot](https://www.honeypot.io/) (only candidate 
 
 This project is developed using Reactjs, Typescript, Golang and MongoDb for learning purpose only. 
 
-### Project Goals
+## Project Goals
 * [Create Clean Architecture For API Server With Golang](https://github.com/shuvo009/candyhouse/tree/master/golang-server)
 * [Create Clean Architecture For API Frontend With React and TypeScript](https://github.com/shuvo009/candyhouse/tree/master/reactjs-client)
 * [Create Integration Test API Server](https://github.com/shuvo009/candyhouse/tree/master/golang-server/test/)
 
-Learning Golang and React.
-
-### Project Status
-
-This project is still under development.
+## Technologies are used
+* [Golang](https://golang.org/)
+  * [Gin Web Framework](https://github.com/gin-gonic/gin)
+  * [Mongo Go Models](https://github.com/Kamva/mgm)
+  * [Mongo Driver](https://godoc.org/go.mongodb.org/mongo-driver/mongo/options)
+  * [jwt-go](https://github.com/dgrijalva/jwt-go)
+  * [GoDotEnv](https://github.com/joho/godotenv)
+  
