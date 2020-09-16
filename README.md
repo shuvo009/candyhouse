@@ -39,7 +39,7 @@ IN_MEMORY_MONGO_DB_PATH='F:\inMemoryMongoDb4.2.8\bin\mongod.exe'
 TOKEN_KEY='Your_Auth_Token_Encryption_KEY'
 ```
 - Step 3: go get
-- Step 6: go get main.go
+- Step 4: go get main.go
 ## Run Reactjs Client
 - Step 1: create a **.env** file at root directory of client (**reactjs-client**) with below variables.
 ```
